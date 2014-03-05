@@ -26,7 +26,6 @@ private:
 	cocos2d::CCGLProgram* getEmbossMov();
 	cocos2d::CCGLProgram* getColorRamp();
 	cocos2d::CCGLProgram* getGrass();
-	cocos2d::CCGLProgram* getBlur();
 	int _timeUniformLocation;
 	float _totalTime = 0.0f;
 	cocos2d::CCSprite* _pSprite;

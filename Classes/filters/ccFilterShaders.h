@@ -38,6 +38,9 @@ THE SOFTWARE.
  extern CC_DLL const GLchar * ccFilterShader_gray_vert;
  extern CC_DLL const GLchar * ccFilterShader_gray_frag;
 
+ extern CC_DLL const GLchar * ccFilterShader_blur_vert;
+ extern CC_DLL const GLchar * ccFilterShader_blur_frag;
+
 extern CC_DLL const GLchar * ccFilterShader_colorramp_frag;
 
 extern CC_DLL const GLchar * ccFilterShader_emboss_frag;
@@ -45,8 +48,6 @@ extern CC_DLL const GLchar * ccFilterShader_emboss_frag;
 extern CC_DLL const GLchar * ccFilterShader_embossmov_frag;
 
 extern CC_DLL const GLchar * ccFilterShader_grass_frag;
-
-extern CC_DLL const GLchar * ccFilterShader_blur_frag;
 
 // end of shaders group
 /// @}

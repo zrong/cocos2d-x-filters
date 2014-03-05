@@ -31,9 +31,7 @@ public:
 	const char* shaderName;
 protected:
 	CCArray* _pAttributes;
-	CCArray* _pParameters;
 	void addAttribute(GLint $value, const char* $key);
-	void addParameter(GLint $value, const char* $key);
 	void addDictionary(GLint $value, const char* $key, CCArray* $arr);
 };
 

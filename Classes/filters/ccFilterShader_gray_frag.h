@@ -7,7 +7,7 @@ precision mediump float;                    \n\
 varying vec4 v_fragmentColor;               \n\
 varying vec2 v_texCoord;                    \n\
 varying vec4 v_grayParam;					\n\
-uniform sampler2D CC_Texture0;				\n\
+uniform sampler2D CC_Texture0;\n\
 \n\
 void main(void)                             \n\
 {                                           \n\

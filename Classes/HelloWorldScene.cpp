@@ -70,39 +70,21 @@ void HelloWorld::showSprite(CCSize* $size, CCPoint* $origin)
 	//_pSprite = CCSprite::create("grass.png");
 
 	
-	CCBlurFilter* __blurFilter = CCBlurFilter::create();
-	CCSprite* __sp1 = CCFilteredSprite::create("helloworld.png", __blurFilter);
-	__sp1->setPosition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));
-	this->addChild(__sp1, 0);
+	//CCBlurFilter* __blurFilter = CCBlurFilter::create();
+	//CCSprite* __sp1 = CCFilteredSprite::create("helloworld.png", __blurFilter);
+	//__sp1->setPosition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));
+	//this->addChild(__sp1, 0);
 
-	//ccColor4F __color = ccc4f(0.2f, 0.3f, 0.4f, 0.5f);
-	//CCGrayFilter* __grayFilter = CCGrayFilter::create();
+	ccColor4F __color = ccc4f(0.2f, 0.3f, 0.4f, 0.5f);
+	CCGrayFilter* __grayFilter = CCGrayFilter::create();
+	CCSprite* __sp1 = CCFilteredSprite::create("helloworld.png", __grayFilter);
+	__sp1->setPosition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));
+	this->addChild(__sp1);
 
 	//_pSprite = CCFilteredSprite::create("grass5.png", __grayFilter);
-	//
 	////_pSprite->setShaderProgram(this->getGrass());
-
-	//// position the sprite on the center of the screen
 	//_pSprite->setPosition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));
-
-	//// add the sprite as a child to this layer
 	//this->addChild(_pSprite, 0);
-}
-
-cocos2d::CCGLProgram* HelloWorld::getBlur()
-{
-	cocos2d::CCGLProgram* __pProg = new CCGLProgram();
-	//__pProg->initWithVertexShaderByteArray(ccPositionTextureA8Color_vert, ccShader_blur);
-
-	__pProg->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
-	__pProg->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
-
-	int __fade = glGetUniformLocation(__pProg->getProgram(), "fade");
-	glUniform1f(__fade, 1.0f);
-
-	__pProg->link();
-	__pProg->updateUniforms();
-	return __pProg;
 }
 
 cocos2d::CCGLProgram* HelloWorld::getGrass()

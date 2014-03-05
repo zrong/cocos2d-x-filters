@@ -192,9 +192,9 @@ bool CCFilteredSprite::updateFilter()
 	CCAssert(_pFilter, "Invalid CCShaderFilter!");
 	do
 	{
-		CCGLProgram* pProgram = _pFilter->getProgram();
-
-		setShaderProgram(pProgram);
+		CCGLProgram* __program = _pFilter->getProgram();
+		
+		setShaderProgram(__program);
 		CHECK_GL_ERROR_DEBUG();
 
 		getShaderProgram()->link();

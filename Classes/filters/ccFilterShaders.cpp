@@ -30,9 +30,13 @@ THE SOFTWARE.
 
 const GLchar * ccFilterShader_gray_vert =
 #include "ccFilterShader_gray_vert.h"
-
 const GLchar * ccFilterShader_gray_frag =
 #include "ccFilterShader_gray_frag.h"
+
+const GLchar * ccFilterShader_blur_vert =
+#include "ccFilterShader_blur_vert.h"
+const GLchar * ccFilterShader_blur_frag =
+#include "ccFilterShader_blur_frag.h"
 
 const GLchar * ccFilterShader_colorramp_frag =
 #include "ccFilterShader_colorramp_frag.h"
@@ -45,8 +49,5 @@ const GLchar * ccFilterShader_embossmov_frag =
 
 const GLchar * ccFilterShader_grass_frag =
 #include "ccFilterShader_grass_frag.h"
-
-const GLchar * ccFilterShader_blur_frag =
-#include "ccFilterShader_blur_frag.h"
 
 //NS_CC_END
