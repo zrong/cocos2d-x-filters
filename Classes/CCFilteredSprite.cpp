@@ -197,12 +197,6 @@ bool CCFilteredSprite::updateFilter()
 		setShaderProgram(__program);
 		CHECK_GL_ERROR_DEBUG();
 
-		getShaderProgram()->link();
-		CHECK_GL_ERROR_DEBUG();
-
-		getShaderProgram()->updateUniforms();
-		CHECK_GL_ERROR_DEBUG();
-
 		return true;
 	} while (0);
 

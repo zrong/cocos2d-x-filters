@@ -21,21 +21,17 @@ public:
 	CCShaderFilter();
 	~CCShaderFilter();
 
-	CCArray* getAttributes();
-	CCArray* getParameters();
 	virtual void draw()=0;
-	virtual CCGLProgram* getProgram();
+	CCGLProgram* getProgram();
 
-	const GLchar* vertex;
-	const GLchar* fragment;
 	const char* shaderName;
 protected:
 	CCArray* _pAttributes;
+	CCGLProgram* _pProgram;
+	void initProgram();
 	virtual CCGLProgram* loadShader() = 0;
 	virtual void setAttributes(CCGLProgram* $glp) = 0;
 	virtual void setUniforms(CCGLProgram* $glp) = 0;
-	void addAttribute(GLint $value, const char* $key);
-	void addDictionary(GLint $value, const char* $key, CCArray* $arr);
 };
 
 class CCGrayFilter : public CCShaderFilter
@@ -66,7 +62,6 @@ public:
 	CCBlurFilter();
 	~CCBlurFilter();
 	virtual void draw();
-	virtual CCGLProgram* getProgram();
 protected:
 	virtual CCGLProgram* loadShader();
 	virtual void setAttributes(CCGLProgram* $glp);

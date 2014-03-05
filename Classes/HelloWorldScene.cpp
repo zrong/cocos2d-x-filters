@@ -70,16 +70,18 @@ void HelloWorld::showSprite(CCSize* $size, CCPoint* $origin)
 	//_pSprite = CCSprite::create("grass.png");
 
 	
-	//CCBlurFilter* __blurFilter = CCBlurFilter::create();
-	//CCSprite* __sp1 = CCFilteredSprite::create("helloworld.png", __blurFilter);
-	//__sp1->setPosition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));
-	//this->addChild(__sp1, 0);
+	CCBlurFilter* __blurFilter = CCBlurFilter::create();
+	CCSprite* __blurSprite = CCFilteredSprite::create("helloworld.png", __blurFilter);
+	__blurSprite->setAnchorPoint(ccp(0,0));
+	__blurSprite->setPosition(ccp($origin->x, $origin->y));
+	this->addChild(__blurSprite, 0);
 
-	ccColor4F __color = ccc4f(0.2f, 0.3f, 0.4f, 0.5f);
-	CCGrayFilter* __grayFilter = CCGrayFilter::create();
-	CCSprite* __sp1 = CCFilteredSprite::create("helloworld.png", __grayFilter);
-	__sp1->setPosition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));
-	this->addChild(__sp1);
+	ccColor4F __color = ccc4f(0.2f, 0.3f, 0.4f, 0.0f);
+	CCGrayFilter* __grayFilter = CCGrayFilter::create(__color);
+	CCSprite* __graySprite = CCFilteredSprite::create("helloworld.png", __grayFilter);
+	__graySprite->setAnchorPoint(ccp(0, 0));
+	__graySprite->setPosition(ccp($size->width / 2 + $origin->x, $origin->y));
+	this->addChild(__graySprite);
 
 	//_pSprite = CCFilteredSprite::create("grass5.png", __grayFilter);
 	////_pSprite->setShaderProgram(this->getGrass());

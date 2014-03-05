@@ -16,6 +16,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     AppDelegate app;
     CCEGLView* eglView = CCEGLView::sharedOpenGLView();
     eglView->setViewName("filters");
-    eglView->setFrameSize(960, 540);
+    eglView->setFrameSize(960, 640);
     return CCApplication::sharedApplication()->run();
 }
