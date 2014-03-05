@@ -31,6 +31,9 @@ public:
 	const char* shaderName;
 protected:
 	CCArray* _pAttributes;
+	virtual CCGLProgram* loadShader() = 0;
+	virtual void setAttributes(CCGLProgram* $glp) = 0;
+	virtual void setUniforms(CCGLProgram* $glp) = 0;
 	void addAttribute(GLint $value, const char* $key);
 	void addDictionary(GLint $value, const char* $key, CCArray* $arr);
 };
@@ -46,6 +49,11 @@ public:
 	virtual void draw();
 	void setParameter(ccColor4F $param);
 
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+
 private:
 	ccColor4F _pParam;
 };
@@ -59,6 +67,10 @@ public:
 	~CCBlurFilter();
 	virtual void draw();
 	virtual CCGLProgram* getProgram();
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
 
 };
 
