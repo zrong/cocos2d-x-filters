@@ -22,7 +22,6 @@ public:
 
 	const char* shaderName;
 protected:
-	CCArray* _pAttributes;
 	CCGLProgram* _pProgram;
 	void initProgram();
 	virtual CCGLProgram* loadShader() = 0;

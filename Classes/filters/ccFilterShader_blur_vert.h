@@ -39,6 +39,7 @@ varying vec2 v_texCoord;							\n\
 //uniform mat2 u_rawTexCoordTransform = mat2(-1,0,0,-0.976); \n\
 uniform float u_radius; \n\
 varying vec2 v_blurTexCoords[14]; \n\
+varying vec2 v_vblurTexCoords[14]; \n\
 													\n\
 void main()											\n\
 {													\n\
@@ -46,9 +47,12 @@ void main()											\n\
 	v_fragmentColor = a_color;						\n\
 	v_texCoord = a_texCoord;						\n\
 	for (int i = 0; i < 7; ++i) {\n\
-		vec2 c = vec2(u_radius / 7.0*(7.0 - float(i)), 0.0);\n\
-		v_blurTexCoords[i] = v_texCoord - c;\n\
-		v_blurTexCoords[13 - i] = v_texCoord + c;\n\
+		vec2 h = vec2(u_radius / 7.0*(7.0 - float(i)), 0.0);\n\
+		v_blurTexCoords[i] = v_texCoord - h;\n\
+		v_blurTexCoords[13 - i] = v_texCoord + h;\n\
+		vec2 v = vec2(0.0, u_radius / 7.0*(7.0 - float(i)));\n\
+		v_vblurTexCoords[i] = v_texCoord - v;\n\
+		v_vblurTexCoords[13 - i] = v_texCoord + v;\n\
 	}\n\
 }													\n\
 ";

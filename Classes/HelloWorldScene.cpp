@@ -70,7 +70,7 @@ void HelloWorld::showSprite(CCSize* $size, CCPoint* $origin)
 	//_pSprite = CCSprite::create("grass.png");
 
 	
-	CCBlurFilter* __blurFilter = CCBlurFilter::create(0.05f);
+	CCBlurFilter* __blurFilter = CCBlurFilter::create(0.01f);
 	CCSprite* __blurSprite = CCFilteredSprite::create("helloworld.png", __blurFilter);
 	__blurSprite->setAnchorPoint(ccp(0,0));
 	__blurSprite->setPosition(ccp($origin->x, $origin->y));
