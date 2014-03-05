@@ -9,10 +9,6 @@
 #define kCCFilterShader_gray	"ccFilterShader_gray"
 #define kCCFilterShader_blur	"ccFilterShader_blur"
 
-//define attribute names
-#define kCCAttributeName_grayParam        "a_grayParam"
-#define kCCVertexAttrib_grayParam   4
-
 USING_NS_CC;
 
 class CCShaderFilter :	public CCObject
@@ -21,7 +17,7 @@ public:
 	CCShaderFilter();
 	~CCShaderFilter();
 
-	virtual void draw()=0;
+	virtual void draw();
 	CCGLProgram* getProgram();
 
 	const char* shaderName;
@@ -42,7 +38,6 @@ public:
 
 	CCGrayFilter();
 	~CCGrayFilter();
-	virtual void draw();
 	void setParameter(ccColor4F $param);
 
 protected:
@@ -51,22 +46,24 @@ protected:
 	virtual void setUniforms(CCGLProgram* $glp);
 
 private:
-	ccColor4F _pParam;
+	ccColor4F _param;
 };
 
 class CCBlurFilter : public CCShaderFilter
 {
 public:
 	static CCBlurFilter* create();
+	static CCBlurFilter* create(float $param);
 
 	CCBlurFilter();
 	~CCBlurFilter();
-	virtual void draw();
+	void setParameter(float $param);
 protected:
 	virtual CCGLProgram* loadShader();
 	virtual void setAttributes(CCGLProgram* $glp);
 	virtual void setUniforms(CCGLProgram* $glp);
-
+private:
+	float _param;
 };
 
 #endif /* __CCSHADER_FILTER_H__ */

@@ -70,14 +70,13 @@ void HelloWorld::showSprite(CCSize* $size, CCPoint* $origin)
 	//_pSprite = CCSprite::create("grass.png");
 
 	
-	CCBlurFilter* __blurFilter = CCBlurFilter::create();
+	CCBlurFilter* __blurFilter = CCBlurFilter::create(0.05f);
 	CCSprite* __blurSprite = CCFilteredSprite::create("helloworld.png", __blurFilter);
 	__blurSprite->setAnchorPoint(ccp(0,0));
 	__blurSprite->setPosition(ccp($origin->x, $origin->y));
 	this->addChild(__blurSprite, 0);
 
-	ccColor4F __color = ccc4f(0.2f, 0.3f, 0.4f, 0.0f);
-	CCGrayFilter* __grayFilter = CCGrayFilter::create(__color);
+	CCGrayFilter* __grayFilter = CCGrayFilter::create(ccc4f(0.2f, 0.3f, 0.4f, 0.0f));
 	CCSprite* __graySprite = CCFilteredSprite::create("helloworld.png", __grayFilter);
 	__graySprite->setAnchorPoint(ccp(0, 0));
 	__graySprite->setPosition(ccp($size->width / 2 + $origin->x, $origin->y));

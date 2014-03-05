@@ -49,6 +49,10 @@ void CCShaderFilter::initProgram()
 	}
 }
 
+void CCShaderFilter::draw()
+{
+}
+
 CCGrayFilter* CCGrayFilter::create()
 {
 	CCGrayFilter* __filter = new CCGrayFilter();
@@ -64,20 +68,15 @@ CCGrayFilter* CCGrayFilter::create(ccColor4F $param)
 }
 
 CCGrayFilter::CCGrayFilter()
-: _pParam(ccc4f(0.299f, 0.587f, 0.114f, 0.0f))
+: _param(ccc4f(0.299f, 0.587f, 0.114f, 0.0f))
 {
 	this->shaderName = kCCFilterShader_gray;
 	initProgram();
 }
 
-void CCGrayFilter::draw()
-{
-}
-
-
 void CCGrayFilter::setParameter(ccColor4F $param)
 {
-	_pParam = $param;
+	_param = $param;
 }
 
 CCGLProgram* CCGrayFilter::loadShader()
@@ -92,21 +91,18 @@ void CCGrayFilter::setAttributes(CCGLProgram* $cgp)
 	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
 	$cgp->addAttribute(kCCAttributeNameColor, kCCVertexAttrib_Color);
 	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
-	$cgp->addAttribute(kCCAttributeName_grayParam, kCCVertexAttrib_grayParam);
 }
 
 void CCGrayFilter::setUniforms(CCGLProgram* $cgp)
 {
 	int __grayParam = $cgp->getUniformLocationForName("u_grayParam");
 	CCLOG("CCGrayFilter::setUniforms, u_grayParam:%d", __grayParam);
-	$cgp->setUniformLocationWith4f(__grayParam, _pParam.r, _pParam.g, _pParam.b, _pParam.a);
+	$cgp->setUniformLocationWith4f(__grayParam, _param.r, _param.g, _param.b, _param.a);
 }
 
 CCGrayFilter::~CCGrayFilter()
 {
-	
 }
-
 
 CCBlurFilter* CCBlurFilter::create()
 {
@@ -115,20 +111,23 @@ CCBlurFilter* CCBlurFilter::create()
 	return __filter;
 }
 
+CCBlurFilter* CCBlurFilter::create(float $param)
+{
+	CCBlurFilter* __filter = CCBlurFilter::create();
+	__filter->setParameter($param);
+	return __filter;
+}
+
+void CCBlurFilter::setParameter(float $param)
+{
+	_param = $param;
+}
+
 CCBlurFilter::CCBlurFilter()
+: _param(0.1f)
 {
 	this->shaderName = kCCFilterShader_blur;
 	initProgram();
-}
-
-void CCBlurFilter::draw()
-{
-	//CCGLProgram* __program = CCShaderCache::sharedShaderCache()->programForKey(shaderName);
-	//int __radius = __program->getUniformLocationForName("u_radius");
-	//CCLOG("CCShaderFilter::getProgram %d", __program);
-	//__program->setUniformLocationWith1f(__radius, 0.02f);
-	////glUniform1f(__radius, 0.02f);
-	//CCLOG("GOGOG %d", __radius);
 }
 
 CCGLProgram* CCBlurFilter::loadShader()
@@ -147,6 +146,10 @@ void CCBlurFilter::setAttributes(CCGLProgram* $cgp)
 
 void CCBlurFilter::setUniforms(CCGLProgram* $cgp)
 {
+	int __radius = $cgp->getUniformLocationForName("u_radius");
+	//CCLOG("CCShaderFilter::getProgram %d", $cgp);
+	$cgp->setUniformLocationWith1f(__radius, _param);
+	CCLOG("GOGOG %d", __radius);
 }
 
 CCBlurFilter::~CCBlurFilter()
