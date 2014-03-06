@@ -45,7 +45,7 @@ void main()											\n\
 	v_fragmentColor = a_color;						\n\
 	v_texCoord = a_texCoord;						\n\
 	for (int i = 0; i < 7; ++i) {\n\
-		vec2 c = vec2(u_radius / 7.0*(7.0 - float(i)), 0.0);\n\
+		vec2 c = vec2(0.0, u_radius / 7.0*(7.0 - float(i)));\n\
 		v_blurTexCoords[i] = v_texCoord - c;\n\
 		v_blurTexCoords[13 - i] = v_texCoord + c;\n\
 	}\n\

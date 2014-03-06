@@ -8,6 +8,7 @@
 
 #define kCCFilterShader_gray	"ccFilterShader_gray"
 #define kCCFilterShader_blur	"ccFilterShader_blur"
+#define kCCFilterShader_vblur	"ccFilterShader_vblur"
 
 USING_NS_CC;
 
@@ -61,8 +62,19 @@ protected:
 	virtual CCGLProgram* loadShader();
 	virtual void setAttributes(CCGLProgram* $glp);
 	virtual void setUniforms(CCGLProgram* $glp);
-private:
 	float _param;
+private:
+	
+};
+
+class CCVBlurFilter : public CCBlurFilter
+{
+public:
+	static CCBlurFilter* create();
+	static CCBlurFilter* create(float $param);
+	CCVBlurFilter();
+protected:
+	virtual CCGLProgram* loadShader();
 };
 
 #endif /* __CCSHADER_FILTER_H__ */

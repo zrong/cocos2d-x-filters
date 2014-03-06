@@ -65,7 +65,7 @@ CCFilteredSprite* CCFilteredSprite::create(const char *pszFileName, CCShaderFilt
 CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D *pTexture)
 {
 	CCFilteredSprite *pobSprite = new CCFilteredSprite();
-	if (pobSprite && pobSprite->initWithTexture(pTexture, CCRectZero, false))
+	if (pobSprite && pobSprite->initWithTexture(pTexture))
 	{
 		pobSprite->autorelease();
 		return pobSprite;
@@ -84,7 +84,7 @@ CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D *pTexture, CCS
 CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D *pTexture, const CCRect& rect)
 {
 	CCFilteredSprite *pobSprite = new CCFilteredSprite();
-	if (pobSprite && pobSprite->initWithTexture(pTexture, rect, false))
+	if (pobSprite && pobSprite->initWithTexture(pTexture, rect))
 	{
 		pobSprite->autorelease();
 		return pobSprite;

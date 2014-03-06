@@ -37,6 +37,8 @@ const GLchar * ccFilterShader_blur_vert =
 #include "ccFilterShader_blur_vert.h"
 const GLchar * ccFilterShader_blur_frag =
 #include "ccFilterShader_blur_frag.h"
+const GLchar * ccFilterShader_vblur_vert =
+#include "ccFilterShader_vblur_vert.h"
 
 const GLchar * ccFilterShader_colorramp_frag =
 #include "ccFilterShader_colorramp_frag.h"
