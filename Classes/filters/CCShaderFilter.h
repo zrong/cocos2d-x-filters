@@ -7,10 +7,12 @@
 
 
 #define kCCFilterShader_gray	"ccFilterShader_gray"
-#define kCCFilterShader_blur	"ccFilterShader_blur"
+#define kCCFilterShader_hblur	"ccFilterShader_hblur"
 #define kCCFilterShader_vblur	"ccFilterShader_vblur"
 
 USING_NS_CC;
+
+//================== CCShaderFilter
 
 class CCShaderFilter :	public CCObject
 {
@@ -29,6 +31,8 @@ protected:
 	virtual void setAttributes(CCGLProgram* $glp) = 0;
 	virtual void setUniforms(CCGLProgram* $glp) = 0;
 };
+
+//================== CCGrayFilter
 
 class CCGrayFilter : public CCShaderFilter
 {
@@ -49,29 +53,43 @@ private:
 	ccColor4F _param;
 };
 
-class CCBlurFilter : public CCShaderFilter
-{
-public:
-	static CCBlurFilter* create();
-	static CCBlurFilter* create(float $param);
+//================== CCBlurFilter
 
-	CCBlurFilter();
-	~CCBlurFilter();
+class CCBlurBaseFilter : public CCShaderFilter
+{
+	
+public:
+	CCBlurBaseFilter();
+	~CCBlurBaseFilter();
+
 	void setParameter(float $param);
 protected:
-	virtual CCGLProgram* loadShader();
 	virtual void setAttributes(CCGLProgram* $glp);
 	virtual void setUniforms(CCGLProgram* $glp);
 	float _param;
 private:
+
+};
+
+class CCHBlurFilter : public CCBlurBaseFilter
+{
+public:
+	static CCHBlurFilter* create();
+	static CCHBlurFilter* create(float $param);
+
+	CCHBlurFilter();
+protected:
+	virtual CCGLProgram* loadShader();
+private:
 	
 };
 
-class CCVBlurFilter : public CCBlurFilter
+class CCVBlurFilter : public CCBlurBaseFilter
 {
 public:
-	static CCBlurFilter* create();
-	static CCBlurFilter* create(float $param);
+	static CCVBlurFilter* create();
+	static CCVBlurFilter* create(float $param);
+
 	CCVBlurFilter();
 protected:
 	virtual CCGLProgram* loadShader();

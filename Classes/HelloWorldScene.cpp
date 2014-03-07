@@ -93,9 +93,9 @@ void HelloWorld::showSprite(CCSize* $size, CCPoint* $origin)
 	//__sp2->setPosition(ccp($size->width / 2 + $origin->x+320, $size->height / 2 + $origin->y));
 	//this->addChild(__sp2);
 
-	CCBlurFilter* __hblurFilter = CCBlurFilter::create(0.02f);
+	CCBlurBaseFilter* __hblurFilter = CCHBlurFilter::create(0.02f);
 	CCLOG("=======");
-	CCBlurFilter* __vblurFilter = CCVBlurFilter::create(0.02f);
+	CCBlurBaseFilter* __vblurFilter = CCVBlurFilter::create(0.02f);
 	CCSprite* __hs = CCFilteredSprite::create("helloworld.png", __hblurFilter);
 	__hs->setAnchorPoint(ccp(0,0));
 	CCSprite* __vs = CCFilteredSprite::create("helloworld.png", __vblurFilter);

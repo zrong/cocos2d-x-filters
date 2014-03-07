@@ -1,5 +1,7 @@
 #include "CCShaderFilter.h"
 
+//================== CCShaderFilter
+
 CCShaderFilter::CCShaderFilter()
 : shaderName(NULL)
 , _pProgram(NULL)
@@ -53,6 +55,8 @@ void CCShaderFilter::draw()
 {
 }
 
+//================== CCGrayFilter
+
 CCGrayFilter* CCGrayFilter::create()
 {
 	CCGrayFilter* __filter = new CCGrayFilter();
@@ -104,49 +108,25 @@ CCGrayFilter::~CCGrayFilter()
 {
 }
 
-CCBlurFilter* CCBlurFilter::create()
-{
-	CCBlurFilter* __filter = new CCBlurFilter();
-	__filter->autorelease();
-	return __filter;
-}
+//================== CCBlurBaseFilter
 
-CCBlurFilter* CCBlurFilter::create(float $param)
-{
-	CCBlurFilter* __filter = CCBlurFilter::create();
-	__filter->setParameter($param);
-	return __filter;
-}
-
-void CCBlurFilter::setParameter(float $param)
-{
-	_param = $param;
-	CCLOG("CCBlurFilter::setParameter %f", _param);
-	initProgram();
-}
-
-CCBlurFilter::CCBlurFilter()
+CCBlurBaseFilter::CCBlurBaseFilter()
 : _param(0.1f)
 {
-	this->shaderName = kCCFilterShader_blur;
 }
 
-CCGLProgram* CCBlurFilter::loadShader()
+CCBlurBaseFilter::~CCBlurBaseFilter()
 {
-	CCGLProgram* __p = new CCGLProgram();
-	__p->initWithVertexShaderByteArray(ccFilterShader_blur_vert, ccFilterShader_blur_frag);
-	CCLOG("CCBlurFilter::loadShader %f", _param);
-	return __p;
 }
 
-void CCBlurFilter::setAttributes(CCGLProgram* $cgp)
+void CCBlurBaseFilter::setAttributes(CCGLProgram* $cgp)
 {
 	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
 	$cgp->addAttribute(kCCAttributeNameColor, kCCVertexAttrib_Color);
 	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
 }
 
-void CCBlurFilter::setUniforms(CCGLProgram* $cgp)
+void CCBlurBaseFilter::setUniforms(CCGLProgram* $cgp)
 {
 	int __radius = $cgp->getUniformLocationForName("u_radius");
 	//CCLOG("CCShaderFilter::getProgram %d", $cgp);
@@ -154,29 +134,61 @@ void CCBlurFilter::setUniforms(CCGLProgram* $cgp)
 	CCLOG("CCBlurFilter::setUniforms radius:%d", __radius);
 }
 
-CCBlurFilter::~CCBlurFilter()
+void CCBlurBaseFilter::setParameter(float $param)
 {
+	_param = $param;
+	CCLOG("CCBlurFilter::setParameter %f", _param);
+	initProgram();
 }
 
+//================== CCHBlurFilter
 
-CCVBlurFilter::CCVBlurFilter()
+CCHBlurFilter* CCHBlurFilter::create()
 {
-	this->shaderName = kCCFilterShader_vblur;
-}
-
-
-CCBlurFilter* CCVBlurFilter::create()
-{
-	CCBlurFilter* __filter = new CCVBlurFilter();
+	CCHBlurFilter* __filter = new CCHBlurFilter();
 	__filter->autorelease();
 	return __filter;
 }
 
-CCBlurFilter* CCVBlurFilter::create(float $param)
+CCHBlurFilter* CCHBlurFilter::create(float $param)
 {
-	CCBlurFilter* __filter = CCVBlurFilter::create();
-	static_cast<CCVBlurFilter*>(__filter)->setParameter($param);
+	CCHBlurFilter* __filter = CCHBlurFilter::create();
+	__filter->setParameter($param);
 	return __filter;
+}
+
+CCHBlurFilter::CCHBlurFilter()
+{
+	this->shaderName = kCCFilterShader_hblur;
+}
+
+CCGLProgram* CCHBlurFilter::loadShader()
+{
+	CCGLProgram* __p = new CCGLProgram();
+	__p->initWithVertexShaderByteArray(ccFilterShader_blur_vert, ccFilterShader_blur_frag);
+	CCLOG("CCHBlurFilter::loadShader %f", _param);
+	return __p;
+}
+
+//================== CCVBlurFilter
+
+CCVBlurFilter* CCVBlurFilter::create()
+{
+	CCVBlurFilter* __filter = new CCVBlurFilter();
+	__filter->autorelease();
+	return __filter;
+}
+
+CCVBlurFilter* CCVBlurFilter::create(float $param)
+{
+	CCVBlurFilter* __filter = CCVBlurFilter::create();
+	__filter->setParameter($param);
+	return __filter;
+}
+
+CCVBlurFilter::CCVBlurFilter()
+{
+	this->shaderName = kCCFilterShader_vblur;
 }
 
 CCGLProgram* CCVBlurFilter::loadShader()
