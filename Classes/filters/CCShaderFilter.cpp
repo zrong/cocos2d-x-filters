@@ -12,7 +12,6 @@ CCShaderFilter::CCShaderFilter()
 CCShaderFilter::~CCShaderFilter()
 {
 	CC_SAFE_RELEASE(_pProgram);
-	delete shaderName;
 }
 
 CCGLProgram* CCShaderFilter::getProgram()
@@ -131,13 +130,13 @@ void CCBlurBaseFilter::setUniforms(CCGLProgram* $cgp)
 	int __radius = $cgp->getUniformLocationForName("u_radius");
 	//CCLOG("CCShaderFilter::getProgram %d", $cgp);
 	$cgp->setUniformLocationWith1f(__radius, _param);
-	CCLOG("CCBlurFilter::setUniforms radius:%d", __radius);
+	CCLOG("CCBlurBaseFilter::setUniforms radius:%d", __radius);
 }
 
 void CCBlurBaseFilter::setParameter(float $param)
 {
 	_param = $param;
-	CCLOG("CCBlurFilter::setParameter %f", _param);
+	CCLOG("CCBlurBaseFilter::setParameter %f", _param);
 	initProgram();
 }
 
@@ -165,7 +164,7 @@ CCHBlurFilter::CCHBlurFilter()
 CCGLProgram* CCHBlurFilter::loadShader()
 {
 	CCGLProgram* __p = new CCGLProgram();
-	__p->initWithVertexShaderByteArray(ccFilterShader_blur_vert, ccFilterShader_blur_frag);
+	__p->initWithVertexShaderByteArray(ccFilterShader_hblur_vert, ccFilterShader_blur_frag);
 	CCLOG("CCHBlurFilter::loadShader %f", _param);
 	return __p;
 }

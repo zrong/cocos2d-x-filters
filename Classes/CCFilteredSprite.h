@@ -6,8 +6,6 @@
 
 USING_NS_CC;
 
-#define CC_SHADER_SET_FILTER(p, f)   if(p) { (p)->setFilter(f); return (p);}
-
 class CCFilteredSprite : public CCSprite
 {
 public:
@@ -15,26 +13,49 @@ public:
 	~CCFilteredSprite();
 
 	static CCFilteredSprite* create();
-	static CCFilteredSprite* create(const char *pszFileName);
-	static CCFilteredSprite* create(const char *pszFileName, CCShaderFilter* pFilter);
-	static CCFilteredSprite* create(const char *pszFileName, const CCRect& rect);
-	static CCFilteredSprite* create(const char *pszFileName, CCShaderFilter* pFilter, const CCRect& rect);
-	static CCFilteredSprite* createWithTexture(CCTexture2D *pTexture);
-	static CCFilteredSprite* createWithTexture(CCTexture2D *pTexture, CCShaderFilter* pFilter);
-	static CCFilteredSprite* createWithTexture(CCTexture2D *pTexture, const CCRect& rect);
-	static CCFilteredSprite* createWithTexture(CCTexture2D *pTexture, CCShaderFilter* pFilter, const CCRect& rect);
-	static CCFilteredSprite* createWithSpriteFrame(CCSpriteFrame *pSpriteFrame);
-	static CCFilteredSprite* createWithSpriteFrame(CCSpriteFrame *pSpriteFrame, CCShaderFilter* pFilter);
-	static CCFilteredSprite* createWithSpriteFrameName(const char *pszSpriteFrameName);
-	static CCFilteredSprite* createWithSpriteFrameName(const char *pszSpriteFrameName, CCShaderFilter* pFilter);
+	static CCFilteredSprite* create(const char* $pszFileName);
+	static CCFilteredSprite* create(const char* $pszFileName, const CCRect& $rect);
+
+	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture);
+	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, const CCRect& rect);
+
+	static CCFilteredSprite* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame);
+	static CCFilteredSprite* createWithSpriteFrameName(const char* $pszSpriteFrameName);
+
+	static CCFilteredSprite* create(const char* $pszFileName, CCShaderFilter* $pFilter);
+	static CCFilteredSprite* create(const char* $pszFileName, CCShaderFilter* $pFilter, 
+		const CCRect& $rect);
+
+	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCShaderFilter* $pFilter);
+	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCShaderFilter* $pFilter,
+		const CCRect& rect);
+
+	static CCFilteredSprite* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame,
+		CCShaderFilter* $pFilter);
+	static CCFilteredSprite* createWithSpriteFrameName(const char* $pszSpriteFrameName,
+		CCShaderFilter* $pFilter);
+	
+	static CCFilteredSprite* create(const char* $pszFileName, CCArray* $pFilters);
+	static CCFilteredSprite* create(const char* $pszFileName, CCArray* $pFilters,
+		const CCRect& $rect);
+	
+	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCArray* $pFilters);
+	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCArray* $pFilters,
+		const CCRect& rect);
+
+	static CCFilteredSprite* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame,
+		CCArray* $pFilters);
+	static CCFilteredSprite* createWithSpriteFrameName(const char* $pszSpriteFrameName,
+		CCArray* $pFilters);
 public:
 	virtual void draw(void);
-	void setFilter(CCShaderFilter* pFilter);
-	CCShaderFilter* getFilter();
+	void setFilter(CCShaderFilter* $pFilter);
+	void setFilters(CCArray* $pFilters);
+
 private:
-	bool updateFilter();
-private:
-	CCShaderFilter* _pFilter;
+	bool updateFilters();
+	void drawMultiFilters();
+	CCArray* _pFilters;
 };
 
 #endif

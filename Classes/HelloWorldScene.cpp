@@ -82,47 +82,14 @@ void HelloWorld::showSprite(CCSize* $size, CCPoint* $origin)
 	//__graySprite->setPosition(ccp($size->width / 2 + $origin->x, $origin->y));
 	//this->addChild(__graySprite);
 
-	
-	//CCTextureCache::sharedTextureCache()->addImage("helloworld.png");
-	CCTexture2D* __tex = CCTextureCache::sharedTextureCache()->textureForKey("helloworld.png");
-	//CCSprite* __sp = CCFilteredSprite::createWithTexture(__tex, CCBlurFilter::create(0.2f));
-	//__sp->setPosition(ccp($origin->x+300, $size->height / 2 + $origin->y));
-	//this->addChild(__sp);
-
-	//CCFilteredSprite* __sp2 = CCFilteredSprite::createWithTexture(__sp->getTexture());
-	//__sp2->setPosition(ccp($size->width / 2 + $origin->x+320, $size->height / 2 + $origin->y));
-	//this->addChild(__sp2);
-
-	CCBlurBaseFilter* __hblurFilter = CCHBlurFilter::create(0.02f);
-	CCLOG("=======");
+	CCHBlurFilter* __hblurFilter = CCHBlurFilter::create(0.02f);
 	CCBlurBaseFilter* __vblurFilter = CCVBlurFilter::create(0.02f);
-	CCSprite* __hs = CCFilteredSprite::create("helloworld.png", __hblurFilter);
-	__hs->setAnchorPoint(ccp(0,0));
-	CCSprite* __vs = CCFilteredSprite::create("helloworld.png", __vblurFilter);
-	__vs->setAnchorPoint(ccp(0, 0));
-	CCSize __size = __hs->getContentSize();
-	CCRenderTexture* __canva = CCRenderTexture::create(__size.width, __size.height);
-	__canva->begin();
-	__hs->visit();
-	//__vs->visit();
-	__canva->end();
-	//__canva->setPosition(ccp($size->width / 2 + $origin->x, $size->height /2+$origin->y));
-	//this->addChild(__canva, 0);
-	//CCSprite* __final = CCSprite::createWithTexture(__canva->getSprite()->getTexture());
-	
-	CCTexture2D* __tex2 = new CCTexture2D();
-	__tex2->initWithImage(__canva->newCCImage(true));
-	__tex2->autorelease();
-	CCSprite* __final = CCFilteredSprite::createWithTexture(__tex2);
-	//CCSprite* __final = CCFilteredSprite::createWithTexture(__canva->getSprite()->getTexture());
-	//__final->setFlipY(true);
-	__final->setAnchorPoint(ccp(0,0));
-	__final->setPosition(ccp(0,0));
-	CCLOG("size %f, %f", __final->getContentSize().width, __final->getContentSize().height);
-	this->addChild(__final);
-	//__vs->setAnchorPoint(ccp(0, 0));
-	//__vs->setPosition(ccp($origin->x, $size->height/ 2 + $origin->y));
-	//this->addChild(__vs);
+	CCSprite* __hs = CCFilteredSprite::create("helloworld.png", 
+		CCArray::create(__hblurFilter, __vblurFilter, NULL));
+	//__hs->setAnchorPoint(ccp(0,0));
+	//__hs->setAnchorPoint(ccp(0.5f, 0.5f));
+	__hs->setPosition(ccp($size->width/2+$origin->x, $size->height / 2 + $origin->y));
+	this->addChild(__hs);
 
 	//_pSprite = CCFilteredSprite::create("grass5.png", __grayFilter);
 	////_pSprite->setShaderProgram(this->getGrass());

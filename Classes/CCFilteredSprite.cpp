@@ -1,7 +1,7 @@
 #include "CCFilteredSprite.h"
 
 CCFilteredSprite::CCFilteredSprite()
-:_pFilter(NULL)
+:_pFilters(NULL)
 {
 
 }
@@ -24,10 +24,10 @@ CCFilteredSprite* CCFilteredSprite::create()
 	return NULL;
 }
 
-CCFilteredSprite* CCFilteredSprite::create(const char *pszFileName)
+CCFilteredSprite* CCFilteredSprite::create(const char* $pszFileName)
 {
 	CCFilteredSprite *pobSprite = new CCFilteredSprite();
-	if (pobSprite && pobSprite->initWithFile(pszFileName))
+	if (pobSprite && pobSprite->initWithFile($pszFileName))
 	{
 		pobSprite->autorelease();
 		return pobSprite;
@@ -36,17 +36,10 @@ CCFilteredSprite* CCFilteredSprite::create(const char *pszFileName)
 	return NULL;
 }
 
-CCFilteredSprite* CCFilteredSprite::create(const char *pszFileName, CCShaderFilter* pFilter)
-{
-	CCFilteredSprite *pobSprite = create(pszFileName);
-	CC_SHADER_SET_FILTER(pobSprite, pFilter);
-	return NULL;
-}
-
-CCFilteredSprite* CCFilteredSprite::create(const char *pszFileName, const CCRect& rect)
+CCFilteredSprite* CCFilteredSprite::create(const char* $pszFileName, const CCRect& $rect)
 {
 	CCFilteredSprite *pobSprite = new CCFilteredSprite();
-	if (pobSprite && pobSprite->initWithFile(pszFileName, rect))
+	if (pobSprite && pobSprite->initWithFile($pszFileName, $rect))
 	{
 		pobSprite->autorelease();
 		return pobSprite;
@@ -55,17 +48,10 @@ CCFilteredSprite* CCFilteredSprite::create(const char *pszFileName, const CCRect
 	return NULL;
 }
 
-CCFilteredSprite* CCFilteredSprite::create(const char *pszFileName, CCShaderFilter* pFilter, const CCRect& rect)
-{
-	CCFilteredSprite *pobSprite = CCFilteredSprite::create(pszFileName, rect);
-	CC_SHADER_SET_FILTER(pobSprite, pFilter);
-	return NULL;
-}
-
-CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D *pTexture)
+CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D* $pTexture)
 {
 	CCFilteredSprite *pobSprite = new CCFilteredSprite();
-	if (pobSprite && pobSprite->initWithTexture(pTexture))
+	if (pobSprite && pobSprite->initWithTexture($pTexture))
 	{
 		pobSprite->autorelease();
 		return pobSprite;
@@ -74,17 +60,10 @@ CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D *pTexture)
 	return NULL;
 }
 
-CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D *pTexture, CCShaderFilter* pFilter)
-{
-	CCFilteredSprite *pobSprite = createWithTexture(pTexture);
-	CC_SHADER_SET_FILTER(pobSprite, pFilter);
-	return NULL;
-}
-
-CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D *pTexture, const CCRect& rect)
+CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D* $pTexture, const CCRect& $rect)
 {
 	CCFilteredSprite *pobSprite = new CCFilteredSprite();
-	if (pobSprite && pobSprite->initWithTexture(pTexture, rect))
+	if (pobSprite && pobSprite->initWithTexture($pTexture, $rect))
 	{
 		pobSprite->autorelease();
 		return pobSprite;
@@ -93,18 +72,10 @@ CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D *pTexture, con
 	return NULL;
 }
 
-CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D *pTexture, CCShaderFilter* pFilter,const CCRect& rect)
-{
-	CCFilteredSprite *pobSprite = createWithTexture(pTexture, rect);
-	CC_SHADER_SET_FILTER(pobSprite, pFilter);
-	return NULL;
-}
-
-
-CCFilteredSprite* CCFilteredSprite::createWithSpriteFrame(CCSpriteFrame *pSpriteFrame)
+CCFilteredSprite* CCFilteredSprite::createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame)
 {
 	CCFilteredSprite *pobSprite = new CCFilteredSprite();
-	if (pSpriteFrame && pobSprite && pobSprite->initWithSpriteFrame(pSpriteFrame))
+	if ($pSpriteFrame && pobSprite && pobSprite->initWithSpriteFrame($pSpriteFrame))
 	{
 		pobSprite->autorelease();
 		return pobSprite;
@@ -113,31 +84,109 @@ CCFilteredSprite* CCFilteredSprite::createWithSpriteFrame(CCSpriteFrame *pSprite
 	return NULL;
 }
 
-CCFilteredSprite* CCFilteredSprite::createWithSpriteFrame(CCSpriteFrame *pSpriteFrame, CCShaderFilter* pFilter)
+CCFilteredSprite* CCFilteredSprite::createWithSpriteFrameName(const char* $pszSpriteFrameName)
 {
-	CCFilteredSprite *pobSprite = createWithSpriteFrame(pSpriteFrame);
-	CC_SHADER_SET_FILTER(pobSprite, pFilter);
-	return NULL;
-}
-
-CCFilteredSprite* CCFilteredSprite::createWithSpriteFrameName(const char *pszSpriteFrameName)
-{
-	CCSpriteFrame *pFrame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(pszSpriteFrameName);
+	CCSpriteFrame *pFrame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName($pszSpriteFrameName);
 
 #if COCOS2D_DEBUG > 0
 	char msg[256] = { 0 };
-	sprintf(msg, "Invalid spriteFrameName: %s", pszSpriteFrameName);
+	sprintf(msg, "Invalid spriteFrameName: %s", $pszSpriteFrameName);
 	CCAssert(pFrame != NULL, msg);
 #endif
 
 	return createWithSpriteFrame(pFrame);
 }
 
-CCFilteredSprite* CCFilteredSprite::createWithSpriteFrameName(const char *pszSpriteFrameName, CCShaderFilter* pFilter)
+CCFilteredSprite* CCFilteredSprite::create(const char* $pszFileName, CCShaderFilter* $pFilter)
 {
-	CCFilteredSprite *pobSprite = createWithSpriteFrameName(pszSpriteFrameName);
-	CC_SHADER_SET_FILTER(pobSprite, pFilter);
-	return NULL;
+	CCFilteredSprite *pobSprite = create($pszFileName);
+	pobSprite->setFilter($pFilter);
+	return pobSprite;
+}
+
+CCFilteredSprite* CCFilteredSprite::create(const char* $pszFileName, CCShaderFilter* $pFilter, 
+	const CCRect& rect)
+{
+	CCFilteredSprite *pobSprite = CCFilteredSprite::create($pszFileName, rect);
+	pobSprite->setFilter($pFilter);
+	return pobSprite;
+}
+
+CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D* $pTexture, CCShaderFilter* $pFilter)
+{
+	CCFilteredSprite *pobSprite = createWithTexture($pTexture);
+	pobSprite->setFilter($pFilter);
+	return pobSprite;
+}
+
+CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D* $pTexture, CCShaderFilter* $pFilter,
+	const CCRect& $rect)
+{
+	CCFilteredSprite *pobSprite = createWithTexture($pTexture, $rect);
+	pobSprite->setFilter($pFilter);
+	return pobSprite;
+}
+
+CCFilteredSprite* CCFilteredSprite::createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame, 
+	CCShaderFilter* $pFilter)
+{
+	CCFilteredSprite *pobSprite = createWithSpriteFrame($pSpriteFrame);
+	pobSprite->setFilter($pFilter);
+	return pobSprite;
+}
+
+CCFilteredSprite* CCFilteredSprite::createWithSpriteFrameName(const char* $pszSpriteFrameName, 
+	CCShaderFilter* $pFilter)
+{
+	CCFilteredSprite *pobSprite = createWithSpriteFrameName($pszSpriteFrameName);
+	pobSprite->setFilter($pFilter);
+	return pobSprite;
+}
+
+CCFilteredSprite* CCFilteredSprite::create(const char* $pszFileName, CCArray* $pFilters)
+{
+	CCFilteredSprite *pobSprite = CCFilteredSprite::create($pszFileName);
+	pobSprite->setFilters($pFilters);
+	return pobSprite;
+}
+
+CCFilteredSprite* create(const char* $pszFileName, CCArray* $pFilters,
+	const CCRect& $rect)
+{
+	CCFilteredSprite *pobSprite = CCFilteredSprite::create($pszFileName, $rect);
+	pobSprite->setFilters($pFilters);
+	return pobSprite;
+}
+
+CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCArray* $pFilters)
+{
+	CCFilteredSprite *pobSprite = CCFilteredSprite::createWithTexture($pTexture);
+	pobSprite->setFilters($pFilters);
+	return pobSprite;
+}
+
+CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCArray* $pFilters,
+	const CCRect& rect)
+{
+	CCFilteredSprite *pobSprite = CCFilteredSprite::createWithTexture($pTexture, rect);
+	pobSprite->setFilters($pFilters);
+	return pobSprite;
+}
+
+CCFilteredSprite* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame,
+	CCArray* $pFilters)
+{
+	CCFilteredSprite *pobSprite = CCFilteredSprite::createWithSpriteFrame($pSpriteFrame);
+	pobSprite->setFilters($pFilters);
+	return pobSprite;
+}
+
+CCFilteredSprite* createWithSpriteFrameName(const char* $pszSpriteFrameName,
+	CCArray* $pFilters)
+{
+	CCFilteredSprite *pobSprite = CCFilteredSprite::createWithSpriteFrameName($pszSpriteFrameName);
+	pobSprite->setFilters($pFilters);
+	return pobSprite;
 }
 
 void CCFilteredSprite::draw()
@@ -166,37 +215,71 @@ void CCFilteredSprite::draw()
 	glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (void*)(offset + diff));
 
 	// show custom filter
-	if (_pFilter)
+	if (_pFilters && _pFilters->count()==1)
 	{
-		_pFilter->draw();
+		static_cast<CCShaderFilter*>(_pFilters->objectAtIndex(0))->draw();
 	}
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	CC_INCREMENT_GL_DRAWS(1);
 }
 
-void CCFilteredSprite::setFilter(CCShaderFilter* pFilter)
+void CCFilteredSprite::setFilter(CCShaderFilter* $pFilter)
 {
-	_pFilter = pFilter;
-	_pFilter->retain();
-	updateFilter();
+	CCArray* __pFilters = CCArray::create($pFilter, NULL);
+	setFilters(__pFilters);
 }
 
-CCShaderFilter* CCFilteredSprite::getFilter()
+void CCFilteredSprite::setFilters(CCArray* $pFilters)
 {
-	return _pFilter;
+	CC_SAFE_RETAIN($pFilters);
+	CC_SAFE_RELEASE(_pFilters);
+	_pFilters = $pFilters;
+	CCLOG("setFilters:%d", _pFilters->count());
+	updateFilters();
 }
 
-bool CCFilteredSprite::updateFilter()
+bool CCFilteredSprite::updateFilters()
 {
-	CCAssert(_pFilter, "Invalid CCShaderFilter!");
+	CCAssert(_pFilters, "Invalid CCShaderFilter!");
 	do
 	{	
-		setShaderProgram(_pFilter->getProgram());
+		unsigned int __count = _pFilters->count();
+		CC_BREAK_IF(__count == 0);
+		CCShaderFilter* __shader = NULL;
+		if (__count == 1)
+		{
+			__shader = static_cast<CCShaderFilter*>(_pFilters->objectAtIndex(0));
+			setShaderProgram(__shader->getProgram());
+		}
+		else
+		{
+			CCFilteredSprite* __sp = NULL;
+			CCTexture2D* __oldTex = this->getTexture();
+			CCSize __size = this->getContentSize();
+			CCRenderTexture* __canva = CCRenderTexture::create(__size.width, __size.height);
+			for (size_t i = 0; i < __count; i++)
+			{
+				__canva->begin();
+				__shader = static_cast<CCShaderFilter*>(_pFilters->objectAtIndex(i));
+				__sp = CCFilteredSprite::createWithTexture(__oldTex, __shader);
+				__sp->setAnchorPoint(ccp(0,0));
+				__sp->visit();
+				__canva->end();
+				__oldTex = new CCTexture2D();
+				__oldTex->initWithImage(__canva->newCCImage(true));
+				__oldTex->autorelease();
+			}
+			this->setTexture(__oldTex);
+		}
 		CHECK_GL_ERROR_DEBUG();
-
+		CCLOG("updateFilters:%d", _pFilters->count());
 		return true;
 	} while (0);
 
 	return false;
+}
+
+void CCFilteredSprite::drawMultiFilters()
+{
 }

@@ -67,8 +67,6 @@ protected:
 	virtual void setAttributes(CCGLProgram* $glp);
 	virtual void setUniforms(CCGLProgram* $glp);
 	float _param;
-private:
-
 };
 
 class CCHBlurFilter : public CCBlurBaseFilter
