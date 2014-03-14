@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "CCFilteredSprite.h"
+#include "VisibleRect.h"
 
 class HelloWorld : public cocos2d::CCLayer
 {
@@ -21,7 +22,7 @@ public:
 
 	virtual void update(float delta);
 private:
-	void showSprite(cocos2d::CCSize*, cocos2d::CCPoint*);
+	void showSprite();
 	cocos2d::CCGLProgram* getEmboss();
 	cocos2d::CCGLProgram* getEmbossMov();
 	cocos2d::CCGLProgram* getColorRamp();

@@ -191,13 +191,12 @@ CCFilteredSprite* createWithSpriteFrameName(const char* $pszSpriteFrameName,
 
 void CCFilteredSprite::draw()
 {
-	ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex);
+	CC_NODE_DRAW_SETUP();
+	
 	ccGLBlendFunc(m_sBlendFunc.src, m_sBlendFunc.dst);
 
-	this->getShaderProgram()->use();
-	this->getShaderProgram()->setUniformsForBuiltins();
-
 	ccGLBindTexture2D(this->getTexture()->getName());
+	ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex);
 
 #define kQuadSize sizeof(m_sQuad.bl)
 	long offset = (long)&m_sQuad;
@@ -250,7 +249,11 @@ bool CCFilteredSprite::updateFilters()
 		if (__count == 1)
 		{
 			__shader = static_cast<CCShaderFilter*>(_pFilters->objectAtIndex(0));
-			setShaderProgram(__shader->getProgram());
+			__shader->initSprite(this);
+			if (__shader->getProgram())
+			{
+				setShaderProgram(__shader->getProgram());
+			}
 		}
 		else
 		{

@@ -1,5 +1,5 @@
-#ifndef _FILTERED_SPRITE_H_
-#define _FILTERED_SPRITE_H_
+#ifndef __CCFILTERED_SPRITE_H__
+#define __CCFILTERED_SPRITE_H__
 
 #include "cocos2d.h"
 #include "filters/CCShaderFilter.h"
@@ -58,4 +58,4 @@ private:
 	CCArray* _pFilters;
 };
 
-#endif
+#endif /* __CCFILTERED_SPRITE_H__ */

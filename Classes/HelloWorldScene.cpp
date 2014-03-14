@@ -20,42 +20,30 @@ CCScene* HelloWorld::scene()
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-    //////////////////////////////
-    // 1. super init first
     if ( !CCLayer::init() )
     {
         return false;
     }
-    
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
                                         "CloseNormal.png",
                                         "CloseSelected.png",
                                         this,
                                         menu_selector(HelloWorld::menuCloseCallback));
     
-	pCloseItem->setPosition(ccp(origin.x + visibleSize.width - pCloseItem->getContentSize().width/2 ,
-                                origin.y + pCloseItem->getContentSize().height/2));
+	pCloseItem->setPosition(VisibleRect::rightBottom(-20,20));
 
     // create menu, it's an autorelease object
     CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
     pMenu->setPosition(CCPointZero);
     this->addChild(pMenu, 1);
 
-	
-	this->showSprite(&visibleSize, &origin);
+	this->showSprite();
     
     return true;
 }
 
-void HelloWorld::showSprite(CCSize* $size, CCPoint* $origin)
+void HelloWorld::showSprite()
 {
 
 	//ccnode* __pnode = ccnode::create();
@@ -82,15 +70,17 @@ void HelloWorld::showSprite(CCSize* $size, CCPoint* $origin)
 	//__graySprite->setPosition(ccp($size->width / 2 + $origin->x, $origin->y));
 	//this->addChild(__graySprite);
 
-	CCHBlurFilter* __hblurFilter = CCHBlurFilter::create(0.02f);
-	CCBlurBaseFilter* __vblurFilter = CCVBlurFilter::create(0.02f);
-	CCSprite* __hs = CCFilteredSprite::create("helloworld.png", 
-		CCArray::create(__hblurFilter, __vblurFilter, NULL));
-	//__hs->setAnchorPoint(ccp(0,0));
-	//__hs->setAnchorPoint(ccp(0.5f, 0.5f));
-	__hs->setPosition(ccp($size->width/2+$origin->x, $size->height / 2 + $origin->y));
-	this->addChild(__hs);
+	//CCHBlurFilter* __hblurFilter = CCHBlurFilter::create(0.02f);
+	//CCBlurBaseFilter* __vblurFilter = CCVBlurFilter::create(0.02f);
+	//CCSprite* __blurSprite = CCFilteredSprite::create("helloworld.png", 
+	//	CCArray::create(__hblurFilter, __vblurFilter, NULL));	
+	//__blurSprite->setPosition(VisibleRect::left());
+	//this->addChild(__blurSprite);
 
+	CCMaskFilter* __maskFilter = CCMaskFilter::create(CCString::create("mask.png"));
+	CCSprite* __maskSprite = CCFilteredSprite::create("helloworld.png", __maskFilter);
+	__maskSprite->setPosition(VisibleRect::right());
+	this->addChild(__maskSprite);
 	//_pSprite = CCFilteredSprite::create("grass5.png", __grayFilter);
 	////_pSprite->setShaderProgram(this->getGrass());
 	//_pSprite->setPosition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));

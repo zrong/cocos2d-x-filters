@@ -30,6 +30,9 @@
     <ClCompile Include="..\Classes\filters\CCShaderFilter.cpp">
       <Filter>Classes\filters</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\VisibleRect.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -49,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\filters\CCShaderFilter.h">
       <Filter>Classes\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VisibleRect.h">
+      <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

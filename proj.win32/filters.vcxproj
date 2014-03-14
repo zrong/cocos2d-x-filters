@@ -136,6 +136,7 @@ xcopy /Y /Q "$(COCOS2DX_HOME)\external\libwebsockets\win32\lib\*.*" "$(OutDir)"<
     <ClCompile Include="..\Classes\filters\ccFilterShaders.cpp" />
     <ClCompile Include="..\Classes\filters\CCShaderFilter.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\VisibleRect.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +145,7 @@ xcopy /Y /Q "$(COCOS2DX_HOME)\external\libwebsockets\win32\lib\*.*" "$(OutDir)"<
     <ClInclude Include="..\Classes\filters\ccFilterShaders.h" />
     <ClInclude Include="..\Classes\filters\CCShaderFilter.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\VisibleRect.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

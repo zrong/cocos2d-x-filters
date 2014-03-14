@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "CCGL.h"
 #include "ccFilterShaders.h"
+//#include "../CCFilteredSprite.h"
 
 
 #define kCCFilterShader_gray	"ccFilterShader_gray"
@@ -11,6 +12,8 @@
 #define kCCFilterShader_vblur	"ccFilterShader_vblur"
 
 USING_NS_CC;
+
+class CCFilteredSprite;
 
 //================== CCShaderFilter
 
@@ -20,6 +23,7 @@ public:
 	CCShaderFilter();
 	~CCShaderFilter();
 
+	virtual void initSprite(CCFilteredSprite* $sprite);
 	virtual void draw();
 	CCGLProgram* getProgram();
 
@@ -27,9 +31,9 @@ public:
 protected:
 	CCGLProgram* _pProgram;
 	void initProgram();
-	virtual CCGLProgram* loadShader() = 0;
-	virtual void setAttributes(CCGLProgram* $glp) = 0;
-	virtual void setUniforms(CCGLProgram* $glp) = 0;
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
 };
 
 //================== CCGrayFilter
@@ -91,6 +95,26 @@ public:
 	CCVBlurFilter();
 protected:
 	virtual CCGLProgram* loadShader();
+};
+
+//================== CCMaskFilter
+
+class CCMaskFilter : public CCShaderFilter
+{
+
+public:
+	static CCMaskFilter* create();
+	static CCMaskFilter* create(CCString* $maskImage);
+
+	CCMaskFilter();
+	~CCMaskFilter();
+
+	void setParameter(CCString* $param);
+	virtual void initSprite(CCFilteredSprite* $sprite);
+protected:
+	void initProgram();
+	CCString* _param;
+	
 };
 
 #endif /* __CCSHADER_FILTER_H__ */

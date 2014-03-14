@@ -50,7 +50,24 @@ void CCShaderFilter::initProgram()
 	}
 }
 
+void CCShaderFilter::initSprite(CCFilteredSprite* $sprite)
+{
+}
+
 void CCShaderFilter::draw()
+{
+}
+
+CCGLProgram* CCShaderFilter::loadShader()
+{
+	return NULL;
+}
+
+void CCShaderFilter::setAttributes(CCGLProgram* $glp)
+{
+}
+
+void CCShaderFilter::setUniforms(CCGLProgram* $glp)
 {
 }
 
@@ -196,4 +213,51 @@ CCGLProgram* CCVBlurFilter::loadShader()
 	__p->initWithVertexShaderByteArray(ccFilterShader_vblur_vert, ccFilterShader_blur_frag);
 	CCLOG("CCVBlurFilter::loadShader %f", _param);
 	return __p;
+}
+
+//================== CCMaskFilter
+
+CCMaskFilter* CCMaskFilter::create()
+{
+	CCMaskFilter* __filter = new CCMaskFilter();
+	__filter->autorelease();
+	return __filter;
+}
+
+CCMaskFilter* CCMaskFilter::create(CCString* $maskImage)
+{
+	CCMaskFilter* __filter = CCMaskFilter::create();
+	__filter->setParameter($maskImage);
+	return __filter;
+}
+
+CCMaskFilter::CCMaskFilter()
+: _param(NULL)
+{
+	this->shaderName = NULL;
+}
+
+void CCMaskFilter::initProgram()
+{
+	//Do nothing in CCMaskFilter
+	CCLOG("CCMaskFilter initProgram");
+}
+
+void CCMaskFilter::initSprite(CCFilteredSprite* $sprite)
+{
+	CCLOG("CCMaskFilter initSprite maskImage:%s", _param->getCString());
+	ccBlendFunc __imgBF = { GL_ONE, GL_ZERO };
+	ccBlendFunc __maskBF = { GL_DST_ALPHA, GL_ZERO };
+
+	CCSprite* __pImg = CCSprite::create(_param->getCString());
+
+}
+
+void CCMaskFilter::setParameter(CCString* $maskImage)
+{
+	_param = $maskImage;
+}
+
+CCMaskFilter::~CCMaskFilter()
+{
 }
