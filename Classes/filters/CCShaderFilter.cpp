@@ -243,13 +243,19 @@ void CCMaskFilter::initProgram()
 	CCLOG("CCMaskFilter initProgram");
 }
 
+//class CCFilteredSprite;
+
 void CCMaskFilter::initSprite(CCFilteredSprite* $sprite)
 {
-	CCLOG("CCMaskFilter initSprite maskImage:%s", _param->getCString());
+	CCLOG("CCMaskFilter initSprite maskImage:%s, sprite:%d", _param->getCString(), $sprite);
 	ccBlendFunc __imgBF = { GL_ONE, GL_ZERO };
 	ccBlendFunc __maskBF = { GL_DST_ALPHA, GL_ZERO };
+	//$sprite->getTexture();
 
-	CCSprite* __pImg = CCSprite::create(_param->getCString());
+	//CCSprite* __pImg = CCSprite::createWithTexture($sprite->getTexture());
+	//CCSprite* __pMask = CCSprite::create(_param->getCString());
+	//__pImg->setBlendFunc(__imgBF);
+	
 
 }
 

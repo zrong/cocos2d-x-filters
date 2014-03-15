@@ -4,8 +4,6 @@
 #include "cocos2d.h"
 #include "CCGL.h"
 #include "ccFilterShaders.h"
-//#include "../CCFilteredSprite.h"
-
 
 #define kCCFilterShader_gray	"ccFilterShader_gray"
 #define kCCFilterShader_hblur	"ccFilterShader_hblur"
@@ -14,7 +12,6 @@
 USING_NS_CC;
 
 class CCFilteredSprite;
-
 //================== CCShaderFilter
 
 class CCShaderFilter :	public CCObject
