@@ -57,12 +57,6 @@ void HelloWorld::showSprite()
 
 	//_pSprite = CCSprite::create("grass.png");
 
-	
-	//CCBlurFilter* __blurFilter = CCBlurFilter::create(0.01f);
-	//CCSprite* __blurSprite = CCFilteredSprite::create("helloworld.png", __blurFilter);
-	//__blurSprite->setAnchorPoint(ccp(0,0));
-	//__blurSprite->setPosition(ccp($origin->x, $origin->y));
-	//this->addChild(__blurSprite, 0);
 
 	//CCGrayFilter* __grayFilter = CCGrayFilter::create(ccc4f(0.2f, 0.3f, 0.4f, 0.0f));
 	//CCSprite* __graySprite = CCFilteredSprite::create("helloworld.png", __grayFilter);
@@ -70,21 +64,28 @@ void HelloWorld::showSprite()
 	//__graySprite->setPosition(ccp($size->width / 2 + $origin->x, $origin->y));
 	//this->addChild(__graySprite);
 
-	CCHBlurFilter* __hblurFilter = CCHBlurFilter::create(0.02f);
-	CCBlurBaseFilter* __vblurFilter = CCVBlurFilter::create(0.02f);
-	CCSprite* __blurSprite = CCFilteredSprite::create("helloworld.png", 
-		CCArray::create(__hblurFilter, __vblurFilter, NULL));	
-	__blurSprite->setPosition(VisibleRect::left());
-	this->addChild(__blurSprite);
-
-	CCMaskFilter* __maskFilter = CCMaskFilter::create(CCString::create("mask.png"));
-	CCSprite* __maskSprite = CCFilteredSprite::create("helloworld.png", __maskFilter);
-	__maskSprite->setPosition(VisibleRect::right());
-	this->addChild(__maskSprite);
 	//_pSprite = CCFilteredSprite::create("grass5.png", __grayFilter);
 	////_pSprite->setShaderProgram(this->getGrass());
 	//_pSprite->setPosition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));
 	//this->addChild(_pSprite, 0);
+
+	CCHBlurFilter* __hblurFilter = CCHBlurFilter::create(0.02f);
+	CCBlurBaseFilter* __vblurFilter = CCVBlurFilter::create(0.02f);
+	CCSprite* __blurSprite = CCFilteredSprite::create("helloworld.png", 
+		CCArray::create(__hblurFilter, __vblurFilter, NULL));	
+	__blurSprite->setPosition(VisibleRect::leftTop(100,-100));
+	this->addChild(__blurSprite);
+
+	CCMaskFilter* __maskFilter = CCMaskFilter::create(CCString::create("mask.png"));
+	CCSprite* __maskSprite = CCFilteredSprite::create("helloworld.png", __maskFilter);
+	__maskSprite->setPosition(VisibleRect::leftTop(200, -200));
+	this->addChild(__maskSprite);
+
+	CCGaussianHBlurFilter* __gaussianHblurFilter = CCGaussianHBlurFilter::create(0.2f);
+	CCSprite* __gaussianBlurSprite = CCFilteredSprite::create("helloworld.png", __gaussianHblurFilter);
+	__blurSprite->setPosition(VisibleRect::leftTop(300, -300));
+	this->addChild(__gaussianBlurSprite);
+
 }
 
 cocos2d::CCGLProgram* HelloWorld::getGrass()

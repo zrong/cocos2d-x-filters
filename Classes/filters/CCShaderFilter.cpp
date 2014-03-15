@@ -1,4 +1,5 @@
 #include "CCShaderFilter.h"
+#include "CCFilteredSprite.h"
 
 //================== CCShaderFilter
 
@@ -22,10 +23,11 @@ CCGLProgram* CCShaderFilter::getProgram()
 void CCShaderFilter::initProgram()
 {
 	CCGLProgram* __pProgram = CCShaderCache::sharedShaderCache()->programForKey(shaderName);
-	CCLOG("CCShaderFilter::initProgram %s", shaderName);
+	CCLOG("CCShaderFilter::initProgram %s, program:%d", shaderName, __pProgram);
 	if (!__pProgram)
 	{
 		__pProgram = loadShader();
+		CCLOG("CCShaderFilter::initProgram %s, after loadShader program:%d", shaderName, __pProgram);
 		this->setAttributes(__pProgram);
 		CHECK_GL_ERROR_DEBUG();
 
@@ -50,7 +52,7 @@ void CCShaderFilter::initProgram()
 	}
 }
 
-void CCShaderFilter::initSprite(CCSprite* $sprite)
+void CCShaderFilter::initSprite(CCFilteredSprite* $sprite)
 {
 }
 
@@ -60,6 +62,7 @@ void CCShaderFilter::draw()
 
 CCGLProgram* CCShaderFilter::loadShader()
 {
+	CCLOG("CCShaderFilter::loadShader");
 	return NULL;
 }
 
@@ -137,6 +140,7 @@ CCBlurBaseFilter::~CCBlurBaseFilter()
 
 void CCBlurBaseFilter::setAttributes(CCGLProgram* $cgp)
 {
+	CCLOG("CCBlurBaseFilter::setAttributes");
 	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
 	$cgp->addAttribute(kCCAttributeNameColor, kCCVertexAttrib_Color);
 	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
@@ -215,6 +219,35 @@ CCGLProgram* CCVBlurFilter::loadShader()
 	return __p;
 }
 
+//================== CCGaussianHBlurFilter
+
+CCGaussianHBlurFilter* CCGaussianHBlurFilter::create()
+{
+	CCGaussianHBlurFilter* __filter = new CCGaussianHBlurFilter();
+	__filter->autorelease();
+	return __filter;
+}
+
+CCGaussianHBlurFilter* CCGaussianHBlurFilter::create(float $param)
+{
+	CCGaussianHBlurFilter* __filter = CCGaussianHBlurFilter::create();
+	__filter->setParameter($param);
+	return __filter;
+}
+
+CCGaussianHBlurFilter::CCGaussianHBlurFilter()
+{
+	this->shaderName = kCCFilterShader_gaussian_hblur;
+}
+
+CCGLProgram* CCGaussianHBlurFilter::loadShader()
+{
+	CCGLProgram* __p = new CCGLProgram();
+	CCLOG("CCGaussianHBlurFilter::loadShader %f, program:%d", _param, __p);
+	__p->initWithVertexShaderByteArray(ccFilterShader_gaussian_hblur_vert, ccFilterShader_gaussian_hblur_frag);
+	return __p;
+}
+
 //================== CCMaskFilter
 
 CCMaskFilter* CCMaskFilter::create()
@@ -243,9 +276,9 @@ void CCMaskFilter::initProgram()
 	CCLOG("CCMaskFilter initProgram");
 }
 
-void CCMaskFilter::initSprite(CCSprite* $sprite)
+void CCMaskFilter::initSprite(CCFilteredSprite* $sprite)
 {
-	CCLOG("CCMaskFilter initSprite maskImage:%s, sprite:%d", _param->getCString(), $sprite);
+	CCLOG("CCMaskFilter initSprite maskImage:%s", _param->getCString());
 	ccBlendFunc __maskBF = { GL_ONE, GL_ZERO };
 	ccBlendFunc __imgBF = { GL_DST_ALPHA, GL_ZERO };
 

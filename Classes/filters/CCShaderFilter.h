@@ -8,10 +8,12 @@
 #define kCCFilterShader_gray	"ccFilterShader_gray"
 #define kCCFilterShader_hblur	"ccFilterShader_hblur"
 #define kCCFilterShader_vblur	"ccFilterShader_vblur"
+#define kCCFilterShader_gaussian_hblur	"ccFilterShader_gaussian_hblur"
+#define kCCFilterShader_gaussian_vblur	"ccFilterShader_gaussian_vblur"
 
 USING_NS_CC;
 
-//class CCFilteredSprite;
+class CCFilteredSprite;
 
 //================== CCShaderFilter
 
@@ -21,7 +23,7 @@ public:
 	CCShaderFilter();
 	~CCShaderFilter();
 
-	virtual void initSprite(CCSprite* $sprite);
+	virtual void initSprite(CCFilteredSprite* $sprite);
 	virtual void draw();
 	CCGLProgram* getProgram();
 
@@ -80,7 +82,6 @@ public:
 	CCHBlurFilter();
 protected:
 	virtual CCGLProgram* loadShader();
-private:
 	
 };
 
@@ -93,6 +94,18 @@ public:
 	CCVBlurFilter();
 protected:
 	virtual CCGLProgram* loadShader();
+};
+
+class CCGaussianHBlurFilter : public CCBlurBaseFilter
+{
+public:
+	static CCGaussianHBlurFilter* create();
+	static CCGaussianHBlurFilter* create(float $param);
+
+	CCGaussianHBlurFilter();
+protected:
+	virtual CCGLProgram* loadShader();
+
 };
 
 //================== CCMaskFilter
@@ -108,7 +121,7 @@ public:
 	~CCMaskFilter();
 
 	void setParameter(CCString* $param);
-	virtual void initSprite(CCSprite* $sprite);
+	virtual void initSprite(CCFilteredSprite* $sprite);
 protected:
 	void initProgram();
 	CCString* _param;

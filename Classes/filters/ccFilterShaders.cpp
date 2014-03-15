@@ -40,6 +40,13 @@ const GLchar * ccFilterShader_vblur_vert =
 const GLchar * ccFilterShader_blur_frag =
 #include "ccFilterShader_blur_frag.h"
 
+const GLchar * ccFilterShader_gaussian_hblur_vert =
+#include "ccFilterShader_gaussian_hblur_vert.h"
+const GLchar * ccFilterShader_gaussian_hblur_frag =
+#include "ccFilterShader_gaussian_hblur_frag.h"
+const GLchar * ccFilterShader_gaussian_vblur_frag =
+#include "ccFilterShader_gaussian_vblur_frag.h"
+
 const GLchar * ccFilterShader_colorramp_frag =
 #include "ccFilterShader_colorramp_frag.h"
 
