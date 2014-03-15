@@ -11,7 +11,8 @@
 
 USING_NS_CC;
 
-class CCFilteredSprite;
+//class CCFilteredSprite;
+
 //================== CCShaderFilter
 
 class CCShaderFilter :	public CCObject
@@ -20,7 +21,7 @@ public:
 	CCShaderFilter();
 	~CCShaderFilter();
 
-	virtual void initSprite(CCFilteredSprite* $sprite);
+	virtual void initSprite(CCSprite* $sprite);
 	virtual void draw();
 	CCGLProgram* getProgram();
 
@@ -107,7 +108,7 @@ public:
 	~CCMaskFilter();
 
 	void setParameter(CCString* $param);
-	virtual void initSprite(CCFilteredSprite* $sprite);
+	virtual void initSprite(CCSprite* $sprite);
 protected:
 	void initProgram();
 	CCString* _param;

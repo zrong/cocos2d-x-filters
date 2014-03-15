@@ -70,12 +70,12 @@ void HelloWorld::showSprite()
 	//__graySprite->setPosition(ccp($size->width / 2 + $origin->x, $origin->y));
 	//this->addChild(__graySprite);
 
-	//CCHBlurFilter* __hblurFilter = CCHBlurFilter::create(0.02f);
-	//CCBlurBaseFilter* __vblurFilter = CCVBlurFilter::create(0.02f);
-	//CCSprite* __blurSprite = CCFilteredSprite::create("helloworld.png", 
-	//	CCArray::create(__hblurFilter, __vblurFilter, NULL));	
-	//__blurSprite->setPosition(VisibleRect::left());
-	//this->addChild(__blurSprite);
+	CCHBlurFilter* __hblurFilter = CCHBlurFilter::create(0.02f);
+	CCBlurBaseFilter* __vblurFilter = CCVBlurFilter::create(0.02f);
+	CCSprite* __blurSprite = CCFilteredSprite::create("helloworld.png", 
+		CCArray::create(__hblurFilter, __vblurFilter, NULL));	
+	__blurSprite->setPosition(VisibleRect::left());
+	this->addChild(__blurSprite);
 
 	CCMaskFilter* __maskFilter = CCMaskFilter::create(CCString::create("mask.png"));
 	CCSprite* __maskSprite = CCFilteredSprite::create("helloworld.png", __maskFilter);

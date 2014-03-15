@@ -50,7 +50,7 @@ void CCShaderFilter::initProgram()
 	}
 }
 
-void CCShaderFilter::initSprite(CCFilteredSprite* $sprite)
+void CCShaderFilter::initSprite(CCSprite* $sprite)
 {
 }
 
@@ -243,20 +243,34 @@ void CCMaskFilter::initProgram()
 	CCLOG("CCMaskFilter initProgram");
 }
 
-//class CCFilteredSprite;
-
-void CCMaskFilter::initSprite(CCFilteredSprite* $sprite)
+void CCMaskFilter::initSprite(CCSprite* $sprite)
 {
 	CCLOG("CCMaskFilter initSprite maskImage:%s, sprite:%d", _param->getCString(), $sprite);
-	ccBlendFunc __imgBF = { GL_ONE, GL_ZERO };
-	ccBlendFunc __maskBF = { GL_DST_ALPHA, GL_ZERO };
-	//$sprite->getTexture();
+	ccBlendFunc __maskBF = { GL_ONE, GL_ZERO };
+	ccBlendFunc __imgBF = { GL_DST_ALPHA, GL_ZERO };
 
-	//CCSprite* __pImg = CCSprite::createWithTexture($sprite->getTexture());
-	//CCSprite* __pMask = CCSprite::create(_param->getCString());
-	//__pImg->setBlendFunc(__imgBF);
+	CCSprite* __pMask = CCSprite::create(_param->getCString());
+	__pMask->setAnchorPoint(ccp(0, 0));
+	__pMask->setPosition(ccp(0, 0));
+
+	CCSprite* __pImg = CCSprite::createWithTexture($sprite->getTexture());
+	__pImg->setAnchorPoint(ccp(0, 0));
+	__pImg->setPosition(ccp(0, 0));
+
+	__pMask->setBlendFunc(__maskBF);
+	__pImg->setBlendFunc(__imgBF);
 	
+	CCSize __size = __pImg->getContentSize();
+	CCRenderTexture* __pRender = CCRenderTexture::create(__size.width, __size.height);
+	__pRender->begin();
+	__pMask->visit();
+	__pImg->visit();
+	__pRender->end();
 
+	CCTexture2D* __pTex = new CCTexture2D();
+	__pTex->initWithImage(__pRender->newCCImage(true));
+	__pTex->autorelease();
+	$sprite->setTexture(__pTex);
 }
 
 void CCMaskFilter::setParameter(CCString* $maskImage)
