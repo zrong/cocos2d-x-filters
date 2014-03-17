@@ -246,6 +246,59 @@ CCGLProgram* CCGaussianHBlurFilter::loadShader()
 	CCLOG("CCGaussianHBlurFilter::loadShader %f, program:%d", _param, __p);
 	__p->initWithVertexShaderByteArray(ccFilterShader_gaussian_hblur_vert, ccFilterShader_gaussian_hblur_frag);
 	return __p;
+	//return NULL;
+}
+
+void CCGaussianHBlurFilter::setAttributes(CCGLProgram* $cgp)
+{
+	CCLOG("CCBlurBaseFilter::setAttributes");
+	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
+	$cgp->addAttribute(kCCAttributeNameColor, kCCVertexAttrib_Color);
+	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
+}
+
+void CCGaussianHBlurFilter::setUniforms(CCGLProgram* $cgp)
+{
+	int __radius = $cgp->getUniformLocationForName("u_radius");
+	//CCLOG("CCShaderFilter::getProgram %d", $cgp);
+	$cgp->setUniformLocationWith1f(__radius, _param);
+	CCLOG("CCGaussianHBlurFilter::setUniforms radius:%d", __radius);
+}
+
+void CCGaussianHBlurFilter::setParameter(float $param)
+{
+	_param = $param;
+	//initProgram();
+}
+
+void CCGaussianHBlurFilter::initSprite(CCFilteredSprite* $sprite)
+{
+
+	ccBlendFunc __maskBF = { GL_ONE, GL_ONE };
+	ccBlendFunc __imgBF = { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };
+
+	CCSprite* __pMask = CCSprite::createWithTexture($sprite->getTexture());
+	__pMask->setAnchorPoint(ccp(0, 0));
+	__pMask->setPosition(ccp(0, 0));
+
+	CCSprite* __pImg = CCSprite::createWithTexture($sprite->getTexture());
+	__pImg->setAnchorPoint(ccp(0, 0));
+	__pImg->setPosition(ccp(0, 0));
+
+	__pMask->setBlendFunc(__maskBF);
+	__pImg->setBlendFunc(__imgBF);
+
+	CCSize __size = __pImg->getContentSize();
+	CCRenderTexture* __pRender = CCRenderTexture::create(__size.width, __size.height);
+	__pRender->begin();
+	__pMask->visit();
+	__pImg->visit();
+	__pRender->end();
+
+	CCTexture2D* __pTex = new CCTexture2D();
+	__pTex->initWithImage(__pRender->newCCImage(true));
+	__pTex->autorelease();
+	$sprite->setTexture(__pTex);
 }
 
 //================== CCMaskFilter
@@ -313,4 +366,71 @@ void CCMaskFilter::setParameter(CCString* $maskImage)
 
 CCMaskFilter::~CCMaskFilter()
 {
+}
+
+//================== CCSharpenFilter
+
+CCSharpenFilter* CCSharpenFilter::create()
+{
+	CCSharpenFilter* __filter = new CCSharpenFilter();
+	__filter->autorelease();
+	return __filter;
+}
+
+CCSharpenFilter* CCSharpenFilter::create(float $sharpness, float $widthFactor, float $heightFactor)
+{
+	CCSharpenFilter* __filter = CCSharpenFilter::create();
+	__filter->setParameter($sharpness, $widthFactor, $heightFactor);
+	return __filter;
+}
+
+CCSharpenFilter::CCSharpenFilter()
+: _sharpness(0.f)
+, _widthFactor(0.f)
+, _heightFactor(0.f)
+{
+	this->shaderName = kCCFilterShader_sharpen;
+}
+
+CCGLProgram* CCSharpenFilter::loadShader()
+{
+	CCGLProgram* __p = new CCGLProgram();
+	CCLOG("CCSharpenFilter::loadShader, program:%d", __p);
+	__p->initWithVertexShaderByteArray(ccFilterShader_sharpen_vert, ccFilterShader_sharpen_frag);
+	return __p;
+}
+
+void CCSharpenFilter::setParameter(float $sharpness, float $widthFactor, float $heightFactor)
+{
+	_sharpness = $sharpness;
+	_widthFactor = $widthFactor;
+	_heightFactor = $heightFactor;
+	initProgram();
+}
+
+void CCSharpenFilter::setAttributes(CCGLProgram* $cgp)
+{
+	CCLOG("CCBlurBaseFilter::setAttributes");
+	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
+	$cgp->addAttribute(kCCAttributeNameColor, kCCVertexAttrib_Color);
+	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
+}
+
+void CCSharpenFilter::setUniforms(CCGLProgram* $cgp)
+{
+	int __sharpness = $cgp->getUniformLocationForName("u_sharpness");
+	int __widthFactor = $cgp->getUniformLocationForName("u_widthFactor");
+	int __heightFactor = $cgp->getUniformLocationForName("u_heightFactor");
+	//CCLOG("CCSharpenFilter::getProgram %d", $cgp);
+	$cgp->setUniformLocationWith1f(__sharpness, _sharpness);
+	$cgp->setUniformLocationWith1f(__widthFactor, _widthFactor);
+	$cgp->setUniformLocationWith1f(__heightFactor, _heightFactor);
+	CCLOG("CCSharpenFilter::setUniforms u_sharpness:%.2f, u_widthFactor:%.2f, u_heightFctor:%.2f",
+		_sharpness, _widthFactor, _heightFactor);
+}
+
+
+CCSharpenFilter::~CCSharpenFilter()
+{
+
 }

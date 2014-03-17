@@ -46,6 +46,9 @@ THE SOFTWARE.
  extern CC_DLL const GLchar * ccFilterShader_gaussian_hblur_frag;
  extern CC_DLL const GLchar * ccFilterShader_gaussian_vblur_frag;
 
+ extern CC_DLL const GLchar * ccFilterShader_sharpen_vert;
+ extern CC_DLL const GLchar * ccFilterShader_sharpen_frag;
+
 extern CC_DLL const GLchar * ccFilterShader_colorramp_frag;
 
 extern CC_DLL const GLchar * ccFilterShader_emboss_frag;

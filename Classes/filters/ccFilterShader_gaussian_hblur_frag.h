@@ -7,6 +7,7 @@ const float total = (1. + 8. + 28. + 56.) * 2. + 70.;\n\
 void main()\n\
 {\n\
 	vec2 st = gl_TexCoord[0].st;\n\
+	//vec2 st = vec2(1,0);\n\
 \n\
 	vec4 color = vec4(0.0,0.0,0.0,0.0);\n\
 	color += (1. / total) * texture2D(CC_Texture0, st - u_radius * vec2(4. / 4., 0.));\n\

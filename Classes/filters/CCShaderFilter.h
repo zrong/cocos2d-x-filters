@@ -10,6 +10,7 @@
 #define kCCFilterShader_vblur	"ccFilterShader_vblur"
 #define kCCFilterShader_gaussian_hblur	"ccFilterShader_gaussian_hblur"
 #define kCCFilterShader_gaussian_vblur	"ccFilterShader_gaussian_vblur"
+#define kCCFilterShader_sharpen	"ccFilterShader_sharpen"
 
 USING_NS_CC;
 
@@ -96,15 +97,20 @@ protected:
 	virtual CCGLProgram* loadShader();
 };
 
-class CCGaussianHBlurFilter : public CCBlurBaseFilter
+class CCGaussianHBlurFilter : public CCShaderFilter
 {
 public:
 	static CCGaussianHBlurFilter* create();
 	static CCGaussianHBlurFilter* create(float $param);
 
 	CCGaussianHBlurFilter();
+	void setParameter(float $param);
 protected:
 	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	virtual void initSprite(CCFilteredSprite* $sprite);
+	float _param;
 
 };
 
@@ -126,6 +132,29 @@ protected:
 	void initProgram();
 	CCString* _param;
 	
+};
+
+//================== CCSharpenFilter
+
+class CCSharpenFilter : public CCShaderFilter
+{
+
+public:
+	static CCSharpenFilter* create();
+	static CCSharpenFilter* create(float $sharpness, float $widthFactor, float $heightFactor);
+
+	CCSharpenFilter();
+	~CCSharpenFilter();
+
+	void setParameter(float $sharpness, float $widthFactor, float $heightFactor);
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	float _sharpness;
+	float _widthFactor;
+	float _heightFactor;
+
 };
 
 #endif /* __CCSHADER_FILTER_H__ */
