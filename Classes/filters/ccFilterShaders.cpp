@@ -52,6 +52,10 @@ const GLchar * ccFilterShader_sharpen_vert =
 const GLchar * ccFilterShader_sharpen_frag = 
 #include "ccFilterShader_sharpen_frag.h"
 
+const GLchar * ccFilterShader_rgb_vert = 
+#include "ccFilterShader_rgb_vert.h"
+const GLchar * ccFilterShader_rgb_frag = 
+#include "ccFilterShader_rgb_frag.h"
 
 const GLchar * ccFilterShader_colorramp_frag =
 #include "ccFilterShader_colorramp_frag.h"

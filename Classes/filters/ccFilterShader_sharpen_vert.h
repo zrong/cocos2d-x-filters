@@ -17,7 +17,8 @@ varying float v_edgeMultiplier;\n\
 \n\
 void main()\n\
 {\n\
-    gl_Position = a_position;\n\
+    gl_Position = CC_MVPMatrix * a_position;		\n\
+    //gl_Position = a_position;\n\
     \n\
     vec2 widthStep = vec2(u_widthFactor, 0.0);\n\
     vec2 heightStep = vec2(0.0, u_heightFactor);\n\

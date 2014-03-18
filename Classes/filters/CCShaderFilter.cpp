@@ -384,10 +384,18 @@ CCSharpenFilter* CCSharpenFilter::create(float $sharpness, float $widthFactor, f
 	return __filter;
 }
 
+CCSharpenFilter* CCSharpenFilter::create(float $sharpness, int $amount)
+{
+	CCSharpenFilter* __filter = CCSharpenFilter::create();
+	__filter->setParameter($sharpness, $amount);
+	return __filter;
+}
+
 CCSharpenFilter::CCSharpenFilter()
 : _sharpness(0.f)
 , _widthFactor(0.f)
 , _heightFactor(0.f)
+, _amount(0)
 {
 	this->shaderName = kCCFilterShader_sharpen;
 }
@@ -405,6 +413,25 @@ void CCSharpenFilter::setParameter(float $sharpness, float $widthFactor, float $
 	_sharpness = $sharpness;
 	_widthFactor = $widthFactor;
 	_heightFactor = $heightFactor;
+	//The initProgram() will perform in initSprite()
+}
+
+void CCSharpenFilter::setParameter(float $sharpness, int $amount)
+{
+	_sharpness = $sharpness;
+	_amount = $amount;
+	//The initProgram() will perform in initSprite()
+}
+
+void CCSharpenFilter::initSprite(CCFilteredSprite* $sprite)
+{
+	// If _amount is not 0, then calculate the value of the widthFactor and the heightFactor.
+	if (_amount != 0)
+	{
+		CCSize __size = $sprite->getContentSize();
+		_widthFactor = 1.0f / __size.width * _amount;
+		_heightFactor = 1.0f / __size.height * _amount;
+	}
 	initProgram();
 }
 
@@ -429,8 +456,74 @@ void CCSharpenFilter::setUniforms(CCGLProgram* $cgp)
 		_sharpness, _widthFactor, _heightFactor);
 }
 
-
 CCSharpenFilter::~CCSharpenFilter()
+{
+
+}
+
+//================== CCRGBFilter
+
+CCRGBFilter* CCRGBFilter::create()
+{
+	CCRGBFilter* __filter = new CCRGBFilter();
+	__filter->autorelease();
+	return __filter;
+}
+
+CCRGBFilter* CCRGBFilter::create(float $readAdj, float $greenAdj, float $blueAdj)
+{
+	CCRGBFilter* __filter = CCRGBFilter::create();
+	__filter->setParameter($readAdj, $greenAdj, $blueAdj);
+	return __filter;
+}
+
+CCRGBFilter::CCRGBFilter()
+: _redAdj(1.f)
+, _greenAdj(1.f)
+, _blueAdj(1.f)
+{
+	this->shaderName = kCCFilterShader_rgb;
+}
+
+CCGLProgram* CCRGBFilter::loadShader()
+{
+	CCGLProgram* __p = new CCGLProgram();
+	CCLOG("CCRGBFilter::loadShader, program:%d", __p);
+	__p->initWithVertexShaderByteArray(ccFilterShader_rgb_vert, ccFilterShader_rgb_frag);
+	return __p;
+}
+
+void CCRGBFilter::setParameter(float $redAdj, float $greenAdj, float $blueAdj)
+{
+	_redAdj = $redAdj;
+	_greenAdj = $greenAdj;
+	_blueAdj = $blueAdj;
+	initProgram();
+}
+
+void CCRGBFilter::setAttributes(CCGLProgram* $cgp)
+{
+	CCLOG("CCRGBFilter::setAttributes");
+	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
+	$cgp->addAttribute(kCCAttributeNameColor, kCCVertexAttrib_Color);
+	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
+}
+
+void CCRGBFilter::setUniforms(CCGLProgram* $cgp)
+{
+	int __redAdj = $cgp->getUniformLocationForName("u_redAdj");
+	int __greenAdj = $cgp->getUniformLocationForName("u_greenAdj");
+	int __blueAdj = $cgp->getUniformLocationForName("u_blueAdj");
+	CCLOG("CCRGBFilter::setUniforms %d, %d, %d", __redAdj, __greenAdj, __blueAdj);
+	$cgp->setUniformLocationWith1f(__redAdj, _redAdj);
+	$cgp->setUniformLocationWith1f(__greenAdj, _greenAdj);
+	$cgp->setUniformLocationWith1f(__blueAdj, _blueAdj);
+	CCLOG("CCRGBFilter::setUniforms u_redAdj:%.2f, u_greenAdj:%.5f, u_blueAdj:%.5f",
+		_redAdj, _greenAdj, _blueAdj);
+}
+
+
+CCRGBFilter::~CCRGBFilter()
 {
 
 }
