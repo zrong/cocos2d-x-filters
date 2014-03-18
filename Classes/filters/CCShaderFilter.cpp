@@ -421,11 +421,11 @@ void CCSharpenFilter::setUniforms(CCGLProgram* $cgp)
 	int __sharpness = $cgp->getUniformLocationForName("u_sharpness");
 	int __widthFactor = $cgp->getUniformLocationForName("u_widthFactor");
 	int __heightFactor = $cgp->getUniformLocationForName("u_heightFactor");
-	//CCLOG("CCSharpenFilter::getProgram %d", $cgp);
+	CCLOG("CCSharpenFilter::setUniforms %d, %d, %d", __sharpness, __widthFactor, __heightFactor);
 	$cgp->setUniformLocationWith1f(__sharpness, _sharpness);
 	$cgp->setUniformLocationWith1f(__widthFactor, _widthFactor);
 	$cgp->setUniformLocationWith1f(__heightFactor, _heightFactor);
-	CCLOG("CCSharpenFilter::setUniforms u_sharpness:%.2f, u_widthFactor:%.2f, u_heightFctor:%.2f",
+	CCLOG("CCSharpenFilter::setUniforms u_sharpness:%.2f, u_widthFactor:%.5f, u_heightFctor:%.5f",
 		_sharpness, _widthFactor, _heightFactor);
 }
 

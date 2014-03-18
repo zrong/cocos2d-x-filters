@@ -81,10 +81,16 @@ void HelloWorld::showSprite()
 	__maskSprite->setPosition(VisibleRect::rightTop(-240, -160));
 	this->addChild(__maskSprite);
 
-	CCGaussianHBlurFilter* __gaussianHblurFilter = CCGaussianHBlurFilter::create(2.0f);
-	CCSprite* __gaussianBlurSprite = CCFilteredSprite::create("helloworld.png", __gaussianHblurFilter);
-	__gaussianBlurSprite->setPosition(VisibleRect::leftBottom(240, 160));
-	this->addChild(__gaussianBlurSprite);
+	//CCGaussianHBlurFilter* __gaussianHblurFilter = CCGaussianHBlurFilter::create(2.0f);
+	//CCSprite* __gaussianBlurSprite = CCFilteredSprite::create("helloworld.png", __gaussianHblurFilter);
+	//__gaussianBlurSprite->setPosition(VisibleRect::leftBottom(240, 160));
+	//this->addChild(__gaussianBlurSprite);
+
+	//CCSharpenFilter* __sharpenFilter = CCSharpenFilter::create(0.1f, 0.00002f, 0.0002f);
+	CCSharpenFilter* __sharpenFilter = CCSharpenFilter::create(0.1f, 1.0f/480.f, 1.0f/320.f);
+	CCSprite* __sharpenSprite = CCFilteredSprite::create("helloworld.png", __sharpenFilter);
+	__sharpenSprite->setPosition(VisibleRect::leftBottom(240, 160));
+	this->addChild(__sharpenSprite, -10);
 
 }
 
