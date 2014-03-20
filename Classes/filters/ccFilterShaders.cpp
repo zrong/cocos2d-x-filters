@@ -30,6 +30,9 @@ const GLchar * ccFilterShader_exposure_frag =
 const GLchar * ccFilterShader_contrast_frag = 
 #include "ccFilterShader_contrast_frag.h"
 
+const GLchar * ccFilterShader_saturation_frag = 
+#include "ccFilterShader_saturation_frag.h"
+
 
 
 //==============================

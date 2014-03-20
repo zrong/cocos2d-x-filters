@@ -248,4 +248,24 @@ protected:
 	virtual void setUniforms(CCGLProgram* $glp);
 	float _param;
 };
+
+//================== CCSaturationFilter
+
+class CCSaturationFilter : public CCShaderFilter
+{
+
+public:
+	static CCSaturationFilter* create();
+	static CCSaturationFilter* create(float $param);
+
+	CCSaturationFilter();
+	~CCSaturationFilter();
+
+	void setParameter(float $param);
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	float _param;
+};
 #endif /* __CCSHADER_FILTER_H__ */
