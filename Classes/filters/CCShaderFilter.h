@@ -12,6 +12,7 @@
 #define kCCFilterShader_gaussian_vblur	"ccFilterShader_gaussian_vblur"
 #define kCCFilterShader_sharpen	"ccFilterShader_sharpen"
 #define kCCFilterShader_rgb	"ccFilterShader_rgb"
+#define kCCFilterShader_brightness	"ccFilterShader_brightness"
 
 USING_NS_CC;
 
@@ -184,4 +185,24 @@ protected:
 	float _blueAdj;
 };
 
+
+//================== CCBrightnessFilter
+
+class CCBrightnessFilter : public CCShaderFilter
+{
+
+public:
+	static CCBrightnessFilter* create();
+	static CCBrightnessFilter* create(float $brightness);
+
+	CCBrightnessFilter();
+	~CCBrightnessFilter();
+
+	void setParameter(float $brightness);
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	float _brightness;
+};
 #endif /* __CCSHADER_FILTER_H__ */

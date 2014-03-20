@@ -57,17 +57,20 @@ void HelloWorld::showSprite()
 
 	//_pSprite = CCSprite::create("grass.png");
 
-
-	//CCGrayFilter* __grayFilter = CCGrayFilter::create(ccc4f(0.2f, 0.3f, 0.4f, 0.0f));
-	//CCSprite* __graySprite = CCFilteredSprite::create("helloworld.png", __grayFilter);
-	//__graySprite->setAnchorPoint(ccp(0, 0));
-	//__graySprite->setPosition(ccp($size->width / 2 + $origin->x, $origin->y));
-	//this->addChild(__graySprite);
-
 	//_pSprite = CCFilteredSprite::create("grass5.png", __grayFilter);
 	////_pSprite->setShaderProgram(this->getGrass());
 	//_pSprite->setPosition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));
 	//this->addChild(_pSprite, 0);
+
+	//CCGaussianHBlurFilter* __gaussianHblurFilter = CCGaussianHBlurFilter::create(2.0f);
+	//CCSprite* __gaussianBlurSprite = CCFilteredSprite::create("helloworld.png", __gaussianHblurFilter);
+	//__gaussianBlurSprite->setPosition(VisibleRect::leftBottom(240, 160));
+	//this->addChild(__gaussianBlurSprite);
+
+	//CCGrayFilter* __grayFilter = CCGrayFilter::create(ccc4f(0.2f, 0.3f, 0.4f, 0.0f));
+	//CCSprite* __graySprite = CCFilteredSprite::create("helloworld.png", __grayFilter);
+	//__graySprite->setPosition(VisibleRect::leftTop(240, -160));
+	//this->addChild(__graySprite, 10);
 
 	CCHBlurFilter* __hblurFilter = CCHBlurFilter::create(0.02f);
 	CCBlurBaseFilter* __vblurFilter = CCVBlurFilter::create(0.02f);
@@ -81,21 +84,20 @@ void HelloWorld::showSprite()
 	__maskSprite->setPosition(VisibleRect::rightTop(-240, -160));
 	this->addChild(__maskSprite);
 
-	//CCGaussianHBlurFilter* __gaussianHblurFilter = CCGaussianHBlurFilter::create(2.0f);
-	//CCSprite* __gaussianBlurSprite = CCFilteredSprite::create("helloworld.png", __gaussianHblurFilter);
-	//__gaussianBlurSprite->setPosition(VisibleRect::leftBottom(240, 160));
-	//this->addChild(__gaussianBlurSprite);
-
 	CCSharpenFilter* __sharpenFilter = CCSharpenFilter::create(9.0f, 2);
 	CCSprite* __sharpenSprite = CCFilteredSprite::create("helloworld.png", __sharpenFilter);
 	__sharpenSprite->setPosition(VisibleRect::leftBottom(240, 160));
 	this->addChild(__sharpenSprite, -10);
 
-	CCRGBFilter* __rgbFilter = CCRGBFilter::create(0.5f, 0.2f, 0.3f);
+	CCRGBFilter* __rgbFilter = CCRGBFilter::create(0.5f, 0.7f, 0.3f);
 	CCSprite* __rgbSprite = CCFilteredSprite::create("helloworld.png", __rgbFilter);
 	__rgbSprite->setPosition(VisibleRect::rightBottom(-240, 160));
 	this->addChild(__rgbSprite, -10);
 
+	//CCBrightnessFilter* __brightnessFilter = CCBrightnessFilter::create(0.5f);
+	//CCSprite* __brightnessSprite = CCFilteredSprite::create("helloworld.png", __brightnessFilter);
+	//__brightnessSprite->setPosition(VisibleRect::rightBottom(-240, 160));
+	//this->addChild(__brightnessSprite, -10);
 }
 
 cocos2d::CCGLProgram* HelloWorld::getGrass()

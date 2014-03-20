@@ -4,7 +4,6 @@
 precision mediump float;                    \n\
 #endif                                      \n\
 \n\
-varying vec4 v_fragmentColor;               \n\
 varying vec2 v_texCoord;                    \n\
 \n\
 uniform sampler2D CC_Texture0;\n\
