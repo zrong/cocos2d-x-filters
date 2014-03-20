@@ -36,6 +36,9 @@ const GLchar * ccFilterShader_saturation_frag =
 const GLchar * ccFilterShader_gamma_frag = 
 #include "ccFilterShader_gamma_frag.h"
 
+const GLchar * ccFilterShader_hue_frag = 
+#include "ccFilterShader_hue_frag.h"
+
 //==============================
 //
 const GLchar * ccFilterShader_gaussian_hblur_vert =

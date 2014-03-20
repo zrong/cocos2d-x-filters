@@ -84,7 +84,8 @@ void HelloWorld::showSprite()
 	//testFilter(CCExposureFilter::create(1.5f));
 	//testFilter(CCContrastFilter::create(5.5f));
 	//testFilter(CCSaturationFilter::create(0.f));
-	testFilter(CCGammaFilter::create(0.2f));
+	//testFilter(CCGammaFilter::create(0.2f));
+	testFilter(CCHueFilter::create(90.5f));
 
 }
 
