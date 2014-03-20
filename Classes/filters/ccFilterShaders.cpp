@@ -24,6 +24,12 @@ const GLchar * ccFilterShader_rgb_frag =
 const GLchar * ccFilterShader_brightness_frag = 
 #include "ccFilterShader_brightness_frag.h"
 
+const GLchar * ccFilterShader_exposure_frag = 
+#include "ccFilterShader_exposure_frag.h"
+
+const GLchar * ccFilterShader_contrast_frag = 
+#include "ccFilterShader_contrast_frag.h"
+
 
 
 //==============================

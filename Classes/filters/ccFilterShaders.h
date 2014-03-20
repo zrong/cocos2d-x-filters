@@ -48,6 +48,10 @@ extern CC_DLL const GLchar * ccFilterShader_rgb_frag;
 
 extern CC_DLL const GLchar * ccFilterShader_brightness_frag;
 
+extern CC_DLL const GLchar * ccFilterShader_exposure_frag;
+
+extern CC_DLL const GLchar * ccFilterShader_contrast_frag;
+
 //==============================
 extern CC_DLL const GLchar * ccFilterShader_gaussian_hblur_vert;
 extern CC_DLL const GLchar * ccFilterShader_gaussian_hblur_frag;

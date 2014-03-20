@@ -13,6 +13,8 @@
 #define kCCFilterShader_sharpen	"ccFilterShader_sharpen"
 #define kCCFilterShader_rgb	"ccFilterShader_rgb"
 #define kCCFilterShader_brightness	"ccFilterShader_brightness"
+#define kCCFilterShader_exposure	"ccFilterShader_exposure"
+#define kCCFilterShader_contrast	"ccFilterShader_contrast"
 
 USING_NS_CC;
 
@@ -204,5 +206,46 @@ protected:
 	virtual void setAttributes(CCGLProgram* $glp);
 	virtual void setUniforms(CCGLProgram* $glp);
 	float _brightness;
+};
+
+//================== CCExposureFilter
+
+class CCExposureFilter : public CCShaderFilter
+{
+
+public:
+	static CCExposureFilter* create();
+	static CCExposureFilter* create(float $param);
+
+	CCExposureFilter();
+	~CCExposureFilter();
+
+	void setParameter(float $param);
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	float _param;
+};
+
+
+//================== CCContrastFilter
+
+class CCContrastFilter : public CCShaderFilter
+{
+
+public:
+	static CCContrastFilter* create();
+	static CCContrastFilter* create(float $param);
+
+	CCContrastFilter();
+	~CCContrastFilter();
+
+	void setParameter(float $param);
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	float _param;
 };
 #endif /* __CCSHADER_FILTER_H__ */

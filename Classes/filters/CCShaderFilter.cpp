@@ -558,7 +558,7 @@ CCGLProgram* CCBrightnessFilter::loadShader()
 
 void CCBrightnessFilter::setParameter(float $brightness)
 {
-	_brightness = $brightness;
+	_brightness = MIN(1.f, MAX($brightness, -1.f)); 
 	initProgram();
 }
 
@@ -578,6 +578,118 @@ void CCBrightnessFilter::setUniforms(CCGLProgram* $cgp)
 }
 
 CCBrightnessFilter::~CCBrightnessFilter()
+{
+
+}
+
+//================== CCExposureFilter
+
+CCExposureFilter* CCExposureFilter::create()
+{
+	CCExposureFilter* __filter = new CCExposureFilter();
+	__filter->autorelease();
+	return __filter;
+}
+
+CCExposureFilter* CCExposureFilter::create(float $brightness)
+{
+	CCExposureFilter* __filter = CCExposureFilter::create();
+	__filter->setParameter($brightness);
+	return __filter;
+}
+
+CCExposureFilter::CCExposureFilter()
+: _param(0.f)
+{
+	this->shaderName = kCCFilterShader_exposure;
+}
+
+CCGLProgram* CCExposureFilter::loadShader()
+{
+	CCGLProgram* __p = new CCGLProgram();
+	CCLOG("CCExposureFilter::loadShader, program:%d", __p);
+	__p->initWithVertexShaderByteArray(ccPositionTexture_vert, ccFilterShader_exposure_frag);
+	return __p;
+}
+
+void CCExposureFilter::setParameter(float $param)
+{
+	_param = MIN(10.f, MAX($param, -10.f));
+	initProgram();
+}
+
+void CCExposureFilter::setAttributes(CCGLProgram* $cgp)
+{
+	CCLOG("CCExposureFilter::setAttributes");
+	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
+	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
+}
+
+void CCExposureFilter::setUniforms(CCGLProgram* $cgp)
+{
+	int __param = $cgp->getUniformLocationForName("u_exposure");
+	CCLOG("CCExposureFilter::setUniforms %d", __param);
+	$cgp->setUniformLocationWith1f(__param, _param);
+	CCLOG("CCExposureFilter::setUniforms _param:%.2f", _param);
+}
+
+CCExposureFilter::~CCExposureFilter()
+{
+
+}
+
+//================== CCContrastFilter
+
+CCContrastFilter* CCContrastFilter::create()
+{
+	CCContrastFilter* __filter = new CCContrastFilter();
+	__filter->autorelease();
+	return __filter;
+}
+
+CCContrastFilter* CCContrastFilter::create(float $brightness)
+{
+	CCContrastFilter* __filter = CCContrastFilter::create();
+	__filter->setParameter($brightness);
+	return __filter;
+}
+
+CCContrastFilter::CCContrastFilter()
+: _param(1.f)
+{
+	this->shaderName = kCCFilterShader_contrast;
+}
+
+CCGLProgram* CCContrastFilter::loadShader()
+{
+	CCGLProgram* __p = new CCGLProgram();
+	CCLOG("CCContrastFilter::loadShader, program:%d", __p);
+	__p->initWithVertexShaderByteArray(ccPositionTexture_vert, ccFilterShader_contrast_frag);
+	return __p;
+}
+
+void CCContrastFilter::setParameter(float $param)
+{
+	_param = MIN(4.f, MAX($param, 0.f));
+	initProgram();
+}
+
+void CCContrastFilter::setAttributes(CCGLProgram* $cgp)
+{
+	CCLOG("CCContrastFilter::setAttributes");
+	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
+	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
+}
+
+void CCContrastFilter::setUniforms(CCGLProgram* $cgp)
+{
+	int __param = $cgp->getUniformLocationForName("u_contrast");
+	CCLOG("CCContrastFilter::setUniforms %d", __param);
+	$cgp->setUniformLocationWith1f(__param, _param);
+	CCLOG("CCContrastFilter::setUniforms _param:%.2f", _param);
+}
+
+CCContrastFilter::~CCContrastFilter()
 {
 
 }

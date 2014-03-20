@@ -5,6 +5,14 @@
 #include "CCFilteredSprite.h"
 #include "VisibleRect.h"
 
+typedef enum {
+	LEFT_TOP,
+	RIGHT_TOP,
+	LEFT_BOTTOM,
+	RIGHT_BOTTOM,
+	CENTER,
+} ccLocation;
+
 class HelloWorld : public cocos2d::CCLayer
 {
 public:
@@ -30,6 +38,9 @@ private:
 	int _timeUniformLocation;
 	float _totalTime = 0.0f;
 	cocos2d::CCSprite* _pSprite;
+	void testFilter(CCShaderFilter* $filter, ccLocation $location = CENTER, int $order = 0);
+	void testFilter(CCArray* $filters, ccLocation $location = CENTER, int $order = 0);
+	CCPoint getLocation(ccLocation $location);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
