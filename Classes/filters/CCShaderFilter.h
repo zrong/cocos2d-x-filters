@@ -15,6 +15,8 @@
 #define kCCFilterShader_brightness	"ccFilterShader_brightness"
 #define kCCFilterShader_exposure	"ccFilterShader_exposure"
 #define kCCFilterShader_contrast	"ccFilterShader_contrast"
+#define kCCFilterShader_saturation	"ccFilterShader_saturation"
+#define kCCFilterShader_gamma	"ccFilterShader_gamma"
 
 USING_NS_CC;
 
@@ -260,6 +262,26 @@ public:
 
 	CCSaturationFilter();
 	~CCSaturationFilter();
+
+	void setParameter(float $param);
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	float _param;
+};
+
+//================== CCGammaFilter
+
+class CCGammaFilter : public CCShaderFilter
+{
+
+public:
+	static CCGammaFilter* create();
+	static CCGammaFilter* create(float $param);
+
+	CCGammaFilter();
+	~CCGammaFilter();
 
 	void setParameter(float $param);
 protected:
