@@ -85,8 +85,8 @@ void HelloWorld::showSprite()
 	//testFilter(CCContrastFilter::create(5.5f));
 	//testFilter(CCSaturationFilter::create(0.f));
 	//testFilter(CCGammaFilter::create(0.2f));
-	testFilter(CCHueFilter::create(90.5f));
-
+	//testFilter(CCHueFilter::create(90.5f));
+	testFilter(CCHazeFilter::create(0.3, 0));
 }
 
 CCPoint HelloWorld::getLocation(ccLocation $location)

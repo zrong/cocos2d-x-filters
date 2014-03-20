@@ -18,6 +18,7 @@
 #define kCCFilterShader_saturation	"ccFilterShader_saturation"
 #define kCCFilterShader_gamma	"ccFilterShader_gamma"
 #define kCCFilterShader_hue	"ccFilterShader_hue"
+#define kCCFilterShader_haze	"ccFilterShader_haze"
 
 USING_NS_CC;
 
@@ -311,4 +312,26 @@ protected:
 	virtual void setUniforms(CCGLProgram* $glp);
 	float _param;
 };
+
+//================== CCHazeFilter
+
+class CCHazeFilter : public CCShaderFilter
+{
+
+public:
+	static CCHazeFilter* create();
+	static CCHazeFilter* create(float $hazeDistance, float $slope);
+
+	CCHazeFilter();
+	~CCHazeFilter();
+
+	void setParameter(float $hazeDistance, float $slope);
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	float _hazeDistance;
+	float _slope;
+};
+
 #endif /* __CCSHADER_FILTER_H__ */
