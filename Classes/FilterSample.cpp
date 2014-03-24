@@ -88,7 +88,16 @@ void FilterSample::showSprite()
 	//testFilter(CCHueFilter::create(90.5f));
 	//testFilter(CCHazeFilter::create(0.3, 0));
 	//testFilter(CCHBlurFilter::create(0.3));
-	testFilter(CCZoomBlurFilter::create(3.f, 0.4, 0.6));
+	//CCSprite* __sprite = testFilter(CCZoomBlurFilter::create(-1.f, 9, 9));
+	//__sprite->setTextureRect(CCRectMake(-20,0, 420	, 236));
+
+	testFilter(CCMotionBlurFilter::create(2.0f, 180));
+	//CCSprite* __sp2 = CCSprite::create("HelloWorld2.png");
+	//addChild(__sp2, 10);
+	//__sp2->setPosition(VisibleRect::center(0, 200));
+	//__sp2->setColor(ccBLACK);
+	
+
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)
@@ -112,18 +121,20 @@ CCPoint FilterSample::getLocation(ccLocation $location)
 	return VisibleRect::center();
 }
 
-void FilterSample::testFilter(CCShaderFilter* $filter, ccLocation $location, int $order)
+CCSprite*  FilterSample::testFilter(CCShaderFilter* $filter, ccLocation $location, int $order)
 {
-	CCSprite* __sprite = CCFilteredSprite::create("HelloWorld.png", $filter);
+	CCSprite* __sprite = CCFilteredSprite::create("HelloWorld2.png", $filter);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
+	return __sprite;
 }
 
-void FilterSample::testFilter(CCArray* $filters, ccLocation $location, int $order)
+CCSprite*  FilterSample::testFilter(CCArray* $filters, ccLocation $location, int $order)
 {
-	CCSprite* __sprite = CCFilteredSprite::create("HelloWorld.png", $filters);
+	CCSprite* __sprite = CCFilteredSprite::create("HelloWorld2.png", $filters);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
+	return __sprite;
 }
 
 cocos2d::CCGLProgram* FilterSample::getGrass()

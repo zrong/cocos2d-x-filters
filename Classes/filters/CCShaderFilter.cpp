@@ -957,6 +957,7 @@ CCGLProgram* CCZoomBlurFilter::loadShader()
 
 void CCZoomBlurFilter::setParameter(float $blurSize, float $centerX, float $centerY)
 {
+	_blurSize = $blurSize < 0 ? 0.f : $blurSize;
 	//_blurSize = MIN(10.f, MAX($blurSize, 0.f));
 	//_centerX = MIN(1.f, MAX($centerX, 0.f));
 	//_centerY = MIN(1.f, MAX($centerY, 0.f));
@@ -979,12 +980,83 @@ void CCZoomBlurFilter::setUniforms(CCGLProgram* $cgp)
 	int __blurCenter = $cgp->getUniformLocationForName("u_blurCenter");
 	CCLOG("CCZoomBlurFilter::setUniforms %d, %d", __blurSize, __blurCenter);
 	$cgp->setUniformLocationWith1f(__blurSize, _blurSize);
-	//GLfloat* fl[2] = {}
 	$cgp->setUniformLocationWith2f(__blurCenter, _centerX, _centerY);
 	CCLOG("CCZoomBlurFilter::setUniforms _blurSize:%.5f, _centerX:%.5f, _centerY:%.5f", _blurSize, _centerX, _centerY);
 }
 
 CCZoomBlurFilter::~CCZoomBlurFilter()
+{
+
+}
+
+
+//================== CCMotionBlurFilter
+
+CCMotionBlurFilter* CCMotionBlurFilter::create()
+{
+	CCMotionBlurFilter* __filter = new CCMotionBlurFilter();
+	__filter->autorelease();
+	return __filter;
+}
+
+CCMotionBlurFilter* CCMotionBlurFilter::create(float $blurSize, float $blurAngle)
+{
+	CCMotionBlurFilter* __filter = CCMotionBlurFilter::create();
+	__filter->setParameter($blurSize, $blurAngle);
+	return __filter;
+}
+
+CCMotionBlurFilter::CCMotionBlurFilter()
+: _blurSize(1.f)
+, _blurAngle(0.f)
+, _texelOffsetX(0.f)
+, _texelOffsetY(0.f)
+{
+	this->shaderName = kCCFilterShader_motion_blur;
+}
+
+CCGLProgram* CCMotionBlurFilter::loadShader()
+{
+	CCGLProgram* __p = new CCGLProgram();
+	CCLOG("CCMotionBlurFilter::loadShader, program:%d", __p);
+	__p->initWithVertexShaderByteArray(ccFilterShader_motion_blur_vert, ccFilterShader_motion_blur_frag);
+	return __p;
+}
+
+void CCMotionBlurFilter::setParameter(float $blurSize, float $blurAngle)
+{
+	_blurSize = $blurSize < 0 ? 0.f : $blurSize;
+	_blurAngle = $blurAngle;
+	//The initProgram() will perform in initSprite()
+}
+
+void CCMotionBlurFilter::initSprite(CCFilteredSprite* $sprite)
+{
+	float __aspectRatio = 1.0f;
+	CCSize __size = $sprite->getContentSize();
+	__aspectRatio = __size.height / __size.width;
+	_texelOffsetX = _blurSize*cos(_blurAngle*M_PI / 180.0f) / __size.width;
+	_texelOffsetY = _blurSize*sin(_blurAngle*M_PI / 180.0f) / __size.width;
+	initProgram();
+}
+
+void CCMotionBlurFilter::setAttributes(CCGLProgram* $cgp)
+{
+	CCLOG("CCMotionBlurFilter::setAttributes");
+	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
+	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
+}
+
+void CCMotionBlurFilter::setUniforms(CCGLProgram* $cgp)
+{
+	int __directionalTexelStep = $cgp->getUniformLocationForName("u_directionalTexelStep");
+	CCLOG("CCMotionBlurFilter::setUniforms %d", __directionalTexelStep);
+	$cgp->setUniformLocationWith2f(__directionalTexelStep, _texelOffsetX, _texelOffsetY);
+	CCLOG("CCMotionBlurFilter::setUniforms _blurSize:%.5f,_blurAngle:%.5f, _texelOffsetX:%.5f, _texelOffsetY:%.5f", 
+		_blurSize, _blurAngle, _texelOffsetX, _texelOffsetY);
+}
+
+CCMotionBlurFilter::~CCMotionBlurFilter()
 {
 
 }

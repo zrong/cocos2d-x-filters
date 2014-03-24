@@ -45,6 +45,11 @@ const GLchar * ccFilterShader_haze_frag =
 const GLchar * ccFilterShader_zoom_blur_frag = 
 #include "ccFilterShader_zoom_blur_frag.h"
 
+const GLchar * ccFilterShader_motion_blur_vert = 
+#include "ccFilterShader_motion_blur_vert.h"
+const GLchar * ccFilterShader_motion_blur_frag = 
+#include "ccFilterShader_motion_blur_frag.h"
+
 //==============================
 //
 const GLchar * ccFilterShader_gaussian_hblur_vert =

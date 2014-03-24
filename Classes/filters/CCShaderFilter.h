@@ -20,6 +20,7 @@
 #define kCCFilterShader_hue	"ccFilterShader_hue"
 #define kCCFilterShader_haze	"ccFilterShader_haze"
 #define kCCFilterShader_zoom_blur	"ccFilterShader_zoom_blur"
+#define kCCFilterShader_motion_blur	"ccFilterShader_motion_blur"
 
 USING_NS_CC;
 
@@ -355,6 +356,30 @@ protected:
 	float _blurSize;
 	float _centerX;
 	float _centerY;
+};
+
+//================== CCMotionBlurFilter
+
+class CCMotionBlurFilter : public CCShaderFilter
+{
+
+public:
+	static CCMotionBlurFilter* create();
+	static CCMotionBlurFilter* create(float $blurSize, float $blurAngle);
+
+	CCMotionBlurFilter();
+	~CCMotionBlurFilter();
+
+	void setParameter(float $blurSize, float $blurAngle);
+	virtual void initSprite(CCFilteredSprite* $sprite);
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	float _blurSize;
+	float _blurAngle;
+	float _texelOffsetX;
+	float _texelOffsetY;
 };
 
 #endif /* __CCSHADER_FILTER_H__ */

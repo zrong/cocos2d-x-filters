@@ -62,6 +62,9 @@ extern CC_DLL const GLchar * ccFilterShader_haze_frag;
 
 extern CC_DLL const GLchar * ccFilterShader_zoom_blur_frag;
 
+extern CC_DLL const GLchar * ccFilterShader_motion_blur_vert;
+extern CC_DLL const GLchar * ccFilterShader_motion_blur_frag;
+
 //==============================
 extern CC_DLL const GLchar * ccFilterShader_gaussian_hblur_vert;
 extern CC_DLL const GLchar * ccFilterShader_gaussian_hblur_frag;
