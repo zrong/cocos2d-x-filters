@@ -922,3 +922,69 @@ CCHazeFilter::~CCHazeFilter()
 {
 
 }
+
+//================== CCZoomBlurFilter
+
+CCZoomBlurFilter* CCZoomBlurFilter::create()
+{
+	CCZoomBlurFilter* __filter = new CCZoomBlurFilter();
+	__filter->autorelease();
+	return __filter;
+}
+
+CCZoomBlurFilter* CCZoomBlurFilter::create(float $blurSize, float $centerX, float $centerY)
+{
+	CCZoomBlurFilter* __filter = CCZoomBlurFilter::create();
+	__filter->setParameter($blurSize, $centerX, $centerY);
+	return __filter;
+}
+
+CCZoomBlurFilter::CCZoomBlurFilter()
+: _blurSize(1.f)
+, _centerX(0.5f)
+, _centerY(0.5f)
+{
+	this->shaderName = kCCFilterShader_zoom_blur;
+}
+
+CCGLProgram* CCZoomBlurFilter::loadShader()
+{
+	CCGLProgram* __p = new CCGLProgram();
+	CCLOG("CCZoomBlurFilter::loadShader, program:%d", __p);
+	__p->initWithVertexShaderByteArray(ccPositionTexture_vert, ccFilterShader_zoom_blur_frag);
+	return __p;
+}
+
+void CCZoomBlurFilter::setParameter(float $blurSize, float $centerX, float $centerY)
+{
+	//_blurSize = MIN(10.f, MAX($blurSize, 0.f));
+	//_centerX = MIN(1.f, MAX($centerX, 0.f));
+	//_centerY = MIN(1.f, MAX($centerY, 0.f));
+	_blurSize = $blurSize;
+	_centerX = $centerX;
+	_centerY = $centerY;
+	initProgram();
+}
+
+void CCZoomBlurFilter::setAttributes(CCGLProgram* $cgp)
+{
+	CCLOG("CCZoomBlurFilter::setAttributes");
+	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
+	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
+}
+
+void CCZoomBlurFilter::setUniforms(CCGLProgram* $cgp)
+{
+	int __blurSize = $cgp->getUniformLocationForName("u_blurSize");
+	int __blurCenter = $cgp->getUniformLocationForName("u_blurCenter");
+	CCLOG("CCZoomBlurFilter::setUniforms %d, %d", __blurSize, __blurCenter);
+	$cgp->setUniformLocationWith1f(__blurSize, _blurSize);
+	//GLfloat* fl[2] = {}
+	$cgp->setUniformLocationWith2f(__blurCenter, _centerX, _centerY);
+	CCLOG("CCZoomBlurFilter::setUniforms _blurSize:%.5f, _centerX:%.5f, _centerY:%.5f", _blurSize, _centerX, _centerY);
+}
+
+CCZoomBlurFilter::~CCZoomBlurFilter()
+{
+
+}

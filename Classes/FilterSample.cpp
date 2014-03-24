@@ -86,7 +86,9 @@ void FilterSample::showSprite()
 	//testFilter(CCSaturationFilter::create(0.f));
 	//testFilter(CCGammaFilter::create(0.2f));
 	//testFilter(CCHueFilter::create(90.5f));
-	testFilter(CCHazeFilter::create(0.3, 0));
+	//testFilter(CCHazeFilter::create(0.3, 0));
+	//testFilter(CCHBlurFilter::create(0.3));
+	testFilter(CCZoomBlurFilter::create(3.f, 0.4, 0.6));
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)

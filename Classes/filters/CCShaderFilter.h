@@ -19,6 +19,7 @@
 #define kCCFilterShader_gamma	"ccFilterShader_gamma"
 #define kCCFilterShader_hue	"ccFilterShader_hue"
 #define kCCFilterShader_haze	"ccFilterShader_haze"
+#define kCCFilterShader_zoom_blur	"ccFilterShader_zoom_blur"
 
 USING_NS_CC;
 
@@ -332,6 +333,28 @@ protected:
 	virtual void setUniforms(CCGLProgram* $glp);
 	float _hazeDistance;
 	float _slope;
+};
+
+//================== CCZoomBlurFilter
+
+class CCZoomBlurFilter : public CCShaderFilter
+{
+
+public:
+	static CCZoomBlurFilter* create();
+	static CCZoomBlurFilter* create(float $blurSize, float $centerX, float $centerY);
+
+	CCZoomBlurFilter();
+	~CCZoomBlurFilter();
+
+	void setParameter(float $blurSize, float $centerX, float $centerY);
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	float _blurSize;
+	float _centerX;
+	float _centerY;
 };
 
 #endif /* __CCSHADER_FILTER_H__ */
