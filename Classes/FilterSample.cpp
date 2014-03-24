@@ -1,14 +1,14 @@
-#include "HelloWorldScene.h"
+#include "FilterSample.h"
 
 USING_NS_CC;
 
-CCScene* HelloWorld::scene()
+CCScene* FilterSample::scene()
 {
     // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
     
     // 'layer' is an autorelease object
-    HelloWorld *layer = HelloWorld::create();
+    FilterSample *layer = FilterSample::create();
 
     // add layer as a child to scene
     scene->addChild(layer);
@@ -18,7 +18,7 @@ CCScene* HelloWorld::scene()
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool FilterSample::init()
 {
     if ( !CCLayer::init() )
     {
@@ -29,7 +29,7 @@ bool HelloWorld::init()
                                         "CloseNormal.png",
                                         "CloseSelected.png",
                                         this,
-                                        menu_selector(HelloWorld::menuCloseCallback));
+                                        menu_selector(FilterSample::menuCloseCallback));
     
 	pCloseItem->setPosition(VisibleRect::rightBottom(-20,20));
 
@@ -43,11 +43,11 @@ bool HelloWorld::init()
     return true;
 }
 
-void HelloWorld::showSprite()
+void FilterSample::showSprite()
 {
 
 	//ccnode* __pnode = ccnode::create();
-	//ccsprite* __sp1 = ccsprite::create("helloworld.png");
+	//ccsprite* __sp1 = ccsprite::create("FilterSample.png");
 	//ccsprite* __sp2 = ccsprite::create("grass.png");
 	//__pnode->addchild(__sp1);
 	//__pnode->addchild(__sp2);
@@ -63,12 +63,12 @@ void HelloWorld::showSprite()
 	//this->addChild(_pSprite, 0);
 
 	//CCGaussianHBlurFilter* __gaussianHblurFilter = CCGaussianHBlurFilter::create(2.0f);
-	//CCSprite* __gaussianBlurSprite = CCFilteredSprite::create("helloworld.png", __gaussianHblurFilter);
+	//CCSprite* __gaussianBlurSprite = CCFilteredSprite::create("FilterSample.png", __gaussianHblurFilter);
 	//__gaussianBlurSprite->setPosition(VisibleRect::leftBottom(240, 160));
 	//this->addChild(__gaussianBlurSprite);
 
 	//CCGrayFilter* __grayFilter = CCGrayFilter::create(ccc4f(0.2f, 0.3f, 0.4f, 0.0f));
-	//CCSprite* __graySprite = CCFilteredSprite::create("helloworld.png", __grayFilter);
+	//CCSprite* __graySprite = CCFilteredSprite::create("FilterSample.png", __grayFilter);
 	//__graySprite->setPosition(VisibleRect::leftTop(240, -160));
 	//this->addChild(__graySprite, 10);
 
@@ -89,7 +89,7 @@ void HelloWorld::showSprite()
 	testFilter(CCHazeFilter::create(0.3, 0));
 }
 
-CCPoint HelloWorld::getLocation(ccLocation $location)
+CCPoint FilterSample::getLocation(ccLocation $location)
 {
 	if ($location == LEFT_TOP)
 	{
@@ -110,21 +110,21 @@ CCPoint HelloWorld::getLocation(ccLocation $location)
 	return VisibleRect::center();
 }
 
-void HelloWorld::testFilter(CCShaderFilter* $filter, ccLocation $location, int $order)
+void FilterSample::testFilter(CCShaderFilter* $filter, ccLocation $location, int $order)
 {
-	CCSprite* __sprite = CCFilteredSprite::create("helloworld.png", $filter);
+	CCSprite* __sprite = CCFilteredSprite::create("HelloWorld.png", $filter);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
 }
 
-void HelloWorld::testFilter(CCArray* $filters, ccLocation $location, int $order)
+void FilterSample::testFilter(CCArray* $filters, ccLocation $location, int $order)
 {
-	CCSprite* __sprite = CCFilteredSprite::create("helloworld.png", $filters);
+	CCSprite* __sprite = CCFilteredSprite::create("HelloWorld.png", $filters);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
 }
 
-cocos2d::CCGLProgram* HelloWorld::getGrass()
+cocos2d::CCGLProgram* FilterSample::getGrass()
 {
 	cocos2d::CCGLProgram* __pProg = new CCGLProgram();
 	//__pProg->initWithVertexShaderByteArray(ccPositionTextureA8Color_vert, ccShader_grass);
@@ -142,7 +142,7 @@ cocos2d::CCGLProgram* HelloWorld::getGrass()
 	return __pProg;
 }
 
-cocos2d::CCGLProgram* HelloWorld::getEmbossMov()
+cocos2d::CCGLProgram* FilterSample::getEmbossMov()
 {
 	cocos2d::CCGLProgram* __pProg = new CCGLProgram();
 	//__pProg->initWithVertexShaderByteArray(ccPositionTextureA8Color_vert, ccShader_emboss );
@@ -160,7 +160,7 @@ cocos2d::CCGLProgram* HelloWorld::getEmbossMov()
 	return __pProg;
 }
 
-void HelloWorld::update(float $dt)
+void FilterSample::update(float $dt)
 {
 	_totalTime += $dt;
 	//CCLOG("show %f, dt %f", _totalTime, $dt);
@@ -169,7 +169,7 @@ void HelloWorld::update(float $dt)
 
 }
 
-cocos2d::CCGLProgram* HelloWorld::getEmboss()
+cocos2d::CCGLProgram* FilterSample::getEmboss()
 {
 	cocos2d::CCGLProgram* __pProg = new CCGLProgram();
 	//__pProg->initWithVertexShaderByteArray(ccPositionTextureA8Color_vert,ccShader_emboss);
@@ -181,7 +181,7 @@ cocos2d::CCGLProgram* HelloWorld::getEmboss()
 	return __pProg;
 }
 
-cocos2d::CCGLProgram* HelloWorld::getColorRamp()
+cocos2d::CCGLProgram* FilterSample::getColorRamp()
 {
 	cocos2d::CCGLProgram* __pProg = new CCGLProgram();
 	//__pProg->initWithVertexShaderByteArray(ccPositionTextureA8Color_vert,ccShader_colorramp);
@@ -205,7 +205,7 @@ cocos2d::CCGLProgram* HelloWorld::getColorRamp()
 }
 
 
-void HelloWorld::menuCloseCallback(CCObject* pSender)
+void FilterSample::menuCloseCallback(CCObject* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
 	CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
