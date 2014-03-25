@@ -21,6 +21,7 @@
 #define kCCFilterShader_haze	"ccFilterShader_haze"
 #define kCCFilterShader_zoom_blur	"ccFilterShader_zoom_blur"
 #define kCCFilterShader_motion_blur	"ccFilterShader_motion_blur"
+#define kCCFilterShader_drop_shadow_blur	"ccFilterShader_drop_shadow_blur"
 
 USING_NS_CC;
 
@@ -381,5 +382,28 @@ protected:
 	float _texelOffsetX;
 	float _texelOffsetY;
 };
+
+//================== CCDropShadowFilter
+
+class CCDropShadowFilter : public CCShaderFilter
+{
+
+public:
+	static CCDropShadowFilter* create();
+	static CCDropShadowFilter* create(float $resolation);
+
+	CCDropShadowFilter();
+	~CCDropShadowFilter();
+
+	void setParameter(float $resolation);
+	virtual void initSprite(CCFilteredSprite* $sprite);
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	float _textureWidth;
+	float _textureHeight;
+};
+
 
 #endif /* __CCSHADER_FILTER_H__ */

@@ -50,6 +50,11 @@ const GLchar * ccFilterShader_motion_blur_vert =
 const GLchar * ccFilterShader_motion_blur_frag = 
 #include "ccFilterShader_motion_blur_frag.h"
 
+const GLchar * ccFilterShader_drop_shadow_vert =
+#include "ccFilterShader_drop_shadow_vert.h"
+const GLchar * ccFilterShader_drop_shadow_frag = 
+#include "ccFilterShader_drop_shadow_frag.h"
+
 //==============================
 //
 const GLchar * ccFilterShader_gaussian_hblur_vert =

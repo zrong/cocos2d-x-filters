@@ -38,8 +38,8 @@ private:
 	int _timeUniformLocation;
 	float _totalTime = 0.0f;
 	cocos2d::CCSprite* _pSprite;
-	CCSprite* testFilter(CCShaderFilter* $filter, ccLocation $location = CENTER, int $order = 0);
-	CCSprite* testFilter(CCArray* $filters, ccLocation $location = CENTER, int $order = 0);
+	CCSprite* testFilter(CCShaderFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path="HelloWorld.png");
+	CCSprite* testFilter(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, const char* $path = "HelloWorld.png");
 	CCPoint getLocation(ccLocation $location);
 };
 

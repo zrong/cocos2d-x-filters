@@ -37,7 +37,9 @@ bool FilterSample::init()
     CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
     pMenu->setPosition(CCPointZero);
     this->addChild(pMenu, 1);
-
+	CCSprite* __bg = CCSprite::create("bg.jpg");
+	__bg->setPosition(VisibleRect::center());
+	this->addChild(__bg, -10);
 	this->showSprite();
     
     return true;
@@ -47,11 +49,14 @@ void FilterSample::showSprite()
 {
 
 	//ccnode* __pnode = ccnode::create();
-	//ccsprite* __sp1 = ccsprite::create("FilterSample.png");
+	//CCSprite* __sp1 = CCSprite::create("HelloWorld.png");
+	//addChild(__sp1);
+	//__sp1->setShaderProgram(getEmboss());
+	//__sp1->setPosition(VisibleRect::center());
 	//ccsprite* __sp2 = ccsprite::create("grass.png");
 	//__pnode->addchild(__sp1);
 	//__pnode->addchild(__sp2);
-	//__pnode->setposition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));
+	//__pnode->setposition(VisibleRect::center()));
 	//__pnode->setshaderprogram(this->getcolorramp());
 	//this->addchild(__pnode, 0);
 
@@ -91,13 +96,17 @@ void FilterSample::showSprite()
 	//CCSprite* __sprite = testFilter(CCZoomBlurFilter::create(-1.f, 9, 9));
 	//__sprite->setTextureRect(CCRectMake(-20,0, 420	, 236));
 
-	testFilter(CCMotionBlurFilter::create(2.0f, 180));
+	//testFilter(CCMotionBlurFilter::create(2.0f, 180));
 	//CCSprite* __sp2 = CCSprite::create("HelloWorld2.png");
 	//addChild(__sp2, 10);
 	//__sp2->setPosition(VisibleRect::center(0, 200));
 	//__sp2->setColor(ccBLACK);
-	
 
+	//CCSprite* __sp1 = testFilter(CCArray::create(CCHBlurFilter::create(0.05), CCVBlurFilter::create(0.05), NULL));
+	//__sp1->setTextureRect(CCRect(-50, -50, 500, 500));
+	//CCLOG("width: %.5f", __sp1->getContentSize().width);
+
+	testFilter(CCDropShadowFilter::create(0.1), CENTER, 0, "HelloWorld2.png");
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)
@@ -121,17 +130,17 @@ CCPoint FilterSample::getLocation(ccLocation $location)
 	return VisibleRect::center();
 }
 
-CCSprite*  FilterSample::testFilter(CCShaderFilter* $filter, ccLocation $location, int $order)
+CCSprite*  FilterSample::testFilter(CCShaderFilter* $filter, ccLocation $location, int $order, const char* $path)
 {
-	CCSprite* __sprite = CCFilteredSprite::create("HelloWorld2.png", $filter);
+	CCSprite* __sprite = CCFilteredSprite::create($path, $filter);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
 	return __sprite;
 }
 
-CCSprite*  FilterSample::testFilter(CCArray* $filters, ccLocation $location, int $order)
+CCSprite*  FilterSample::testFilter(CCArray* $filters, ccLocation $location, int $order, const char* $path)
 {
-	CCSprite* __sprite = CCFilteredSprite::create("HelloWorld2.png", $filters);
+	CCSprite* __sprite = CCFilteredSprite::create($path, $filters);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
 	return __sprite;
@@ -185,7 +194,7 @@ void FilterSample::update(float $dt)
 cocos2d::CCGLProgram* FilterSample::getEmboss()
 {
 	cocos2d::CCGLProgram* __pProg = new CCGLProgram();
-	//__pProg->initWithVertexShaderByteArray(ccPositionTextureA8Color_vert,ccShader_emboss);
+	__pProg->initWithVertexShaderByteArray(ccPositionTextureA8Color_vert, ccFilterShader_emboss_frag);
 
 	__pProg->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
 	__pProg->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
