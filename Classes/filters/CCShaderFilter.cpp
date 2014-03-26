@@ -1102,8 +1102,8 @@ void CCDropShadowFilter::initSprite(CCFilteredSprite* $sprite)
 	CCSize __size = $sprite->getContentSize();
 	/*_textureWidth = __size.width;
 	_textureHeight = __size.height;*/
-	_textureWidth = 960;
-	_textureHeight = 640;
+	_textureWidth = 480;
+	_textureHeight = 320;
 	initProgram();
 }
 

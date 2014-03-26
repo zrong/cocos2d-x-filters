@@ -111,8 +111,8 @@ void FilterSample::showSprite()
 		CCArray::create(
 			CCHBlurFilter::create(0.02), CCVBlurFilter::create(0.02),
 			CCDropShadowFilter::create(0.1), NULL), 
-		CENTER, 0, "HelloWorld3.png");
-
+		CENTER, 0, "HelloWorld.png");
+	 
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)
