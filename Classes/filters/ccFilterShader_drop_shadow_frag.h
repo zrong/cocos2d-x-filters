@@ -12,8 +12,13 @@ void main() {\n\
 	float r = 0.1;\n\
 	float softness=0.02;\n\
 	float vignette = smoothstep(r, r-softness, len);\n\
-	texColor.rgb *= mix(texColor.rgb, texColor.rgb*vignette, 0.5);\n\
+	//texColor.rgb *= mix(texColor.rgb, texColor.rgb*vignette, 0.5);\n\
 	//gl_FragColor=vec4(vec3(len), 1.0);\n\
 	//gl_FragColor=texColor;\n\
-	gl_FragColor=vec4(vec3(smoothstep(r, r-softness,len)), 1.0);\n\
+	//gl_FragColor=vec4(vec3(smoothstep(r, r-softness,len)), 1.0);\n\
+	//gl_FragColor=vec4(vec3(1,0,0), texColor.a);\n\
+	texColor.rgb = 1.0-texColor.rgb;\n\
+	//gl_FragColor=vec4(vec3(v_texCoord.s, v_texCoord.t, v_texCoord.t), texColor.a);\n\
+	//gl_FragColor=texColor;\n\
+	gl_FragColor=texColor*v_fragmentColor;\n\
 }";

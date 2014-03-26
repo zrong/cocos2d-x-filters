@@ -29,6 +29,7 @@ public:
     CREATE_FUNC(FilterSample);
 
 	virtual void update(float delta);
+	virtual void draw();
 private:
 	void showSprite();
 	cocos2d::CCGLProgram* getEmboss();

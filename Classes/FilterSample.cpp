@@ -102,11 +102,17 @@ void FilterSample::showSprite()
 	//__sp2->setPosition(VisibleRect::center(0, 200));
 	//__sp2->setColor(ccBLACK);
 
-	//CCSprite* __sp1 = testFilter(CCArray::create(CCHBlurFilter::create(0.05), CCVBlurFilter::create(0.05), NULL));
+	/*CCSprite* __sp1 = testFilter(CCArray::create(CCHBlurFilter::create(0.02), CCVBlurFilter::create(0.02), NULL),
+		CENTER, 0, "HelloWorld3.png");*/
 	//__sp1->setTextureRect(CCRect(-50, -50, 500, 500));
 	//CCLOG("width: %.5f", __sp1->getContentSize().width);
 
-	testFilter(CCDropShadowFilter::create(0.1), CENTER, 0, "HelloWorld2.png");
+	testFilter(
+		CCArray::create(
+			CCHBlurFilter::create(0.02), CCVBlurFilter::create(0.02),
+			CCDropShadowFilter::create(0.1), NULL), 
+		CENTER, 0, "HelloWorld3.png");
+
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)
@@ -188,7 +194,12 @@ void FilterSample::update(float $dt)
 	//CCLOG("show %f, dt %f", _totalTime, $dt);
 	_pSprite->getShaderProgram()->use();
 	glUniform1f(_timeUniformLocation, _totalTime);
+}
 
+void FilterSample::draw()
+{
+	//CCTexture2D* __tex = CCTextureCache::sharedTextureCache()->addImage("HelloWorld.png");
+	//__tex->drawAtPoint(CCPointMake(100, 100));
 }
 
 cocos2d::CCGLProgram* FilterSample::getEmboss()
