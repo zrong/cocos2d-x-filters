@@ -21,7 +21,9 @@
 #define kCCFilterShader_haze	"ccFilterShader_haze"
 #define kCCFilterShader_zoom_blur	"ccFilterShader_zoom_blur"
 #define kCCFilterShader_motion_blur	"ccFilterShader_motion_blur"
-#define kCCFilterShader_drop_shadow_blur	"ccFilterShader_drop_shadow_blur"
+#define kCCFilterShader_drop_shadow	"ccFilterShader_drop_shadow"
+#define kCCFilterShader_sepia	"ccFilterShader_sepia"
+#define kCCFilterShader_test	"ccFilterShader_test"
 
 USING_NS_CC;
 
@@ -394,6 +396,48 @@ public:
 
 	CCDropShadowFilter();
 	~CCDropShadowFilter();
+
+	void setParameter(float $resolation);
+	virtual void initSprite(CCFilteredSprite* $sprite);
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+	float _textureWidth;
+	float _textureHeight;
+};
+
+
+//================== CCSepiaFilter
+
+class CCSepiaFilter : public CCShaderFilter
+{
+
+public:
+	static CCSepiaFilter* create();
+	static CCSepiaFilter* create(float $resolation);
+
+	CCSepiaFilter();
+	~CCSepiaFilter();
+
+	void setParameter();
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setAttributes(CCGLProgram* $glp);
+	virtual void setUniforms(CCGLProgram* $glp);
+};
+
+//================== CCTestFilter
+
+class CCTestFilter : public CCShaderFilter
+{
+
+public:
+	static CCTestFilter* create();
+	static CCTestFilter* create(float $resolation);
+
+	CCTestFilter();
+	~CCTestFilter();
 
 	void setParameter(float $resolation);
 	virtual void initSprite(CCFilteredSprite* $sprite);

@@ -107,11 +107,61 @@ void FilterSample::showSprite()
 	//__sp1->setTextureRect(CCRect(-50, -50, 500, 500));
 	//CCLOG("width: %.5f", __sp1->getContentSize().width);
 
-	testFilter(
-		CCArray::create(
-			CCHBlurFilter::create(0.02), CCVBlurFilter::create(0.02),
-			CCDropShadowFilter::create(0.1), NULL), 
-		CENTER, 0, "HelloWorld.png");
+	//testFilter(
+	//	CCArray::create(
+	//		CCHBlurFilter::create(0.02), CCVBlurFilter::create(0.02),
+	//		CCDropShadowFilter::create(0.1), NULL), 
+	//	CENTER, 0, "HelloWorld.png");
+	//testFilter(CCSepiaFilter::create(0.f));
+	//testFilter(CCTestFilter::create(0.f), CENTER, 0, "HelloWorld.png");
+
+	CCSprite* __sp = CCSprite::create("colors2.png");
+	CCSize __size = __sp->getContentSize();
+	CCRenderTexture* __rTex = CCRenderTexture::create(__size.width, __size.height);
+	__rTex->begin();
+	__sp->getTexture()->drawAtPoint(ccp(0,0));
+	__sp->getTexture()->setAliasTexParameters();
+	//__sp->setAnchorPoint(ccp(0, 0));
+	//__sp->getTexture()->setAliasTexParameters();
+	//__sp->visit();
+	__rTex->end();
+
+	this->addChild(__rTex, 10);
+	__rTex->setPosition(VisibleRect::center());
+
+	//CCImage* __img = new CCImage();
+	//__img->initWithImageFile("colors.png");
+	CCImage* __img = __rTex->newCCImage(false);
+	//CCTexture2D* __tex = new CCTexture2D();
+	//__tex->initWithImage(__img);
+	//__tex->autorelease();
+	//this->addChild(CCSprite::createWithTexture(__tex));
+
+	unsigned int x = 128, y = 128;
+	unsigned int* pixel_int = (unsigned int*)__img->getData();
+	unsigned char* pixel_byte = __img->getData();
+		
+	//pixel_byte += (y * __img->getWidth() + x)*4;
+
+	//CCLOG("%x", *pixels);
+	/*CCLOG("r %x", *(pixel_byte++));
+	CCLOG("g %x", *(pixel_byte++));
+	CCLOG("b %x", *(pixel_byte++));
+	CCLOG("a %x", *(pixel_byte++));*/
+
+	ccColor4B __color = __img->getColor4B(x, y);
+	CCLOG("r %x", __color.r);
+	CCLOG("g %x", __color.g);
+	CCLOG("b %x", __color.b);
+	CCLOG("a %x", __color.a);
+
+	//CCLOG("typeof(pixel): %u, %u", sizeof(pixels), sizeof(pixels[0]));
+	CCLOG("typeof(pixel_byte): %u, %u", sizeof(pixel_byte), sizeof(pixel_byte[0]));
+
+
+	CCLOG("width:%d, height:%d, bitPerCom:%d, dataLen:%d", 
+		__img->getWidth(), __img->getHeight(), 
+		__img->getBitsPerComponent(), __img->getDataLen());
 	 
 }
 

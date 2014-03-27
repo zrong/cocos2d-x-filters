@@ -55,6 +55,14 @@ const GLchar * ccFilterShader_drop_shadow_vert =
 const GLchar * ccFilterShader_drop_shadow_frag = 
 #include "ccFilterShader_drop_shadow_frag.h"
 
+const GLchar * ccFilterShader_sepia_frag = 
+#include "ccFilterShader_sepia_frag.h"
+
+const GLchar * ccFilterShader_test_vert =
+#include "ccFilterShader_test_vert.h"
+const GLchar * ccFilterShader_test_frag = 
+#include "ccFilterShader_test_frag.h"
+
 //==============================
 //
 const GLchar * ccFilterShader_gaussian_hblur_vert =
