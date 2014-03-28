@@ -1,26 +1,32 @@
-"precision mediump float;\n\
-uniform sampler2D CC_Texture0;\n\
+"uniform sampler2D CC_Texture0;\n\
+uniform float u_resolution;\n\
 uniform float u_radius;\n\
 \n\
-const float total = (1. + 8. + 28. + 56.) * 2. + 70.;\n\
-void main()\n\
-{\n\
-	vec2 st = gl_TexCoord[0].st;\n\
+varying vec4 v_fragmentColor;\n\
+varying vec2 v_texCoord;\n\
 \n\
-	vec4 color = vec4(0.0,0.0,0.0,0.0);\n\
-	color += (1. / total) * texture2DRect(CC_Texture0, st - u_radius * vec2(0., 4. / 4.));\n\
-	color += (8. / total)  * texture2DRect(CC_Texture0, st - u_radius * vec2(0., 3. / 4.));\n\
-	color += (28. / total)  * texture2DRect(CC_Texture0, st - u_radius * vec2(0., 2. / 4.));\n\
-	color += (56. / total)  * texture2DRect(CC_Texture0, st - u_radius * vec2(0., 1. / 4.));\n\
+const float f1 = 0.15;\n\
+const float f2 = 0.12;\n\
+const float f3 = 0.09;\n\
+const float f4 = 0.05;\n\
+const float fc = 0.16;\n\
 \n\
-	color +=  (70. / total) * texture2DRect(CC_Texture0, st);\n\
+void main() {\n\
+	vec4 sum = vec4(0.0);\n\
+	vec2 tc = v_texCoord;\n\
+	float blur = u_radius/u_resolution; \n\
+	\n\
+	sum += texture2D(CC_Texture0, vec2(tc.x, tc.y - 4.0*blur)) * f4;\n\
+	sum += texture2D(CC_Texture0, vec2(tc.x, tc.y - 3.0*blur)) * f3;\n\
+	sum += texture2D(CC_Texture0, vec2(tc.x, tc.y - 2.0*blur)) * f2;\n\
+	sum += texture2D(CC_Texture0, vec2(tc.x, tc.y - 1.0*blur)) * f1;\n\
+	\n\
+	sum += texture2D(CC_Texture0, vec2(tc.x, tc.y)) * fc;\n\
+	\n\
+	sum += texture2D(CC_Texture0, vec2(tc.x, tc.y + 1.0*blur)) * f1;\n\
+	sum += texture2D(CC_Texture0, vec2(tc.x, tc.y + 2.0*blur)) * f2;\n\
+	sum += texture2D(CC_Texture0, vec2(tc.x, tc.y + 3.0*blur)) * f3;\n\
+	sum += texture2D(CC_Texture0, vec2(tc.x, tc.y + 4.0*blur)) * f4;\n\
 \n\
-	color += (1. / total) * texture2DRect(CC_Texture0, st + u_radius * vec2(0., 4. / 4.));\n\
-	color += (8. / total)  * texture2DRect(CC_Texture0, st + u_radius * vec2(0., 3. / 4.));\n\
-	color += (28. / total)  * texture2DRect(CC_Texture0, st + u_radius * vec2(0., 2. / 4.));\n\
-	color += (56. / total)  * texture2DRect(CC_Texture0, st + u_radius * vec2(0., 1. / 4.));\n\
-\n\
-	gl_FragColor = color;\n\
-	//gl_FragColor.a = 1.0;\n\
+	gl_FragColor = v_fragmentColor * sum;\n\
 }";
-

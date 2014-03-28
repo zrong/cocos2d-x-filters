@@ -42,9 +42,9 @@ void CCShaderFilter::initProgram()
 
 		CCShaderCache::sharedShaderCache()->addProgram(__pProgram, this->shaderName);
 		__pProgram->release();
-		CCLOG("CCShaderFilter::getProgram1 %d", __pProgram);
+		CCLOG("CCShaderFilter::getProgram %d", __pProgram);
 	}
-	CCLOG("CCShaderFilter::getProgram2 %d", __pProgram);
+	//CCLOG("CCShaderFilter::getProgram2 %d", __pProgram);
 	if (!_pProgram)
 	{
 		_pProgram = __pProgram;
@@ -143,6 +143,7 @@ void CCBlurBaseFilter::setAttributes(CCGLProgram* $cgp)
 	CCLOG("CCBlurBaseFilter::setAttributes");
 	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
 	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
+	$cgp->addAttribute(kCCAttributeNameColor, kCCVertexAttrib_Color);
 }
 
 void CCBlurBaseFilter::setUniforms(CCGLProgram* $cgp)
@@ -150,7 +151,7 @@ void CCBlurBaseFilter::setUniforms(CCGLProgram* $cgp)
 	int __radius = $cgp->getUniformLocationForName("u_radius");
 	//CCLOG("CCShaderFilter::getProgram %d", $cgp);
 	$cgp->setUniformLocationWith1f(__radius, _param);
-	CCLOG("CCBlurBaseFilter::setUniforms radius:%d", __radius);
+	CCLOG("CCBlurBaseFilter::setUniforms radius:%d, param:%f", __radius, _param);
 }
 
 void CCBlurBaseFilter::setParameter(float $param)
@@ -227,10 +228,10 @@ CCGaussianHBlurFilter* CCGaussianHBlurFilter::create()
 	return __filter;
 }
 
-CCGaussianHBlurFilter* CCGaussianHBlurFilter::create(float $param, bool $isHorzontial)
+CCGaussianHBlurFilter* CCGaussianHBlurFilter::create(float $param)
 {
 	CCGaussianHBlurFilter* __filter = CCGaussianHBlurFilter::create();
-	__filter->setParameter($param, $isHorzontial);
+	__filter->setParameter($param);
 	return __filter;
 }
 
@@ -248,39 +249,52 @@ CCGLProgram* CCGaussianHBlurFilter::loadShader()
 	return __p;
 }
 
-void CCGaussianHBlurFilter::setAttributes(CCGLProgram* $cgp)
-{
-	CCLOG("CCGaussianHBlurFilter::setAttributes");
-	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
-	$cgp->addAttribute(kCCAttributeNameColor, kCCVertexAttrib_Color);
-	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
-}
-
 void CCGaussianHBlurFilter::setUniforms(CCGLProgram* $cgp)
 {
-	int __radius = $cgp->getUniformLocationForName("u_radius");
-	CCLOG("CCShaderFilter::getProgram %d", $cgp);
-	$cgp->setUniformLocationWith1f(__radius, _param);
+	CCBlurBaseFilter::setUniforms($cgp);
 
 	int u_resolution = $cgp->getUniformLocationForName("u_resolution");
 	$cgp->setUniformLocationWith1f(u_resolution, 480);
-
-	int u_direction = $cgp->getUniformLocationForName("u_direction");
-	$cgp->setUniformLocationWith2f(u_direction, _isHorizontial ? 1.f:0.f, _isHorizontial?0.f:1.f);
-	CCLOG("CCGaussianHBlurFilter::setUniforms radius:%d", _param);
+	CCLOG("CCGaussianHBlurFilter::setUniforms u_resolution:%f", 480);
 }
+//================== CCGaussianVBlurFilter
 
-void CCGaussianHBlurFilter::setParameter(float $param, bool $isHorzontial)
+CCGaussianVBlurFilter* CCGaussianVBlurFilter::create()
 {
-	_param = $param;
-	_isHorizontial = $isHorzontial;
-	initProgram();
+	CCGaussianVBlurFilter* __filter = new CCGaussianVBlurFilter();
+	__filter->autorelease();
+	return __filter;
 }
 
-//void CCGaussianHBlurFilter::initSprite(CCFilteredSprite* $sprite)
-//{
-//
-//}
+CCGaussianVBlurFilter* CCGaussianVBlurFilter::create(float $param)
+{
+	CCGaussianVBlurFilter* __filter = CCGaussianVBlurFilter::create();
+	__filter->setParameter($param);
+	return __filter;
+}
+
+CCGaussianVBlurFilter::CCGaussianVBlurFilter()
+{
+	this->shaderName = kCCFilterShader_gaussian_vblur;
+}
+
+CCGLProgram* CCGaussianVBlurFilter::loadShader()
+{
+	CCGLProgram* __p = new CCGLProgram();
+	CCLOG("CCGaussianVBlurFilter::loadShader %f, program:%d", _param, __p);
+	__p->initWithVertexShaderByteArray(ccPositionTextureColor_vert,
+		ccFilterShader_gaussian_vblur_frag);
+	return __p;
+}
+
+void CCGaussianVBlurFilter::setUniforms(CCGLProgram* $cgp)
+{
+	CCBlurBaseFilter::setUniforms($cgp);
+
+	int u_resolution = $cgp->getUniformLocationForName("u_resolution");
+	$cgp->setUniformLocationWith1f(u_resolution, 320);
+	CCLOG("CCGaussianVBlurFilter::setUniforms u_resolution:%f", 320);
+}
 
 //================== CCMaskFilter
 

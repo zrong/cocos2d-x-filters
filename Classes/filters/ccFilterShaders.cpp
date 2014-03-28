@@ -65,8 +65,6 @@ const GLchar * ccFilterShader_test_frag =
 
 //==============================
 //
-const GLchar * ccFilterShader_gaussian_hblur_vert =
-#include "ccFilterShader_gaussian_hblur_vert.h"
 const GLchar * ccFilterShader_gaussian_hblur_frag =
 #include "ccFilterShader_gaussian_hblur_frag.h"
 const GLchar * ccFilterShader_gaussian_vblur_frag =

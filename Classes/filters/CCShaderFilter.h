@@ -110,22 +110,28 @@ protected:
 	virtual CCGLProgram* loadShader();
 };
 
-class CCGaussianHBlurFilter : public CCShaderFilter
+class CCGaussianHBlurFilter : public CCBlurBaseFilter
 {
 public:
 	static CCGaussianHBlurFilter* create();
-	static CCGaussianHBlurFilter* create(float $param, bool $isHorzontial);
+	static CCGaussianHBlurFilter* create(float $param);
 
 	CCGaussianHBlurFilter();
-	void setParameter(float $param, bool $isHorzontial);
 protected:
 	virtual CCGLProgram* loadShader();
-	virtual void setAttributes(CCGLProgram* $glp);
 	virtual void setUniforms(CCGLProgram* $glp);
-	//virtual void initSprite(CCFilteredSprite* $sprite);
-	float _param;
-	bool _isHorizontial;
+};
 
+class CCGaussianVBlurFilter : public CCBlurBaseFilter
+{
+public:
+	static CCGaussianVBlurFilter* create();
+	static CCGaussianVBlurFilter* create(float $param);
+
+	CCGaussianVBlurFilter();
+protected:
+	virtual CCGLProgram* loadShader();
+	virtual void setUniforms(CCGLProgram* $glp);
 };
 
 //================== CCMaskFilter

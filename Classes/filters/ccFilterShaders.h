@@ -74,7 +74,6 @@ extern CC_DLL const GLchar * ccFilterShader_test_vert;
 extern CC_DLL const GLchar * ccFilterShader_test_frag;
 
 //==============================
-extern CC_DLL const GLchar * ccFilterShader_gaussian_hblur_vert;
 extern CC_DLL const GLchar * ccFilterShader_gaussian_hblur_frag;
 extern CC_DLL const GLchar * ccFilterShader_gaussian_vblur_frag;
 

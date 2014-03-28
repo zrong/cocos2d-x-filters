@@ -121,18 +121,18 @@ void FilterSample::showSprite()
 	//	CENTER, 0, "HelloWorld.png");
 	//testFilter(CCSepiaFilter::create(0.f));
 	//testFilter(CCTestFilter::create(0.f), CENTER, 0, "HelloWorld.png");
-	testFilter(
-		CCArray::create(
-		CCHBlurFilter::create(0.2f),
-		CCVBlurFilter::create(0.2f),
-		NULL)
-		);
 	//testFilter(
 	//	CCArray::create(
-	//		CCGaussianHBlurFilter::create(10.f, false),
-	//		CCGaussianHBlurFilter::create(10.f, true), 
-	//		NULL)
+	//	CCHBlurFilter::create(0.1f),
+	//	CCVBlurFilter::create(0.3f),
+	//	NULL)
 	//	);
+	testFilter(
+		CCArray::create(
+			CCGaussianHBlurFilter::create(10.f),
+			CCGaussianVBlurFilter::create(10.f), 
+			NULL)
+		);
 
 }
 
