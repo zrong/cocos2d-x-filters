@@ -41,6 +41,8 @@ private:
 	cocos2d::CCSprite* _pSprite;
 	CCSprite* testFilter(CCShaderFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path="HelloWorld.png");
 	CCSprite* testFilter(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, const char* $path = "HelloWorld.png");
+	CCSprite* testFilterFromFrame(CCShaderFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path = "dirt.png");
+	CCSprite* testFilterFromFrame(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, const char* $path = "dirt.png");
 	CCPoint getLocation(ccLocation $location);
 };
 

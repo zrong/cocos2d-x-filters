@@ -37,6 +37,8 @@ bool FilterSample::init()
     CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
     pMenu->setPosition(CCPointZero);
     this->addChild(pMenu, 1);
+
+	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("test2.plist", "test2.png");
 	CCSprite* __bg = CCSprite::create("bg.jpg");
 	__bg->setPosition(VisibleRect::center());
 	this->addChild(__bg, -10);
@@ -67,11 +69,6 @@ void FilterSample::showSprite()
 	//_pSprite->setPosition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));
 	//this->addChild(_pSprite, 0);
 
-	//CCGaussianHBlurFilter* __gaussianHblurFilter = CCGaussianHBlurFilter::create(2.0f);
-	//CCSprite* __gaussianBlurSprite = CCFilteredSprite::create("FilterSample.png", __gaussianHblurFilter);
-	//__gaussianBlurSprite->setPosition(VisibleRect::leftBottom(240, 160));
-	//this->addChild(__gaussianBlurSprite);
-
 	//CCGrayFilter* __grayFilter = CCGrayFilter::create(ccc4f(0.2f, 0.3f, 0.4f, 0.0f));
 	//CCSprite* __graySprite = CCFilteredSprite::create("FilterSample.png", __grayFilter);
 	//__graySprite->setPosition(VisibleRect::leftTop(240, -160));
@@ -83,6 +80,8 @@ void FilterSample::showSprite()
 
 	//testFilter(CCMaskFilter::create(CCString::create("mask.png")), RIGHT_TOP);
 	//testFilter(CCSharpenFilter::create(9.0f, 2), LEFT_BOTTOM);
+
+	//__sp->setPosition(ccp(200, 200));
 
 	//testFilter(CCBrightnessFilter::create(0.5f), RIGHT_BOTTOM);
 	//testFilter(CCRGBFilter::create(0.5f, 0.7f, 0.3f), RIGHT_BOTTOM);
@@ -97,6 +96,14 @@ void FilterSample::showSprite()
 	//__sprite->setTextureRect(CCRectMake(-20,0, 420	, 236));
 
 	//testFilter(CCMotionBlurFilter::create(2.0f, 180));
+	//testFilterFromFrame(CCMotionBlurFilter::create(2.0f, 180));
+
+	//This will throw ad CCAssert
+	//testFilterFromFrame(CCArray::create(
+	//	CCHBlurFilter::create(2.0f),
+	//	CCVBlurFilter::create(2.0f), 
+	//	NULL), CENTER, 0, "colors2.png");
+
 	//CCSprite* __sp2 = CCSprite::create("HelloWorld2.png");
 	//addChild(__sp2, 10);
 	//__sp2->setPosition(VisibleRect::center(0, 200));
@@ -114,55 +121,19 @@ void FilterSample::showSprite()
 	//	CENTER, 0, "HelloWorld.png");
 	//testFilter(CCSepiaFilter::create(0.f));
 	//testFilter(CCTestFilter::create(0.f), CENTER, 0, "HelloWorld.png");
+	testFilter(
+		CCArray::create(
+		CCHBlurFilter::create(0.2f),
+		CCVBlurFilter::create(0.2f),
+		NULL)
+		);
+	//testFilter(
+	//	CCArray::create(
+	//		CCGaussianHBlurFilter::create(10.f, false),
+	//		CCGaussianHBlurFilter::create(10.f, true), 
+	//		NULL)
+	//	);
 
-	CCSprite* __sp = CCSprite::create("colors2.png");
-	CCSize __size = __sp->getContentSize();
-	CCRenderTexture* __rTex = CCRenderTexture::create(__size.width, __size.height);
-	__rTex->begin();
-	__sp->getTexture()->drawAtPoint(ccp(0,0));
-	__sp->getTexture()->setAliasTexParameters();
-	//__sp->setAnchorPoint(ccp(0, 0));
-	//__sp->getTexture()->setAliasTexParameters();
-	//__sp->visit();
-	__rTex->end();
-
-	this->addChild(__rTex, 10);
-	__rTex->setPosition(VisibleRect::center());
-
-	//CCImage* __img = new CCImage();
-	//__img->initWithImageFile("colors.png");
-	CCImage* __img = __rTex->newCCImage(false);
-	//CCTexture2D* __tex = new CCTexture2D();
-	//__tex->initWithImage(__img);
-	//__tex->autorelease();
-	//this->addChild(CCSprite::createWithTexture(__tex));
-
-	unsigned int x = 128, y = 128;
-	unsigned int* pixel_int = (unsigned int*)__img->getData();
-	unsigned char* pixel_byte = __img->getData();
-		
-	//pixel_byte += (y * __img->getWidth() + x)*4;
-
-	//CCLOG("%x", *pixels);
-	/*CCLOG("r %x", *(pixel_byte++));
-	CCLOG("g %x", *(pixel_byte++));
-	CCLOG("b %x", *(pixel_byte++));
-	CCLOG("a %x", *(pixel_byte++));*/
-
-	ccColor4B __color = __img->getColor4B(x, y);
-	CCLOG("r %x", __color.r);
-	CCLOG("g %x", __color.g);
-	CCLOG("b %x", __color.b);
-	CCLOG("a %x", __color.a);
-
-	//CCLOG("typeof(pixel): %u, %u", sizeof(pixels), sizeof(pixels[0]));
-	CCLOG("typeof(pixel_byte): %u, %u", sizeof(pixel_byte), sizeof(pixel_byte[0]));
-
-
-	CCLOG("width:%d, height:%d, bitPerCom:%d, dataLen:%d", 
-		__img->getWidth(), __img->getHeight(), 
-		__img->getBitsPerComponent(), __img->getDataLen());
-	 
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)
@@ -194,13 +165,33 @@ CCSprite*  FilterSample::testFilter(CCShaderFilter* $filter, ccLocation $locatio
 	return __sprite;
 }
 
-CCSprite*  FilterSample::testFilter(CCArray* $filters, ccLocation $location, int $order, const char* $path)
+CCSprite* FilterSample::testFilter(CCArray* $filters, ccLocation $location, int $order, const char* $path)
 {
 	CCSprite* __sprite = CCFilteredSprite::create($path, $filters);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
 	return __sprite;
 }
+
+CCSprite* FilterSample::testFilterFromFrame(CCShaderFilter* $filter, ccLocation $location, int $order, const char* $path)
+{
+	CCSprite* __sprite = CCFilteredSprite::createWithSpriteFrameName($path, $filter);
+	__sprite->setPosition(getLocation($location));
+	this->addChild(__sprite, $order);
+	return __sprite;
+}
+
+
+CCSprite* FilterSample::testFilterFromFrame(CCArray* $filters, ccLocation $location, int $order, const char* $path)
+{
+	CCFilteredSprite* __sprite = CCFilteredSprite::create();
+	__sprite->setFilters($filters);
+	//CCSprite* __sprite = CCFilteredSprite::createWithSpriteFrameName($path, $filters);
+	__sprite->setPosition(getLocation($location));
+	this->addChild(__sprite, $order);
+	return __sprite;
+}
+
 
 cocos2d::CCGLProgram* FilterSample::getGrass()
 {

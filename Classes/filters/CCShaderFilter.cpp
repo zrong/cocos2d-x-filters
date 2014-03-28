@@ -227,10 +227,10 @@ CCGaussianHBlurFilter* CCGaussianHBlurFilter::create()
 	return __filter;
 }
 
-CCGaussianHBlurFilter* CCGaussianHBlurFilter::create(float $param)
+CCGaussianHBlurFilter* CCGaussianHBlurFilter::create(float $param, bool $isHorzontial)
 {
 	CCGaussianHBlurFilter* __filter = CCGaussianHBlurFilter::create();
-	__filter->setParameter($param);
+	__filter->setParameter($param, $isHorzontial);
 	return __filter;
 }
 
@@ -243,14 +243,14 @@ CCGLProgram* CCGaussianHBlurFilter::loadShader()
 {
 	CCGLProgram* __p = new CCGLProgram();
 	CCLOG("CCGaussianHBlurFilter::loadShader %f, program:%d", _param, __p);
-	__p->initWithVertexShaderByteArray(ccFilterShader_gaussian_hblur_vert, ccFilterShader_gaussian_hblur_frag);
+	__p->initWithVertexShaderByteArray(ccPositionTextureColor_vert, 
+		ccFilterShader_gaussian_hblur_frag);
 	return __p;
-	//return NULL;
 }
 
 void CCGaussianHBlurFilter::setAttributes(CCGLProgram* $cgp)
 {
-	CCLOG("CCBlurBaseFilter::setAttributes");
+	CCLOG("CCGaussianHBlurFilter::setAttributes");
 	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
 	$cgp->addAttribute(kCCAttributeNameColor, kCCVertexAttrib_Color);
 	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
@@ -259,46 +259,28 @@ void CCGaussianHBlurFilter::setAttributes(CCGLProgram* $cgp)
 void CCGaussianHBlurFilter::setUniforms(CCGLProgram* $cgp)
 {
 	int __radius = $cgp->getUniformLocationForName("u_radius");
-	//CCLOG("CCShaderFilter::getProgram %d", $cgp);
+	CCLOG("CCShaderFilter::getProgram %d", $cgp);
 	$cgp->setUniformLocationWith1f(__radius, _param);
-	CCLOG("CCGaussianHBlurFilter::setUniforms radius:%d", __radius);
+
+	int u_resolution = $cgp->getUniformLocationForName("u_resolution");
+	$cgp->setUniformLocationWith1f(u_resolution, 480);
+
+	int u_direction = $cgp->getUniformLocationForName("u_direction");
+	$cgp->setUniformLocationWith2f(u_direction, _isHorizontial ? 1.f:0.f, _isHorizontial?0.f:1.f);
+	CCLOG("CCGaussianHBlurFilter::setUniforms radius:%d", _param);
 }
 
-void CCGaussianHBlurFilter::setParameter(float $param)
+void CCGaussianHBlurFilter::setParameter(float $param, bool $isHorzontial)
 {
 	_param = $param;
-	//initProgram();
+	_isHorizontial = $isHorzontial;
+	initProgram();
 }
 
-void CCGaussianHBlurFilter::initSprite(CCFilteredSprite* $sprite)
-{
-
-	ccBlendFunc __maskBF = { GL_ONE, GL_ONE };
-	ccBlendFunc __imgBF = { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA };
-
-	CCSprite* __pMask = CCSprite::createWithTexture($sprite->getTexture());
-	__pMask->setAnchorPoint(ccp(0, 0));
-	__pMask->setPosition(ccp(0, 0));
-
-	CCSprite* __pImg = CCSprite::createWithTexture($sprite->getTexture());
-	__pImg->setAnchorPoint(ccp(0, 0));
-	__pImg->setPosition(ccp(0, 0));
-
-	__pMask->setBlendFunc(__maskBF);
-	__pImg->setBlendFunc(__imgBF);
-
-	CCSize __size = __pImg->getContentSize();
-	CCRenderTexture* __pRender = CCRenderTexture::create(__size.width, __size.height);
-	__pRender->begin();
-	__pMask->visit();
-	__pImg->visit();
-	__pRender->end();
-
-	CCTexture2D* __pTex = new CCTexture2D();
-	__pTex->initWithImage(__pRender->newCCImage(true));
-	__pTex->autorelease();
-	$sprite->setTexture(__pTex);
-}
+//void CCGaussianHBlurFilter::initSprite(CCFilteredSprite* $sprite)
+//{
+//
+//}
 
 //================== CCMaskFilter
 
@@ -313,11 +295,21 @@ CCMaskFilter* CCMaskFilter::create(CCString* $maskImage)
 {
 	CCMaskFilter* __filter = CCMaskFilter::create();
 	__filter->setParameter($maskImage);
+	__filter->setIsSpriteFrame(false);
+	return __filter;
+}
+
+CCMaskFilter* CCMaskFilter::createWithSpriteFrameName(CCString* $maskImage)
+{
+	CCMaskFilter* __filter = CCMaskFilter::create();
+	__filter->setParameter($maskImage);
+	__filter->setIsSpriteFrame(true);
 	return __filter;
 }
 
 CCMaskFilter::CCMaskFilter()
 : _param(NULL)
+, _isSpriteFrame(false)
 {
 	this->shaderName = NULL;
 }
@@ -334,11 +326,13 @@ void CCMaskFilter::initSprite(CCFilteredSprite* $sprite)
 	ccBlendFunc __maskBF = { GL_ONE, GL_ZERO };
 	ccBlendFunc __imgBF = { GL_DST_ALPHA, GL_ZERO };
 
-	CCSprite* __pMask = CCSprite::create(_param->getCString());
+	CCSprite* __pMask = _isSpriteFrame ?
+		CCSprite::create(_param->getCString()) :
+		CCSprite::createWithSpriteFrameName(_param->getCString());
 	__pMask->setAnchorPoint(ccp(0, 0));
 	__pMask->setPosition(ccp(0, 0));
 
-	CCSprite* __pImg = CCSprite::createWithTexture($sprite->getTexture());
+	CCSprite* __pImg = CCSprite::createWithSpriteFrameName("helloworld.png");
 	__pImg->setAnchorPoint(ccp(0, 0));
 	__pImg->setPosition(ccp(0, 0));
 

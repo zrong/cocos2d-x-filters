@@ -263,6 +263,7 @@ bool CCFilteredSprite::updateFilters()
 			CCRenderTexture* __canva = CCRenderTexture::create(__size.width, __size.height);
 			for (size_t i = 0; i < __count; i++)
 			{
+				CCLOG("render %d", i);
 				__canva->begin();
 				__shader = static_cast<CCShaderFilter*>(_pFilters->objectAtIndex(i));
 				__sp = CCFilteredSprite::createWithTexture(__oldTex, __shader);
