@@ -54,10 +54,29 @@ public:
 	void setFilter(CCFilter* $pFilter);
 	void setFilters(CCArray* $pFilters);
 
+protected:
+	virtual void drawFilter();
+	CCArray* _pFilters;
+
 private:
 	bool updateFilters();
 	void drawMultiFilters();
-	CCArray* _pFilters;
+};
+
+class CCFilteredSpriteWithOne : public CCFilteredSprite
+{
+public:
+	void setFilter(CCFilter* $pFilter);
+	CCFilter* getFilter();
+protected:
+	virtual void drawFilter();
+};
+
+class CCFilteredSpriteWithMulti : public CCFilteredSprite
+{
+public:
+	void setFilters();
+	CCArray* getFilter();
 };
 
 NS_CC_EXT_END

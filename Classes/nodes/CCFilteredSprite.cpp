@@ -2,6 +2,8 @@
 
 NS_CC_EXT_BEGIN
 
+//================== CCFilteredSprite
+
 CCFilteredSprite::CCFilteredSprite()
 :_pFilters(NULL)
 {
@@ -214,14 +216,19 @@ void CCFilteredSprite::draw()
 	diff = offsetof(ccV3F_C4B_T2F, colors);
 	glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (void*)(offset + diff));
 
-	// show custom filter
-	if (_pFilters && _pFilters->count()==1)
-	{
-		static_cast<CCFilter*>(_pFilters->objectAtIndex(0))->draw();
-	}
+	// draw customer filter, implement in child class.
+	drawFilter();
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+	CHECK_GL_ERROR_DEBUG();
+
 	CC_INCREMENT_GL_DRAWS(1);
+}
+
+void CCFilteredSprite::drawFilter()
+{
+
 }
 
 void CCFilteredSprite::setFilter(CCFilter* $pFilter)
@@ -288,5 +295,17 @@ bool CCFilteredSprite::updateFilters()
 void CCFilteredSprite::drawMultiFilters()
 {
 }
+
+//================== CCFilteredSpriteWithOne
+
+void CCFilteredSpriteWithOne::drawFilter()
+{
+	// show custom filter
+	if (_pFilters && _pFilters->count() == 1)
+	{
+		static_cast<CCFilter*>(_pFilters->objectAtIndex(0))->draw();
+	}
+}
+//================== CCFilteredSpriteWithMulti
 
 NS_CC_EXT_END
