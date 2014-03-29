@@ -1,6 +1,7 @@
 #include "CCGrayFilter.h"
 
 NS_CC_EXT_BEGIN
+
 //================== CCGrayFilter
 
 CCGrayFilter* CCGrayFilter::create()
