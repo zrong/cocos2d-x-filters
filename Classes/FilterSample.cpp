@@ -127,13 +127,14 @@ void FilterSample::showSprite()
 	//	CCVBlurFilter::create(0.3f),
 	//	NULL)
 	//	);
-	testFilter(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)));
-	//testFilter(
-	//	CCArray::create(
-	//		CCGaussianHBlurFilter::create(3.f),
-	//		CCGaussianVBlurFilter::create(3.f), 
-	//		NULL)
-	//	);
+	testFilter(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)), LEFT_BOTTOM);
+	testFilter(
+		CCArray::create(
+			CCGaussianHBlurFilter::create(3.f),
+			CCGaussianVBlurFilter::create(3.f), 
+			NULL),
+			RIGHT_BOTTOM
+		);
 	//testFilter(
 	//	CCArray::create(
 	//	CCGaussianHBlurFilter::create(10.f),
@@ -163,9 +164,10 @@ CCPoint FilterSample::getLocation(ccLocation $location)
 	return VisibleRect::center();
 }
 
-CCSprite*  FilterSample::testFilter(CCFilter* $filter, ccLocation $location, int $order, const char* $path)
+CCSprite* FilterSample::testFilter(CCFilter* $filter, ccLocation $location, int $order, const char* $path)
 {
-	CCSprite* __sprite = CCFilteredSprite::create($path, $filter);
+	CCFilteredSprite* __sprite = CCFilteredSpriteWithOne::create($path);
+	__sprite->setFilter($filter);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
 	return __sprite;
@@ -173,7 +175,8 @@ CCSprite*  FilterSample::testFilter(CCFilter* $filter, ccLocation $location, int
 
 CCSprite* FilterSample::testFilter(CCArray* $filters, ccLocation $location, int $order, const char* $path)
 {
-	CCSprite* __sprite = CCFilteredSprite::create($path, $filters);
+	CCFilteredSprite* __sprite = CCFilteredSpriteWithMulti::create($path);
+	__sprite->setFilters($filters);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
 	return __sprite;
@@ -181,7 +184,8 @@ CCSprite* FilterSample::testFilter(CCArray* $filters, ccLocation $location, int 
 
 CCSprite* FilterSample::testFilterFromFrame(CCFilter* $filter, ccLocation $location, int $order, const char* $path)
 {
-	CCSprite* __sprite = CCFilteredSprite::createWithSpriteFrameName($path, $filter);
+	CCFilteredSprite* __sprite = CCFilteredSpriteWithOne::createWithSpriteFrameName($path);
+	__sprite->setFilter($filter);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
 	return __sprite;
@@ -190,14 +194,12 @@ CCSprite* FilterSample::testFilterFromFrame(CCFilter* $filter, ccLocation $locat
 
 CCSprite* FilterSample::testFilterFromFrame(CCArray* $filters, ccLocation $location, int $order, const char* $path)
 {
-	CCFilteredSprite* __sprite = CCFilteredSprite::create();
+	CCFilteredSprite* __sprite = CCFilteredSpriteWithMulti::create($path);
 	__sprite->setFilters($filters);
-	//CCSprite* __sprite = CCFilteredSprite::createWithSpriteFrameName($path, $filters);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
 	return __sprite;
 }
-
 
 cocos2d::CCGLProgram* FilterSample::getGrass()
 {

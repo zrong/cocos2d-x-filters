@@ -11,72 +11,66 @@ NS_CC_EXT_BEGIN
 class CCFilteredSprite : public CCSprite
 {
 public:
+
 	CCFilteredSprite();
 	~CCFilteredSprite();
 
-	static CCFilteredSprite* create();
-	static CCFilteredSprite* create(const char* $pszFileName);
-	static CCFilteredSprite* create(const char* $pszFileName, const CCRect& $rect);
+	virtual CCFilter* getFilter(unsigned int $index = 0);
+	virtual void setFilter(CCFilter* $pFilter)=0;
 
-	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture);
-	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, const CCRect& rect);
+	virtual CCArray* getFilters();
+	virtual void setFilters(CCArray* $pFilters);
 
-	static CCFilteredSprite* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame);
-	static CCFilteredSprite* createWithSpriteFrameName(const char* $pszSpriteFrameName);
-
-	static CCFilteredSprite* create(const char* $pszFileName, CCFilter* $pFilter);
-	static CCFilteredSprite* create(const char* $pszFileName, CCFilter* $pFilter, 
-		const CCRect& $rect);
-
-	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCFilter* $pFilter);
-	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCFilter* $pFilter,
-		const CCRect& rect);
-
-	static CCFilteredSprite* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame,
-		CCFilter* $pFilter);
-	static CCFilteredSprite* createWithSpriteFrameName(const char* $pszSpriteFrameName,
-		CCFilter* $pFilter);
-	
-	static CCFilteredSprite* create(const char* $pszFileName, CCArray* $pFilters);
-	static CCFilteredSprite* create(const char* $pszFileName, CCArray* $pFilters,
-		const CCRect& $rect);
-	
-	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCArray* $pFilters);
-	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCArray* $pFilters,
-		const CCRect& rect);
-
-	static CCFilteredSprite* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame,
-		CCArray* $pFilters);
-	static CCFilteredSprite* createWithSpriteFrameName(const char* $pszSpriteFrameName,
-		CCArray* $pFilters);
-public:
 	virtual void draw(void);
-	void setFilter(CCFilter* $pFilter);
-	void setFilters(CCArray* $pFilters);
 
 protected:
-	virtual void drawFilter();
+	virtual void drawFilter()=0;
+	virtual bool updateFilters()=0;
 	CCArray* _pFilters;
-
-private:
-	bool updateFilters();
-	void drawMultiFilters();
 };
 
 class CCFilteredSpriteWithOne : public CCFilteredSprite
 {
 public:
-	void setFilter(CCFilter* $pFilter);
-	CCFilter* getFilter();
+	static CCFilteredSpriteWithOne* create();
+	static CCFilteredSpriteWithOne* create(const char* $pszFileName);
+	static CCFilteredSpriteWithOne* create(const char* $pszFileName, const CCRect& $rect);
+
+	static CCFilteredSpriteWithOne* createWithTexture(CCTexture2D* $pTexture);
+	static CCFilteredSpriteWithOne* createWithTexture(CCTexture2D* $pTexture, const CCRect& rect);
+
+	static CCFilteredSpriteWithOne* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame);
+
+	static CCFilteredSpriteWithOne* createWithSpriteFrameName(const char* $pszSpriteFrameName);
+
+	virtual CCFilter* getFilter(unsigned int $index = 0);
+	virtual void setFilters(CCArray* $pFilters);
+	virtual void setFilter(CCFilter* $pFilter);
+
 protected:
 	virtual void drawFilter();
+	virtual bool updateFilters();
 };
 
 class CCFilteredSpriteWithMulti : public CCFilteredSprite
 {
 public:
-	void setFilters();
-	CCArray* getFilter();
+	static CCFilteredSpriteWithMulti* create();
+	static CCFilteredSpriteWithMulti* create(const char* $pszFileName);
+	static CCFilteredSpriteWithMulti* create(const char* $pszFileName, const CCRect& $rect);
+
+	static CCFilteredSpriteWithMulti* createWithTexture(CCTexture2D* $pTexture);
+	static CCFilteredSpriteWithMulti* createWithTexture(CCTexture2D* $pTexture, const CCRect& rect);
+
+	static CCFilteredSpriteWithMulti* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame);
+
+	static CCFilteredSpriteWithMulti* createWithSpriteFrameName(const char* $pszSpriteFrameName);
+
+	virtual void setFilter(CCFilter* $pFilter);
+
+protected:
+	virtual void drawFilter();
+	virtual bool updateFilters();
 };
 
 NS_CC_EXT_END
