@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "CCGL.h"
-#include "ccFilterShaders.h"
+#include "shaders/ccFilterShaders.h"
 
 #define kCCFilterShader_gray	"ccFilterShader_gray"
 #define kCCFilterShader_hblur	"ccFilterShader_hblur"
@@ -29,13 +29,13 @@ USING_NS_CC;
 
 class CCFilteredSprite;
 
-//================== CCShaderFilter
+//================== CCFilter
 
-class CCShaderFilter :	public CCObject
+class CCFilter :	public CCObject
 {
 public:
-	CCShaderFilter();
-	~CCShaderFilter();
+	CCFilter();
+	~CCFilter();
 
 	virtual void initSprite(CCFilteredSprite* $sprite);
 	virtual void draw();
@@ -52,7 +52,7 @@ protected:
 
 //================== CCGrayFilter
 
-class CCGrayFilter : public CCShaderFilter
+class CCGrayFilter : public CCFilter
 {
 public:
 	static CCGrayFilter* create();
@@ -73,7 +73,7 @@ private:
 
 //================== CCBlurFilter
 
-class CCBlurBaseFilter : public CCShaderFilter
+class CCBlurBaseFilter : public CCFilter
 {
 	
 public:
@@ -136,7 +136,7 @@ protected:
 
 //================== CCMaskFilter
 
-class CCMaskFilter : public CCShaderFilter
+class CCMaskFilter : public CCFilter
 {
 
 public:
@@ -159,7 +159,7 @@ protected:
 
 //================== CCSharpenFilter
 
-class CCSharpenFilter : public CCShaderFilter
+class CCSharpenFilter : public CCFilter
 {
 
 public:
@@ -186,7 +186,7 @@ protected:
 
 //================== CCRGBFilter
 
-class CCRGBFilter : public CCShaderFilter
+class CCRGBFilter : public CCFilter
 {
 
 public:
@@ -209,7 +209,7 @@ protected:
 
 //================== CCBrightnessFilter
 
-class CCBrightnessFilter : public CCShaderFilter
+class CCBrightnessFilter : public CCFilter
 {
 
 public:
@@ -229,7 +229,7 @@ protected:
 
 //================== CCExposureFilter
 
-class CCExposureFilter : public CCShaderFilter
+class CCExposureFilter : public CCFilter
 {
 
 public:
@@ -250,7 +250,7 @@ protected:
 
 //================== CCContrastFilter
 
-class CCContrastFilter : public CCShaderFilter
+class CCContrastFilter : public CCFilter
 {
 
 public:
@@ -270,7 +270,7 @@ protected:
 
 //================== CCSaturationFilter
 
-class CCSaturationFilter : public CCShaderFilter
+class CCSaturationFilter : public CCFilter
 {
 
 public:
@@ -290,7 +290,7 @@ protected:
 
 //================== CCGammaFilter
 
-class CCGammaFilter : public CCShaderFilter
+class CCGammaFilter : public CCFilter
 {
 
 public:
@@ -310,7 +310,7 @@ protected:
 
 //================== CCHueFilter
 
-class CCHueFilter : public CCShaderFilter
+class CCHueFilter : public CCFilter
 {
 
 public:
@@ -330,7 +330,7 @@ protected:
 
 //================== CCHazeFilter
 
-class CCHazeFilter : public CCShaderFilter
+class CCHazeFilter : public CCFilter
 {
 
 public:
@@ -351,7 +351,7 @@ protected:
 
 //================== CCZoomBlurFilter
 
-class CCZoomBlurFilter : public CCShaderFilter
+class CCZoomBlurFilter : public CCFilter
 {
 
 public:
@@ -373,7 +373,7 @@ protected:
 
 //================== CCMotionBlurFilter
 
-class CCMotionBlurFilter : public CCShaderFilter
+class CCMotionBlurFilter : public CCFilter
 {
 
 public:
@@ -397,7 +397,7 @@ protected:
 
 //================== CCDropShadowFilter
 
-class CCDropShadowFilter : public CCShaderFilter
+class CCDropShadowFilter : public CCFilter
 {
 
 public:
@@ -420,7 +420,7 @@ protected:
 
 //================== CCSepiaFilter
 
-class CCSepiaFilter : public CCShaderFilter
+class CCSepiaFilter : public CCFilter
 {
 
 public:
@@ -439,7 +439,7 @@ protected:
 
 //================== CCTestFilter
 
-class CCTestFilter : public CCShaderFilter
+class CCTestFilter : public CCFilter
 {
 
 public:

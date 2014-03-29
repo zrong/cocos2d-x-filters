@@ -2,7 +2,7 @@
 #define __FILTER_SAMPLE_H__
 
 #include "cocos2d.h"
-#include "CCFilteredSprite.h"
+#include "nodes/CCFilteredSprite.h"
 #include "VisibleRect.h"
 
 typedef enum {
@@ -39,9 +39,9 @@ private:
 	int _timeUniformLocation;
 	float _totalTime = 0.0f;
 	cocos2d::CCSprite* _pSprite;
-	CCSprite* testFilter(CCShaderFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path="HelloWorld.png");
+	CCSprite* testFilter(CCFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path="HelloWorld.png");
 	CCSprite* testFilter(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, const char* $path = "HelloWorld.png");
-	CCSprite* testFilterFromFrame(CCShaderFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path = "dirt.png");
+	CCSprite* testFilterFromFrame(CCFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path = "dirt.png");
 	CCSprite* testFilterFromFrame(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, const char* $path = "dirt.png");
 	CCPoint getLocation(ccLocation $location);
 };

@@ -8,7 +8,13 @@
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\filters">
-      <UniqueIdentifier>{883fb178-dbe2-4e3f-9145-33573b7d24b2}</UniqueIdentifier>
+      <UniqueIdentifier>{1a030292-41cd-4778-b2e7-1e618e35e391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\shaders">
+      <UniqueIdentifier>{1e6e105e-7299-4d57-8a52-8e02cf5dd364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\nodes">
+      <UniqueIdentifier>{19d98bd2-90ce-40ec-80d2-b80fabf2ea77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -18,20 +24,20 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CCFilteredSprite.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\filters\ccFilterShaders.cpp">
-      <Filter>Classes\filters</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCShaderFilter.cpp">
-      <Filter>Classes\filters</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\VisibleRect.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\FilterSample.cpp">
       <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\filters\CCFilter.cpp">
+      <Filter>Classes\filters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\shaders\ccFilterShaders.cpp">
+      <Filter>Classes\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\nodes\CCFilteredSprite.cpp">
+      <Filter>Classes\nodes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,20 +47,107 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CCFilteredSprite.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\filters\ccFilterShaders.h">
-      <Filter>Classes\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCShaderFilter.h">
-      <Filter>Classes\filters</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\VisibleRect.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FilterSample.h">
       <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\filters\CCFilter.h">
+      <Filter>Classes\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_blur_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_brightness_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_colorramp_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_contrast_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_drop_shadow_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_drop_shadow_vert.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_emboss_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_embossmov_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_exposure_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_gamma_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_gaussian_blur_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_gaussian_hblur_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_gaussian_vblur_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_grass_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_gray_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_haze_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_hblur_vert.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_hue_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_motion_blur_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_motion_blur_vert.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_rgb_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_saturation_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_sepia_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_sharpen_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_sharpen_vert.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_test_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_test_vert.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_vblur_vert.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShader_zoom_blur_frag.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\shaders\ccFilterShaders.h">
+      <Filter>Classes\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\nodes\CCFilteredSprite.h">
+      <Filter>Classes\nodes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

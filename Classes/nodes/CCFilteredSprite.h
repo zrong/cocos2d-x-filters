@@ -2,7 +2,7 @@
 #define __CCFILTERED_SPRITE_H__
 
 #include "cocos2d.h"
-#include "filters/CCShaderFilter.h"
+#include "filters/CCFilter.h"
 
 USING_NS_CC;
 
@@ -22,18 +22,18 @@ public:
 	static CCFilteredSprite* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame);
 	static CCFilteredSprite* createWithSpriteFrameName(const char* $pszSpriteFrameName);
 
-	static CCFilteredSprite* create(const char* $pszFileName, CCShaderFilter* $pFilter);
-	static CCFilteredSprite* create(const char* $pszFileName, CCShaderFilter* $pFilter, 
+	static CCFilteredSprite* create(const char* $pszFileName, CCFilter* $pFilter);
+	static CCFilteredSprite* create(const char* $pszFileName, CCFilter* $pFilter, 
 		const CCRect& $rect);
 
-	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCShaderFilter* $pFilter);
-	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCShaderFilter* $pFilter,
+	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCFilter* $pFilter);
+	static CCFilteredSprite* createWithTexture(CCTexture2D* $pTexture, CCFilter* $pFilter,
 		const CCRect& rect);
 
 	static CCFilteredSprite* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame,
-		CCShaderFilter* $pFilter);
+		CCFilter* $pFilter);
 	static CCFilteredSprite* createWithSpriteFrameName(const char* $pszSpriteFrameName,
-		CCShaderFilter* $pFilter);
+		CCFilter* $pFilter);
 	
 	static CCFilteredSprite* create(const char* $pszFileName, CCArray* $pFilters);
 	static CCFilteredSprite* create(const char* $pszFileName, CCArray* $pFilters,
@@ -49,7 +49,7 @@ public:
 		CCArray* $pFilters);
 public:
 	virtual void draw(void);
-	void setFilter(CCShaderFilter* $pFilter);
+	void setFilter(CCFilter* $pFilter);
 	void setFilters(CCArray* $pFilters);
 
 private:

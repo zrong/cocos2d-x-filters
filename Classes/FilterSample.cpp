@@ -129,11 +129,16 @@ void FilterSample::showSprite()
 	//	);
 	testFilter(
 		CCArray::create(
-			CCGaussianHBlurFilter::create(10.f),
-			CCGaussianVBlurFilter::create(10.f), 
+			CCGaussianHBlurFilter::create(3.f),
+			CCGaussianVBlurFilter::create(3.f), 
 			NULL)
 		);
-
+	testFilter(
+		CCArray::create(
+		CCGaussianHBlurFilter::create(10.f),
+		CCGaussianVBlurFilter::create(10.f),
+		NULL),
+		RIGHT_BOTTOM);
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)
@@ -157,7 +162,7 @@ CCPoint FilterSample::getLocation(ccLocation $location)
 	return VisibleRect::center();
 }
 
-CCSprite*  FilterSample::testFilter(CCShaderFilter* $filter, ccLocation $location, int $order, const char* $path)
+CCSprite*  FilterSample::testFilter(CCFilter* $filter, ccLocation $location, int $order, const char* $path)
 {
 	CCSprite* __sprite = CCFilteredSprite::create($path, $filter);
 	__sprite->setPosition(getLocation($location));
@@ -173,7 +178,7 @@ CCSprite* FilterSample::testFilter(CCArray* $filters, ccLocation $location, int 
 	return __sprite;
 }
 
-CCSprite* FilterSample::testFilterFromFrame(CCShaderFilter* $filter, ccLocation $location, int $order, const char* $path)
+CCSprite* FilterSample::testFilterFromFrame(CCFilter* $filter, ccLocation $location, int $order, const char* $path)
 {
 	CCSprite* __sprite = CCFilteredSprite::createWithSpriteFrameName($path, $filter);
 	__sprite->setPosition(getLocation($location));

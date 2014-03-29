@@ -1,33 +1,33 @@
-#include "CCShaderFilter.h"
-#include "CCFilteredSprite.h"
+#include "CCFilter.h"
+#include "nodes/CCFilteredSprite.h"
 
-//================== CCShaderFilter
+//================== CCFilter
 
-CCShaderFilter::CCShaderFilter()
+CCFilter::CCFilter()
 : shaderName(NULL)
 , _pProgram(NULL)
 {
 }
 
 
-CCShaderFilter::~CCShaderFilter()
+CCFilter::~CCFilter()
 {
 	CC_SAFE_RELEASE(_pProgram);
 }
 
-CCGLProgram* CCShaderFilter::getProgram()
+CCGLProgram* CCFilter::getProgram()
 {
 	return _pProgram;
 }
 
-void CCShaderFilter::initProgram()
+void CCFilter::initProgram()
 {
 	CCGLProgram* __pProgram = CCShaderCache::sharedShaderCache()->programForKey(shaderName);
-	CCLOG("CCShaderFilter::initProgram %s, program:%d", shaderName, __pProgram);
+	CCLOG("CCFilter::initProgram %s, program:%d", shaderName, __pProgram);
 	if (!__pProgram)
 	{
 		__pProgram = loadShader();
-		CCLOG("CCShaderFilter::initProgram %s, after loadShader program:%d", shaderName, __pProgram);
+		CCLOG("CCFilter::initProgram %s, after loadShader program:%d", shaderName, __pProgram);
 		this->setAttributes(__pProgram);
 		CHECK_GL_ERROR_DEBUG();
 
@@ -42,9 +42,9 @@ void CCShaderFilter::initProgram()
 
 		CCShaderCache::sharedShaderCache()->addProgram(__pProgram, this->shaderName);
 		__pProgram->release();
-		CCLOG("CCShaderFilter::getProgram %d", __pProgram);
+		CCLOG("CCFilter::getProgram %d", __pProgram);
 	}
-	//CCLOG("CCShaderFilter::getProgram2 %d", __pProgram);
+	//CCLOG("CCFilter::getProgram2 %d", __pProgram);
 	if (!_pProgram)
 	{
 		_pProgram = __pProgram;
@@ -52,25 +52,25 @@ void CCShaderFilter::initProgram()
 	}
 }
 
-void CCShaderFilter::initSprite(CCFilteredSprite* $sprite)
+void CCFilter::initSprite(CCFilteredSprite* $sprite)
 {
 }
 
-void CCShaderFilter::draw()
+void CCFilter::draw()
 {
 }
 
-CCGLProgram* CCShaderFilter::loadShader()
+CCGLProgram* CCFilter::loadShader()
 {
-	CCLOG("CCShaderFilter::loadShader");
+	CCLOG("CCFilter::loadShader");
 	return NULL;
 }
 
-void CCShaderFilter::setAttributes(CCGLProgram* $glp)
+void CCFilter::setAttributes(CCGLProgram* $glp)
 {
 }
 
-void CCShaderFilter::setUniforms(CCGLProgram* $glp)
+void CCFilter::setUniforms(CCGLProgram* $glp)
 {
 }
 
@@ -149,7 +149,7 @@ void CCBlurBaseFilter::setAttributes(CCGLProgram* $cgp)
 void CCBlurBaseFilter::setUniforms(CCGLProgram* $cgp)
 {
 	int __radius = $cgp->getUniformLocationForName("u_radius");
-	//CCLOG("CCShaderFilter::getProgram %d", $cgp);
+	//CCLOG("CCFilter::getProgram %d", $cgp);
 	$cgp->setUniformLocationWith1f(__radius, _param);
 	CCLOG("CCBlurBaseFilter::setUniforms radius:%d, param:%f", __radius, _param);
 }

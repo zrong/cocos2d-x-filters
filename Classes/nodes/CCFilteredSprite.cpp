@@ -97,14 +97,14 @@ CCFilteredSprite* CCFilteredSprite::createWithSpriteFrameName(const char* $pszSp
 	return createWithSpriteFrame(pFrame);
 }
 
-CCFilteredSprite* CCFilteredSprite::create(const char* $pszFileName, CCShaderFilter* $pFilter)
+CCFilteredSprite* CCFilteredSprite::create(const char* $pszFileName, CCFilter* $pFilter)
 {
 	CCFilteredSprite *pobSprite = create($pszFileName);
 	pobSprite->setFilter($pFilter);
 	return pobSprite;
 }
 
-CCFilteredSprite* CCFilteredSprite::create(const char* $pszFileName, CCShaderFilter* $pFilter, 
+CCFilteredSprite* CCFilteredSprite::create(const char* $pszFileName, CCFilter* $pFilter, 
 	const CCRect& rect)
 {
 	CCFilteredSprite *pobSprite = CCFilteredSprite::create($pszFileName, rect);
@@ -112,14 +112,14 @@ CCFilteredSprite* CCFilteredSprite::create(const char* $pszFileName, CCShaderFil
 	return pobSprite;
 }
 
-CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D* $pTexture, CCShaderFilter* $pFilter)
+CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D* $pTexture, CCFilter* $pFilter)
 {
 	CCFilteredSprite *pobSprite = createWithTexture($pTexture);
 	pobSprite->setFilter($pFilter);
 	return pobSprite;
 }
 
-CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D* $pTexture, CCShaderFilter* $pFilter,
+CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D* $pTexture, CCFilter* $pFilter,
 	const CCRect& $rect)
 {
 	CCFilteredSprite *pobSprite = createWithTexture($pTexture, $rect);
@@ -128,7 +128,7 @@ CCFilteredSprite* CCFilteredSprite::createWithTexture(CCTexture2D* $pTexture, CC
 }
 
 CCFilteredSprite* CCFilteredSprite::createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame, 
-	CCShaderFilter* $pFilter)
+	CCFilter* $pFilter)
 {
 	CCFilteredSprite *pobSprite = createWithSpriteFrame($pSpriteFrame);
 	pobSprite->setFilter($pFilter);
@@ -136,7 +136,7 @@ CCFilteredSprite* CCFilteredSprite::createWithSpriteFrame(CCSpriteFrame* $pSprit
 }
 
 CCFilteredSprite* CCFilteredSprite::createWithSpriteFrameName(const char* $pszSpriteFrameName, 
-	CCShaderFilter* $pFilter)
+	CCFilter* $pFilter)
 {
 	CCFilteredSprite *pobSprite = createWithSpriteFrameName($pszSpriteFrameName);
 	pobSprite->setFilter($pFilter);
@@ -216,14 +216,14 @@ void CCFilteredSprite::draw()
 	// show custom filter
 	if (_pFilters && _pFilters->count()==1)
 	{
-		static_cast<CCShaderFilter*>(_pFilters->objectAtIndex(0))->draw();
+		static_cast<CCFilter*>(_pFilters->objectAtIndex(0))->draw();
 	}
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	CC_INCREMENT_GL_DRAWS(1);
 }
 
-void CCFilteredSprite::setFilter(CCShaderFilter* $pFilter)
+void CCFilteredSprite::setFilter(CCFilter* $pFilter)
 {
 	CCArray* __pFilters = CCArray::create($pFilter, NULL);
 	setFilters(__pFilters);
@@ -240,15 +240,15 @@ void CCFilteredSprite::setFilters(CCArray* $pFilters)
 
 bool CCFilteredSprite::updateFilters()
 {
-	CCAssert(_pFilters, "Invalid CCShaderFilter!");
+	CCAssert(_pFilters, "Invalid CCFilter!");
 	do
 	{	
 		unsigned int __count = _pFilters->count();
 		CC_BREAK_IF(__count == 0);
-		CCShaderFilter* __shader = NULL;
+		CCFilter* __shader = NULL;
 		if (__count == 1)
 		{
-			__shader = static_cast<CCShaderFilter*>(_pFilters->objectAtIndex(0));
+			__shader = static_cast<CCFilter*>(_pFilters->objectAtIndex(0));
 			__shader->initSprite(this);
 			if (__shader->getProgram())
 			{
@@ -265,7 +265,7 @@ bool CCFilteredSprite::updateFilters()
 			{
 				CCLOG("render %d", i);
 				__canva->begin();
-				__shader = static_cast<CCShaderFilter*>(_pFilters->objectAtIndex(i));
+				__shader = static_cast<CCFilter*>(_pFilters->objectAtIndex(i));
 				__sp = CCFilteredSprite::createWithTexture(__oldTex, __shader);
 				__sp->setAnchorPoint(ccp(0,0));
 				__sp->visit();
