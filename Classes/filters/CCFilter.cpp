@@ -42,6 +42,7 @@ void CCFilter::initProgram()
 		this->setUniforms(__pProgram);
 		CHECK_GL_ERROR_DEBUG();
 
+
 		CCShaderCache::sharedShaderCache()->addProgram(__pProgram, this->shaderName);
 		__pProgram->release();
 		CCLOG("CCFilter::getProgram %d", __pProgram);
@@ -60,6 +61,7 @@ void CCFilter::initSprite(CCFilteredSprite* $sprite)
 
 void CCFilter::draw()
 {
+	setUniforms(getProgram());
 }
 
 CCGLProgram* CCFilter::loadShader()

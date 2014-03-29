@@ -127,20 +127,33 @@ void FilterSample::showSprite()
 	//	CCVBlurFilter::create(0.3f),
 	//	NULL)
 	//	);
-	testFilter(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)), LEFT_BOTTOM);
+	//testFilter(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)), LEFT_BOTTOM);
+	//testFilter(CCGrayFilter::create(ccc4f(0.555, 0.587f, 0.114f, 0.5f)), RIGHT_BOTTOM);
 	testFilter(
 		CCArray::create(
 			CCGaussianHBlurFilter::create(3.f),
 			CCGaussianVBlurFilter::create(3.f), 
 			NULL),
-			RIGHT_BOTTOM
+			LEFT_BOTTOM
 		);
-	//testFilter(
+
+	testFilter(
+		CCArray::create(
+		CCGaussianHBlurFilter::create(1.f),
+		CCGaussianVBlurFilter::create(1.f),
+		NULL),
+		RIGHT_BOTTOM
+		);
+
+	//testFilterFromFrame(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)),
+	//	LEFT_TOP, 0, "dirt.png");
+	//testFilterFromFrame(
 	//	CCArray::create(
-	//	CCGaussianHBlurFilter::create(10.f),
-	//	CCGaussianVBlurFilter::create(10.f),
+	//	CCGaussianHBlurFilter::create(3.f),
+	//	CCGaussianVBlurFilter::create(3.f),
 	//	NULL),
-	//	RIGHT_BOTTOM);
+	//	RIGHT_TOP
+	//	);
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)
@@ -243,12 +256,6 @@ void FilterSample::update(float $dt)
 	//CCLOG("show %f, dt %f", _totalTime, $dt);
 	_pSprite->getShaderProgram()->use();
 	glUniform1f(_timeUniformLocation, _totalTime);
-}
-
-void FilterSample::draw()
-{
-	//CCTexture2D* __tex = CCTextureCache::sharedTextureCache()->addImage("HelloWorld.png");
-	//__tex->drawAtPoint(CCPointMake(100, 100));
 }
 
 cocos2d::CCGLProgram* FilterSample::getEmboss()

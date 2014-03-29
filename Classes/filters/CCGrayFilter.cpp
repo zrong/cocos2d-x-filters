@@ -47,7 +47,7 @@ void CCGrayFilter::setAttributes(CCGLProgram* $cgp)
 void CCGrayFilter::setUniforms(CCGLProgram* $cgp)
 {
 	int __grayParam = $cgp->getUniformLocationForName("u_grayParam");
-	CCLOG("CCGrayFilter::setUniforms, u_grayParam:%d", __grayParam);
+	//CCLOG("CCGrayFilter::setUniforms, u_grayParam:%d", __grayParam);
 	$cgp->setUniformLocationWith4f(__grayParam, _param.r, _param.g, _param.b, _param.a);
 }
 

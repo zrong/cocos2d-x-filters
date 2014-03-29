@@ -29,7 +29,6 @@ public:
     CREATE_FUNC(FilterSample);
 
 	virtual void update(float delta);
-	virtual void draw();
 private:
 	void showSprite();
 	CCGLProgram* getEmboss();
@@ -39,10 +38,14 @@ private:
 	int _timeUniformLocation;
 	float _totalTime = 0.0f;
 	cocos2d::CCSprite* _pSprite;
-	CCSprite* testFilter(cocos2d::extension::CCFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path="HelloWorld.png");
-	CCSprite* testFilter(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, const char* $path = "HelloWorld.png");
-	CCSprite* testFilterFromFrame(cocos2d::extension::CCFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path = "dirt.png");
-	CCSprite* testFilterFromFrame(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, const char* $path = "dirt.png");
+	CCSprite* testFilter(cocos2d::extension::CCFilter* $filter, ccLocation $location = CENTER, int $order = 0, 
+		const char* $path="HelloWorld.png");
+	CCSprite* testFilter(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, 
+		const char* $path = "HelloWorld.png");
+	CCSprite* testFilterFromFrame(cocos2d::extension::CCFilter* $filter, 
+		ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld.png");
+	CCSprite* testFilterFromFrame(CCArray* $filters, 
+		ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld.png");
 	CCPoint getLocation(ccLocation $location);
 };
 
