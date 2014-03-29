@@ -1,6 +1,6 @@
 #include "FilterSample.h"
 
-USING_NS_CC;
+USING_NS_CC_EXT;
 
 CCScene* FilterSample::scene()
 {
@@ -127,18 +127,19 @@ void FilterSample::showSprite()
 	//	CCVBlurFilter::create(0.3f),
 	//	NULL)
 	//	);
-	testFilter(
-		CCArray::create(
-			CCGaussianHBlurFilter::create(3.f),
-			CCGaussianVBlurFilter::create(3.f), 
-			NULL)
-		);
-	testFilter(
-		CCArray::create(
-		CCGaussianHBlurFilter::create(10.f),
-		CCGaussianVBlurFilter::create(10.f),
-		NULL),
-		RIGHT_BOTTOM);
+	testFilter(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)));
+	//testFilter(
+	//	CCArray::create(
+	//		CCGaussianHBlurFilter::create(3.f),
+	//		CCGaussianVBlurFilter::create(3.f), 
+	//		NULL)
+	//	);
+	//testFilter(
+	//	CCArray::create(
+	//	CCGaussianHBlurFilter::create(10.f),
+	//	CCGaussianVBlurFilter::create(10.f),
+	//	NULL),
+	//	RIGHT_BOTTOM);
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)

@@ -6,6 +6,8 @@
 
 USING_NS_CC;
 
+NS_CC_EXT_BEGIN
+
 class CCFilteredSprite : public CCSprite
 {
 public:
@@ -57,5 +59,7 @@ private:
 	void drawMultiFilters();
 	CCArray* _pFilters;
 };
+
+NS_CC_EXT_END
 
 #endif /* __CCFILTERED_SPRITE_H__ */

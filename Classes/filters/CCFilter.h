@@ -2,30 +2,13 @@
 #define __CCSHADER_FILTER_H__
 
 #include "cocos2d.h"
+#include "ExtensionMacros.h"
 #include "CCGL.h"
 #include "shaders/ccFilterShaders.h"
 
-#define kCCFilterShader_gray	"ccFilterShader_gray"
-#define kCCFilterShader_hblur	"ccFilterShader_hblur"
-#define kCCFilterShader_vblur	"ccFilterShader_vblur"
-#define kCCFilterShader_gaussian_hblur	"ccFilterShader_gaussian_hblur"
-#define kCCFilterShader_gaussian_vblur	"ccFilterShader_gaussian_vblur"
-#define kCCFilterShader_sharpen	"ccFilterShader_sharpen"
-#define kCCFilterShader_rgb	"ccFilterShader_rgb"
-#define kCCFilterShader_brightness	"ccFilterShader_brightness"
-#define kCCFilterShader_exposure	"ccFilterShader_exposure"
-#define kCCFilterShader_contrast	"ccFilterShader_contrast"
-#define kCCFilterShader_saturation	"ccFilterShader_saturation"
-#define kCCFilterShader_gamma	"ccFilterShader_gamma"
-#define kCCFilterShader_hue	"ccFilterShader_hue"
-#define kCCFilterShader_haze	"ccFilterShader_haze"
-#define kCCFilterShader_zoom_blur	"ccFilterShader_zoom_blur"
-#define kCCFilterShader_motion_blur	"ccFilterShader_motion_blur"
-#define kCCFilterShader_drop_shadow	"ccFilterShader_drop_shadow"
-#define kCCFilterShader_sepia	"ccFilterShader_sepia"
-#define kCCFilterShader_test	"ccFilterShader_test"
-
 USING_NS_CC;
+
+NS_CC_EXT_BEGIN
 
 class CCFilteredSprite;
 
@@ -50,26 +33,16 @@ protected:
 	virtual void setUniforms(CCGLProgram* $glp);
 };
 
-//================== CCGrayFilter
-
-class CCGrayFilter : public CCFilter
+class CCSingleFloatParamFilter : public CCFilter
 {
 public:
-	static CCGrayFilter* create();
-	static CCGrayFilter* create(ccColor4F $param);
+	CCSingleFloatParamFilter();
 
-	CCGrayFilter();
-	~CCGrayFilter();
-	void setParameter(ccColor4F $param);
-
+	virtual void setParameter(float $param);
 protected:
-	virtual CCGLProgram* loadShader();
-	virtual void setAttributes(CCGLProgram* $glp);
-	virtual void setUniforms(CCGLProgram* $glp);
-
-private:
-	ccColor4F _param;
+	float _param;
 };
+
 
 //================== CCBlurFilter
 
@@ -459,5 +432,7 @@ protected:
 	float _textureHeight;
 };
 
+
+NS_CC_EXT_END
 
 #endif /* __CCSHADER_FILTER_H__ */

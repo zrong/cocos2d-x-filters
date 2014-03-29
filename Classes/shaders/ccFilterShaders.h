@@ -1,39 +1,31 @@
-/****************************************************************************
-Copyright (c) 2010-2012 cocos2d-x.org
-Copyright (c) 2011      Zynga Inc.
-
-http://www.cocos2d-x.org
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-****************************************************************************/
 #ifndef __CC_FILTER_SHADER_H__
 #define __CC_FILTER_SHADER_H__
 
 #include "CCGL.h"
 #include "platform/CCPlatformMacros.h"
+#include "ExtensionMacros.h"
 
-//NS_CC_BEGIN
+NS_CC_EXT_BEGIN
 
-/**
- * @addtogroup shaders
- * @{
- */
+#define kCCFilterShader_gray	"ccFilterShader_gray"
+#define kCCFilterShader_hblur	"ccFilterShader_hblur"
+#define kCCFilterShader_vblur	"ccFilterShader_vblur"
+#define kCCFilterShader_gaussian_hblur	"ccFilterShader_gaussian_hblur"
+#define kCCFilterShader_gaussian_vblur	"ccFilterShader_gaussian_vblur"
+#define kCCFilterShader_sharpen	"ccFilterShader_sharpen"
+#define kCCFilterShader_rgb	"ccFilterShader_rgb"
+#define kCCFilterShader_brightness	"ccFilterShader_brightness"
+#define kCCFilterShader_exposure	"ccFilterShader_exposure"
+#define kCCFilterShader_contrast	"ccFilterShader_contrast"
+#define kCCFilterShader_saturation	"ccFilterShader_saturation"
+#define kCCFilterShader_gamma	"ccFilterShader_gamma"
+#define kCCFilterShader_hue	"ccFilterShader_hue"
+#define kCCFilterShader_haze	"ccFilterShader_haze"
+#define kCCFilterShader_zoom_blur	"ccFilterShader_zoom_blur"
+#define kCCFilterShader_motion_blur	"ccFilterShader_motion_blur"
+#define kCCFilterShader_drop_shadow	"ccFilterShader_drop_shadow"
+#define kCCFilterShader_sepia	"ccFilterShader_sepia"
+#define kCCFilterShader_test	"ccFilterShader_test"
 
 extern CC_DLL const GLchar * ccFilterShader_gray_frag;
 
@@ -85,9 +77,7 @@ extern CC_DLL const GLchar * ccFilterShader_embossmov_frag;
 
 extern CC_DLL const GLchar * ccFilterShader_grass_frag;
 
-// end of shaders group
-/// @}
 
-//NS_CC_END
+NS_CC_EXT_END
 
 #endif /* __CC_FILTER_SHADER_H__ */

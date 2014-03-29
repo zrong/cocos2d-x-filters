@@ -1,7 +1,6 @@
 #include "ccFilterShaders.h"
 
-//NS_CC_BEGIN
-//
+NS_CC_EXT_BEGIN
 
 const GLchar * ccFilterShader_gray_frag =
 #include "ccFilterShader_gray_frag.h"
@@ -82,4 +81,4 @@ const GLchar * ccFilterShader_embossmov_frag =
 const GLchar * ccFilterShader_grass_frag =
 #include "ccFilterShader_grass_frag.h"
 
-//NS_CC_END
+NS_CC_EXT_END

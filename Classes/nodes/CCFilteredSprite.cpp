@@ -1,11 +1,12 @@
 #include "CCFilteredSprite.h"
 
+NS_CC_EXT_BEGIN
+
 CCFilteredSprite::CCFilteredSprite()
 :_pFilters(NULL)
 {
 
 }
-
 
 CCFilteredSprite::~CCFilteredSprite()
 {
@@ -287,3 +288,5 @@ bool CCFilteredSprite::updateFilters()
 void CCFilteredSprite::drawMultiFilters()
 {
 }
+
+NS_CC_EXT_END

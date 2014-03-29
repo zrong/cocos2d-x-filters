@@ -134,6 +134,7 @@ xcopy /Y /Q "$(COCOS2DX_HOME)\external\libwebsockets\win32\lib\*.*" "$(OutDir)"<
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\FilterSample.cpp" />
     <ClCompile Include="..\Classes\filters\CCFilter.cpp" />
+    <ClCompile Include="..\Classes\filters\CCGrayFilter.cpp" />
     <ClCompile Include="..\Classes\nodes\CCFilteredSprite.cpp" />
     <ClCompile Include="..\Classes\shaders\ccFilterShaders.cpp" />
     <ClCompile Include="..\Classes\VisibleRect.cpp" />
@@ -141,39 +142,12 @@ xcopy /Y /Q "$(COCOS2DX_HOME)\external\libwebsockets\win32\lib\*.*" "$(OutDir)"<
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\cocos2dFilters.h" />
     <ClInclude Include="..\Classes\FilterSample.h" />
     <ClInclude Include="..\Classes\filters\CCFilter.h" />
+    <ClInclude Include="..\Classes\filters\CCGrayFilter.h" />
     <ClInclude Include="..\Classes\nodes\CCFilteredSprite.h" />
     <ClInclude Include="..\Classes\shaders\ccFilterShaders.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_blur_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_brightness_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_colorramp_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_contrast_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_drop_shadow_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_drop_shadow_vert.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_embossmov_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_emboss_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_exposure_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_gamma_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_gaussian_blur_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_gaussian_hblur_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_gaussian_vblur_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_grass_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_gray_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_haze_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_hblur_vert.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_hue_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_motion_blur_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_motion_blur_vert.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_rgb_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_saturation_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_sepia_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_sharpen_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_sharpen_vert.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_test_frag.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_test_vert.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_vblur_vert.h" />
-    <ClInclude Include="..\Classes\shaders\ccFilterShader_zoom_blur_frag.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
