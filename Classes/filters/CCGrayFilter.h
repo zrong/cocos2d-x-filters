@@ -14,7 +14,6 @@ public:
 	static CCGrayFilter* create(ccColor4F $param);
 
 	CCGrayFilter();
-	~CCGrayFilter();
 	void setParameter(ccColor4F $param);
 
 protected:

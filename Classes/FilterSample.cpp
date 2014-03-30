@@ -147,13 +147,21 @@ void FilterSample::showSprite()
 
 	//testFilterFromFrame(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)),
 	//	LEFT_TOP, 0, "dirt.png");
-	//testFilterFromFrame(
-	//	CCArray::create(
-	//	CCGaussianHBlurFilter::create(3.f),
-	//	CCGaussianVBlurFilter::create(3.f),
-	//	NULL),
-	//	RIGHT_TOP
-	//	);
+	testFilterFromFrame(
+		CCArray::create(
+		CCGaussianHBlurFilter::create(6.f),
+		CCGaussianVBlurFilter::create(3.f),
+		NULL),
+		LEFT_TOP
+		);
+	testFilterFromFrame(
+		CCArray::create(
+		CCGrayFilter::create(),
+		CCGaussianHBlurFilter::create(1.f),
+		CCGaussianVBlurFilter::create(1.f),
+		NULL),
+		RIGHT_TOP
+		);
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)
