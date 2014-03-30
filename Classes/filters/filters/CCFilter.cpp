@@ -36,8 +36,8 @@ void CCFilter::initProgram()
 		__pProgram->link();
 		CHECK_GL_ERROR_DEBUG();
 
-		//__pProgram->updateUniforms();
-		//CHECK_GL_ERROR_DEBUG();
+		__pProgram->updateUniforms();
+		CHECK_GL_ERROR_DEBUG();
 
 		//this->setUniforms(__pProgram);
 		//CHECK_GL_ERROR_DEBUG();

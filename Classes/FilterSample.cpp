@@ -129,13 +129,14 @@ void FilterSample::showSprite()
 	//	);
 	//testFilter(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)), LEFT_BOTTOM);
 	//testFilter(CCGrayFilter::create(ccc4f(0.555, 0.587f, 0.114f, 0.5f)), RIGHT_BOTTOM);
-	testFilter(
-		CCArray::create(
-			CCGaussianHBlurFilter::create(3.f),
-			CCGaussianVBlurFilter::create(3.f), 
-			NULL),
-			LEFT_BOTTOM
-		);
+	//testFilter(
+	//	CCArray::create(
+	//		CCGaussianHBlurFilter::create(3.f),
+	//		CCGaussianVBlurFilter::create(3.f), 
+	//		NULL),
+	//		LEFT_BOTTOM
+	//	);
+	testFilter(CCGrayFilter::create());
 
 	testFilter(
 		CCArray::create(
