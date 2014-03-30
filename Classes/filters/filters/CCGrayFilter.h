@@ -1,7 +1,7 @@
 #ifndef __CCFILTER_GRAY_H__
 #define __CCFILTER_GRAY_H__
 
-#include "filters/CCFilter.h"
+#include "CCFilter.h"
 
 NS_CC_EXT_BEGIN
 

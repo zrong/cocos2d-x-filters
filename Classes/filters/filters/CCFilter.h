@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "ExtensionMacros.h"
 #include "CCGL.h"
-#include "shaders/ccFilterShaders.h"
+#include "filters/shaders/ccFilterShaders.h"
 
 USING_NS_CC;
 

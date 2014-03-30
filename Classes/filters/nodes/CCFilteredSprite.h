@@ -2,7 +2,7 @@
 #define __CCFILTERED_SPRITE_H__
 
 #include "cocos2d.h"
-#include "filters/CCFilter.h"
+#include "filters/filters/CCFilter.h"
 
 USING_NS_CC;
 

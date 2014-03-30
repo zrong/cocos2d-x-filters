@@ -8,13 +8,16 @@
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\filters">
-      <UniqueIdentifier>{1a030292-41cd-4778-b2e7-1e618e35e391}</UniqueIdentifier>
+      <UniqueIdentifier>{16a627eb-53cd-4565-b844-ff5cb733258d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\shaders">
+    <Filter Include="Classes\filters\nodes">
+      <UniqueIdentifier>{19d98bd2-90ce-40ec-80d2-b80fabf2ea77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\filters\shaders">
       <UniqueIdentifier>{1e6e105e-7299-4d57-8a52-8e02cf5dd364}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\nodes">
-      <UniqueIdentifier>{19d98bd2-90ce-40ec-80d2-b80fabf2ea77}</UniqueIdentifier>
+    <Filter Include="Classes\filters\filters">
+      <UniqueIdentifier>{1a030292-41cd-4778-b2e7-1e618e35e391}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -30,59 +33,59 @@
     <ClCompile Include="..\Classes\FilterSample.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCBlurFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\shaders\ccFilterShaders.cpp">
-      <Filter>Classes\shaders</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCBrightnessFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\nodes\CCFilteredSprite.cpp">
-      <Filter>Classes\nodes</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCContrastFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCGrayFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCDropShadowFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCBlurFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCExposureFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCMaskFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCSharpenFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCGammaFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCRGBFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCGrayFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCBrightnessFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCHazeFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCExposureFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCHueFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCContrastFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCMaskFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCDropShadowFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCRGBFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCGammaFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCSaturationFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCHazeFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCSepiaFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCHueFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCSharpenFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCSaturationFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\filters\CCTestFilter.cpp">
+      <Filter>Classes\filters\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCSepiaFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\nodes\CCFilteredSprite.cpp">
+      <Filter>Classes\filters\nodes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\filters\CCTestFilter.cpp">
-      <Filter>Classes\filters</Filter>
+    <ClCompile Include="..\Classes\filters\shaders\ccFilterShaders.cpp">
+      <Filter>Classes\filters\shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,62 +101,62 @@
     <ClInclude Include="..\Classes\FilterSample.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCFilter.h">
+    <ClInclude Include="..\Classes\filters\cocos2dFilters.h">
       <Filter>Classes\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\shaders\ccFilterShaders.h">
-      <Filter>Classes\shaders</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCBlurFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\nodes\CCFilteredSprite.h">
-      <Filter>Classes\nodes</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCBrightnessFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCGrayFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCContrastFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\cocos2dFilters.h">
-      <Filter>Classes</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCDropShadowFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCBlurFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCExposureFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCMaskFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCSharpenFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCGammaFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCRGBFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCGrayFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCBrightnessFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCHazeFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCExposureFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCHueFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCContrastFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCMaskFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCDropShadowFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCRGBFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCGammaFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCSaturationFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCHazeFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCSepiaFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCHueFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCSharpenFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCSaturationFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\filters\CCTestFilter.h">
+      <Filter>Classes\filters\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCSepiaFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\nodes\CCFilteredSprite.h">
+      <Filter>Classes\filters\nodes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\filters\CCTestFilter.h">
-      <Filter>Classes\filters</Filter>
+    <ClInclude Include="..\Classes\filters\shaders\ccFilterShaders.h">
+      <Filter>Classes\filters\shaders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

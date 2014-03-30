@@ -2,7 +2,7 @@
 #define __FILTER_SAMPLE_H__
 
 #include "cocos2d.h"
-#include "cocos2dFilters.h"
+#include "filters/cocos2dFilters.h"
 #include "VisibleRect.h"
 
 typedef enum {

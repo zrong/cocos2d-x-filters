@@ -1,7 +1,7 @@
 #ifndef __CCGAMMA_FILTER__
 #define __CCGAMMA_FILTER__
 
-#include "filters/CCFilter.h"
+#include "CCFilter.h"
 
 NS_CC_EXT_BEGIN
 

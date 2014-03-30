@@ -1,5 +1,5 @@
 #include "CCRGBFilter.h"
-#include "nodes/CCFilteredSprite.h"
+#include "filters/nodes/CCFilteredSprite.h"
 
 NS_CC_EXT_BEGIN
 
