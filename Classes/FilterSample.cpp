@@ -147,13 +147,32 @@ void FilterSample::showSprite()
 	//	);
 
 	//testFilterFromFrame(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)),LEFT_TOP, 0, "dirt.png");
-	testFilterFromFrame(
+	testFilter(
 		CCArray::create(
-		CCGaussianHBlurFilter::create(6.f),
-		CCGaussianVBlurFilter::create(3.f),
+		CCGaussianHBlurFilter::create(1.5f),
+		CCGaussianVBlurFilter::create(1.5f),
 		NULL),
 		LEFT_TOP
 		);
+
+	testFilterFromFrame(
+		CCArray::create(
+		CCGaussianHBlurFilter::create(1.f),
+		CCGaussianVBlurFilter::create(1.f),
+		NULL),
+		RIGHT_TOP
+		);
+	CCSprite* __sp = testFilter(CCGrayFilter::create(), LEFT_BOTTOM);
+	__sp->setOpacity(128);
+	//testFilter(CCGaussianHBlurFilter::create(3.f), LEFT_TOP);
+	//testFilterFromFrame(CCGaussianHBlurFilter::create(1.f), RIGHT_TOP);
+	//CCSprite* __mp = CCSprite::create();
+	//CCSprite* __mp = CCSprite::createWithSpriteFrameName("dirt.png");
+	//CCTexture2D* __tex = CCTextureCache::sharedTextureCache()->addImage("helloworld.png");
+	//CCLOG("tex %d: (%f, %f)", __tex, __tex->getContentSize().width, __tex->getContentSize().height);
+	//__mp->setTexture(__tex);
+	//__mp->setPosition(VisibleRect::center());
+	//this->addChild(__mp);
 	//testFilterFromFrame(
 	//	CCArray::create(
 	//	CCGrayFilter::create(),

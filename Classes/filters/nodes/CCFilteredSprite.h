@@ -57,8 +57,10 @@ class CCFilteredSpriteWithMulti : public CCFilteredSprite
 public:
 	static CCFilteredSpriteWithMulti* create();
 	static CCFilteredSpriteWithMulti* create(const char* $pszFileName);
+	static CCFilteredSpriteWithMulti* create(const char* $pszFileName, const CCRect& $rect);
 
 	static CCFilteredSpriteWithMulti* createWithTexture(CCTexture2D* $pTexture);
+	static CCFilteredSpriteWithMulti* createWithTexture(CCTexture2D* $pTexture, const CCRect& rect);
 
 	static CCFilteredSpriteWithMulti* createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame);
 
@@ -66,22 +68,21 @@ public:
 
 	virtual void setFilter(CCFilter* $pFilter);
 
-
 	CCFilteredSpriteWithMulti();
 	~CCFilteredSpriteWithMulti();
 
 	// ts = Temporary Storage
-	CCSpriteFrame* getTSSpriteFrame();
-	void setTSSpriteFrame(CCSpriteFrame* $spriteFrame);
 	CCTexture2D* getTSTexture();
 	void setTSTexture(CCTexture2D* $texture);
+	CCRect getTSRect();
+	void setTSRect(const CCRect& $rect);
 
 protected:
 	virtual void drawFilter();
 	virtual bool updateFilters();
 private:
-	CCSpriteFrame* _pFrame;
 	CCTexture2D* _pTexture;
+	CCRect _rect;
 };
 
 NS_CC_EXT_END
