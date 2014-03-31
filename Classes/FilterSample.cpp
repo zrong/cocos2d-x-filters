@@ -147,23 +147,25 @@ void FilterSample::showSprite()
 	//	);
 
 	//testFilterFromFrame(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)),LEFT_TOP, 0, "dirt.png");
-	testFilter(
-		CCArray::create(
-		CCGaussianHBlurFilter::create(1.5f),
-		CCGaussianVBlurFilter::create(1.5f),
-		NULL),
-		LEFT_TOP
-		);
+	//testFilter(
+	//	CCArray::create(
+	//	CCGaussianHBlurFilter::create(1.f),
+	//	CCGaussianVBlurFilter::create(1.f),
+	//	NULL),
+	//	LEFT_TOP
+	//	);
 
 	testFilterFromFrame(
 		CCArray::create(
-		CCGaussianHBlurFilter::create(1.f),
-		CCGaussianVBlurFilter::create(1.f),
+		CCGaussianHBlurFilter::create(10.f),
+		CCGaussianVBlurFilter::create(10.f),
 		NULL),
 		RIGHT_TOP
 		);
 	CCSprite* __sp = testFilter(CCGrayFilter::create(), LEFT_BOTTOM);
 	__sp->setOpacity(128);
+	CCSprite* __sp2 = testFilterFromFrame(CCGrayFilter::create(), RIGHT_BOTTOM);
+	__sp2->setOpacity(128);
 	//testFilter(CCGaussianHBlurFilter::create(3.f), LEFT_TOP);
 	//testFilterFromFrame(CCGaussianHBlurFilter::create(1.f), RIGHT_TOP);
 	//CCSprite* __mp = CCSprite::create();
