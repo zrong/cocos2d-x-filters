@@ -219,62 +219,24 @@ CCFilteredSpriteWithMulti* CCFilteredSpriteWithMulti::create()
 
 CCFilteredSpriteWithMulti* CCFilteredSpriteWithMulti::create(const char* $pszFileName)
 {
-	CCFilteredSpriteWithMulti *pobSprite = new CCFilteredSpriteWithMulti();
-	if (pobSprite && pobSprite->initWithFile($pszFileName))
-	{
-		pobSprite->autorelease();
-		return pobSprite;
-	}
-	CC_SAFE_DELETE(pobSprite);
-	return NULL;
-}
+	CCFilteredSpriteWithMulti *pobSprite = CCFilteredSpriteWithMulti::create();
 
-CCFilteredSpriteWithMulti* CCFilteredSpriteWithMulti::create(const char* $pszFileName, const CCRect& $rect)
-{
-	CCFilteredSpriteWithMulti *pobSprite = new CCFilteredSpriteWithMulti();
-	if (pobSprite && pobSprite->initWithFile($pszFileName, $rect))
-	{
-		pobSprite->autorelease();
-		return pobSprite;
-	}
-	CC_SAFE_DELETE(pobSprite);
-	return NULL;
+	CCTexture2D *pTexture = CCTextureCache::sharedTextureCache()->addImage($pszFileName);
+	return createWithTexture(pTexture);
 }
 
 CCFilteredSpriteWithMulti* CCFilteredSpriteWithMulti::createWithTexture(CCTexture2D* $pTexture)
 {
-	CCFilteredSpriteWithMulti *pobSprite = new CCFilteredSpriteWithMulti();
-	if (pobSprite && pobSprite->initWithTexture($pTexture))
-	{
-		pobSprite->autorelease();
-		return pobSprite;
-	}
-	CC_SAFE_DELETE(pobSprite);
-	return NULL;
-}
-
-CCFilteredSpriteWithMulti* CCFilteredSpriteWithMulti::createWithTexture(CCTexture2D* $pTexture, const CCRect& $rect)
-{
-	CCFilteredSpriteWithMulti *pobSprite = new CCFilteredSpriteWithMulti();
-	if (pobSprite && pobSprite->initWithTexture($pTexture, $rect))
-	{
-		pobSprite->autorelease();
-		return pobSprite;
-	}
-	CC_SAFE_DELETE(pobSprite);
-	return NULL;
+	CCFilteredSpriteWithMulti *pobSprite = CCFilteredSpriteWithMulti::create();
+	pobSprite->setTSTexture($pTexture);
+	return pobSprite;
 }
 
 CCFilteredSpriteWithMulti* CCFilteredSpriteWithMulti::createWithSpriteFrame(CCSpriteFrame* $pSpriteFrame)
 {
-	CCFilteredSpriteWithMulti *pobSprite = new CCFilteredSpriteWithMulti();
-	if ($pSpriteFrame && pobSprite && pobSprite->initWithSpriteFrame($pSpriteFrame))
-	{
-		pobSprite->autorelease();
-		return pobSprite;
-	}
-	CC_SAFE_DELETE(pobSprite);
-	return NULL;
+	CCFilteredSpriteWithMulti *pobSprite = CCFilteredSpriteWithMulti::create();
+	pobSprite->setTSSpriteFrame($pSpriteFrame);
+	return pobSprite;
 }
 
 CCFilteredSpriteWithMulti* CCFilteredSpriteWithMulti::createWithSpriteFrameName(const char* $pszSpriteFrameName)
@@ -288,6 +250,43 @@ CCFilteredSpriteWithMulti* CCFilteredSpriteWithMulti::createWithSpriteFrameName(
 #endif
 
 	return createWithSpriteFrame(pFrame);
+}
+
+CCFilteredSpriteWithMulti::CCFilteredSpriteWithMulti()
+: _pFrame(NULL)
+, _pTexture(NULL)
+{
+}
+
+
+CCFilteredSpriteWithMulti::~CCFilteredSpriteWithMulti()
+{
+	CC_SAFE_RELEASE(_pFrame);
+	CC_SAFE_RELEASE(_pTexture);
+}
+
+CCSpriteFrame* CCFilteredSpriteWithMulti::getTSSpriteFrame()
+{
+	return _pFrame;
+}
+
+void CCFilteredSpriteWithMulti::setTSSpriteFrame(CCSpriteFrame* $spriteFrame)
+{
+	CC_SAFE_RETAIN($spriteFrame);
+	CC_SAFE_RELEASE(_pFrame);
+	_pFrame = $spriteFrame;
+}
+
+CCTexture2D* CCFilteredSpriteWithMulti::getTSTexture()
+{
+	return _pTexture;
+}
+
+void CCFilteredSpriteWithMulti::setTSTexture(CCTexture2D* $texture)
+{
+	CC_SAFE_RETAIN($texture);
+	CC_SAFE_RELEASE(_pTexture);
+	_pTexture = $texture;
 }
 
 void CCFilteredSpriteWithMulti::setFilter(CCFilter* $pFilter)
@@ -313,6 +312,7 @@ bool CCFilteredSpriteWithMulti::updateFilters()
 			__sp = CCFilteredSpriteWithOne::createWithTexture(__oldTex);
 			__sp->setFilter(__filter);
 			__sp->setAnchorPoint(ccp(0, 0));
+			__sp->setPosition(ccp(0, 0));
 			__sp->visit();
 			__canva->end();
 			__oldTex = new CCTexture2D();
@@ -329,4 +329,5 @@ bool CCFilteredSpriteWithMulti::updateFilters()
 }
 
 void CCFilteredSpriteWithMulti::drawFilter(){}
+
 NS_CC_EXT_END

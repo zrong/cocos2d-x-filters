@@ -136,18 +136,17 @@ void FilterSample::showSprite()
 	//		NULL),
 	//		LEFT_BOTTOM
 	//	);
-	testFilter(CCGrayFilter::create());
+	//testFilterFromFrame(CCGrayFilter::create());
 
-	testFilter(
-		CCArray::create(
-		CCGaussianHBlurFilter::create(1.f),
-		CCGaussianVBlurFilter::create(1.f),
-		NULL),
-		RIGHT_BOTTOM
-		);
+	//testFilter(
+	//	CCArray::create(
+	//	CCGaussianHBlurFilter::create(1.f),
+	//	CCGaussianVBlurFilter::create(1.f),
+	//	NULL),
+	//	RIGHT_BOTTOM
+	//	);
 
-	//testFilterFromFrame(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)),
-	//	LEFT_TOP, 0, "dirt.png");
+	//testFilterFromFrame(CCGrayFilter::create(ccc4f(0.299f, 0.587f, 0.114f, 0.0f)),LEFT_TOP, 0, "dirt.png");
 	testFilterFromFrame(
 		CCArray::create(
 		CCGaussianHBlurFilter::create(6.f),
@@ -155,14 +154,14 @@ void FilterSample::showSprite()
 		NULL),
 		LEFT_TOP
 		);
-	testFilterFromFrame(
-		CCArray::create(
-		CCGrayFilter::create(),
-		CCGaussianHBlurFilter::create(1.f),
-		CCGaussianVBlurFilter::create(1.f),
-		NULL),
-		RIGHT_TOP
-		);
+	//testFilterFromFrame(
+	//	CCArray::create(
+	//	CCGrayFilter::create(),
+	//	CCGaussianHBlurFilter::create(1.f),
+	//	CCGaussianVBlurFilter::create(1.f),
+	//	NULL),
+	//	RIGHT_TOP
+	//	);
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)
@@ -216,7 +215,7 @@ CCSprite* FilterSample::testFilterFromFrame(CCFilter* $filter, ccLocation $locat
 
 CCSprite* FilterSample::testFilterFromFrame(CCArray* $filters, ccLocation $location, int $order, const char* $path)
 {
-	CCFilteredSprite* __sprite = CCFilteredSpriteWithMulti::create($path);
+	CCFilteredSprite* __sprite = CCFilteredSpriteWithMulti::createWithSpriteFrameName($path);
 	__sprite->setFilters($filters);
 	__sprite->setPosition(getLocation($location));
 	this->addChild(__sprite, $order);
