@@ -15,13 +15,13 @@ public:
 	CCFilteredSprite();
 	~CCFilteredSprite();
 
+	virtual void draw(void);
+
 	virtual CCFilter* getFilter(unsigned int $index = 0);
 	virtual void setFilter(CCFilter* $pFilter)=0;
 
 	virtual CCArray* getFilters();
 	virtual void setFilters(CCArray* $pFilters);
-
-	virtual void draw(void);
 
 protected:
 	virtual void drawFilter()=0;
@@ -43,6 +43,7 @@ public:
 
 	static CCFilteredSpriteWithOne* createWithSpriteFrameName(const char* $pszSpriteFrameName);
 
+	//virtual bool initWithTexture(CCTexture2D *pTexture, const CCRect& rect, bool rotated);
 	virtual CCFilter* getFilter(unsigned int $index = 0);
 	virtual void setFilters(CCArray* $pFilters);
 	virtual void setFilter(CCFilter* $pFilter);
@@ -74,6 +75,9 @@ public:
 	// ts = Temporary Storage
 	CCTexture2D* getTSTexture();
 	void setTSTexture(CCTexture2D* $texture);
+	CCSpriteFrame* getTSFrame();
+	void setTSFrame(CCSpriteFrame* $frame);
+
 	CCRect getTSRect();
 	void setTSRect(const CCRect& $rect);
 
@@ -82,6 +86,7 @@ protected:
 	virtual bool updateFilters();
 private:
 	CCTexture2D* _pTexture;
+	CCSpriteFrame* _pFrame;
 	CCRect _rect;
 };
 

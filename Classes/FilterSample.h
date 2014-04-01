@@ -39,13 +39,13 @@ private:
 	float _totalTime = 0.0f;
 	cocos2d::CCSprite* _pSprite;
 	CCSprite* testFilter(cocos2d::extension::CCFilter* $filter, ccLocation $location = CENTER, int $order = 0, 
-		const char* $path="helloworld1.png");
+		const char* $path="helloworld.png");
 	CCSprite* testFilter(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, 
-		const char* $path = "helloworld1.png");
+		const char* $path = "helloworld.png");
 	CCSprite* testFilterFromFrame(cocos2d::extension::CCFilter* $filter, 
-		ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld.png");
+		ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld1.png");
 	CCSprite* testFilterFromFrame(CCArray* $filters, 
-		ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld.png");
+		ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld1.png");
 	CCPoint getLocation(ccLocation $location);
 };
 

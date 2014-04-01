@@ -7,7 +7,7 @@
             <key>colors2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{742,260},{128,128}}</string>
+                <string>{{0,234},{128,128}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>dirt.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{484,260},{256,256}}</string>
+                <string>{{256,234},{256,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -29,11 +29,24 @@
                 <string>{{0,0},{256,256}}</string>
                 <key>sourceSize</key>
                 <string>{256,256}</string>
+            </dict>
+            <key>grass.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,0},{600,234}}</string>
+                <key>offset</key>
+                <string>{0,-33}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,66},{600,234}}</string>
+                <key>sourceSize</key>
+                <string>{600,300}</string>
             </dict>
             <key>grass10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{742,2},{256,256}}</string>
+                <string>{{0,736},{256,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -43,14 +56,14 @@
                 <key>sourceSize</key>
                 <string>{256,256}</string>
             </dict>
-            <key>helloworld.png</key>
+            <key>helloworld1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{480,320}}</string>
+                <string>{{600,0},{480,320}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{480,320}}</string>
                 <key>sourceSize</key>
@@ -59,7 +72,7 @@
             <key>mask10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{484,2},{256,256}}</string>
+                <string>{{0,480},{256,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -79,7 +92,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:983e72cd778411f694fe138fda999a6d:57d5c53b030af10751475c70361cf441:6ddd8d6387f3fe491a3df77a6e53b65d$</string>
+            <string>$TexturePacker:SmartUpdate:a7dd2a8a0520cde1b1f6145c98c81529:de315599fa04a28f3271dd55b512d799:6ddd8d6387f3fe491a3df77a6e53b65d$</string>
             <key>textureFileName</key>
             <string>test2.png</string>
         </dict>
