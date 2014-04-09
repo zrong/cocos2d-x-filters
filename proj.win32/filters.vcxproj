@@ -149,6 +149,7 @@ xcopy /Y /Q "$(COCOS2DX_HOME)\external\libwebsockets\win32\lib\*.*" "$(OutDir)"<
     <ClCompile Include="..\Classes\filters\filters\CCSepiaFilter.cpp" />
     <ClCompile Include="..\Classes\filters\filters\CCSharpenFilter.cpp" />
     <ClCompile Include="..\Classes\filters\filters\CCTestFilter.cpp" />
+    <ClCompile Include="..\Classes\filters\nodes\CCFilteredNode.cpp" />
     <ClCompile Include="..\Classes\filters\nodes\CCFilteredSprite.cpp" />
     <ClCompile Include="..\Classes\filters\shaders\ccFilterShaders.cpp" />
     <ClCompile Include="..\Classes\VisibleRect.cpp" />
@@ -174,6 +175,7 @@ xcopy /Y /Q "$(COCOS2DX_HOME)\external\libwebsockets\win32\lib\*.*" "$(OutDir)"<
     <ClInclude Include="..\Classes\filters\filters\CCSepiaFilter.h" />
     <ClInclude Include="..\Classes\filters\filters\CCSharpenFilter.h" />
     <ClInclude Include="..\Classes\filters\filters\CCTestFilter.h" />
+    <ClInclude Include="..\Classes\filters\nodes\CCFilteredNode.h" />
     <ClInclude Include="..\Classes\filters\nodes\CCFilteredSprite.h" />
     <ClInclude Include="..\Classes\filters\shaders\ccFilterShaders.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />

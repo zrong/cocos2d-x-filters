@@ -87,6 +87,9 @@
     <ClCompile Include="..\Classes\filters\shaders\ccFilterShaders.cpp">
       <Filter>Classes\filters\shaders</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\filters\nodes\CCFilteredNode.cpp">
+      <Filter>Classes\filters\nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\filters\shaders\ccFilterShaders.h">
       <Filter>Classes\filters\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\filters\nodes\CCFilteredNode.h">
+      <Filter>Classes\filters\nodes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

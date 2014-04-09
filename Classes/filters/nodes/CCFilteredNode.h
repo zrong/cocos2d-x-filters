@@ -25,29 +25,36 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 
-#ifndef __COCOS2D_FILTERS_H__
-#define __COCOS2D_FILTERS_H__
+#ifndef __CCFILTERED_NODE_H__
+#define __CCFILTERED_NODE_H__
 
-// filters
-#include "filters/CCFilter.h"
-#include "filters/CCGrayFilter.h"
-#include "filters/CCBlurFilter.h"
-#include "filters/CCMaskFilter.h"
-#include "filters/CCSharpenFilter.h"
-#include "filters/CCRGBFilter.h"
-#include "filters/CCBrightnessFilter.h"
-#include "filters/CCExposureFilter.h"
-#include "filters/CCContrastFilter.h"
-#include "filters/CCDropShadowFilter.h"
-#include "filters/CCGammaFilter.h"
-#include "filters/CCHazeFilter.h"
-#include "filters/CCHueFilter.h"
-#include "filters/CCSaturationFilter.h"
-#include "filters/CCSepiaFilter.h"
-#include "filters/CCTestFilter.h"
+#include "cocos2d.h"
+#include "filters/filters/CCFilter.h"
 
-// nodes
-#include "nodes/CCFilteredSprite.h"
-#include "nodes/CCFilteredNode.h"
+USING_NS_CC;
 
-#endif //__COCOS2D_FILTERS_H__
+NS_CC_EXT_BEGIN
+
+class CCFilteredNode : public CCNode
+{
+public:
+	CCFilteredNode();
+	~CCFilteredNode();
+
+	static CCFilteredNode* create();
+	static CCFilteredNode* create(CCFilter* $pFilter);
+	static CCFilteredNode* create(CCArray* $pFilters);
+
+	virtual CCFilter* getFilter(unsigned int $index = 0);
+	virtual void setFilter(CCFilter* $pFilter);
+
+	virtual CCArray* getFilters();
+	virtual void setFilters(CCArray* $pFilters);
+
+protected:
+	CCArray* _pFilters;
+};
+
+NS_CC_EXT_END
+
+#endif /* __CCFILTERED_NODE_H__ */
