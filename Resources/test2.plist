@@ -7,7 +7,7 @@
             <key>colors2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,234},{128,128}}</string>
+                <string>{{856,0},{128,128}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>dirt.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{256,234},{256,256}}</string>
+                <string>{{256,554},{256,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>grass10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,736},{256,256}}</string>
+                <string>{{0,554},{256,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,11 +59,11 @@
             <key>helloworld1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{600,0},{480,320}}</string>
+                <string>{{0,234},{480,320}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{480,320}}</string>
                 <key>sourceSize</key>
@@ -72,7 +72,7 @@
             <key>mask10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,480},{256,256}}</string>
+                <string>{{600,0},{256,256}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -92,7 +92,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a7dd2a8a0520cde1b1f6145c98c81529:de315599fa04a28f3271dd55b512d799:6ddd8d6387f3fe491a3df77a6e53b65d$</string>
+            <string>$TexturePacker:SmartUpdate:3808146519ba3580016cc475e687c76e:de315599fa04a28f3271dd55b512d799:6ddd8d6387f3fe491a3df77a6e53b65d$</string>
             <key>textureFileName</key>
             <string>test2.png</string>
         </dict>

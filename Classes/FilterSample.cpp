@@ -95,8 +95,22 @@ void FilterSample::showSprite()
 	//CCSprite* __sprite = testFilter(CCZoomBlurFilter::create(-1.f, 9, 9));
 	//__sprite->setTextureRect(CCRectMake(-20,0, 420	, 236));
 
-	//testFilter(CCMotionBlurFilter::create(2.0f, 180));
-	testFilter(CCMotionBlurFilter::create(15.0f, 90));
+	//testFilter(CCZoomBlurFilter::create(7.0f, 0.7, 0.7));
+
+	//testFilter(CCArray::create(
+	//	CCGaussianHBlurFilter::create(10),
+	//	CCGaussianVBlurFilter::create(10),
+	//	NULL
+	//	), LEFT_TOP);
+
+	testFilterFromFrame(CCArray::create(
+		CCGaussianVBlurFilter::create(10),
+		CCGaussianHBlurFilter::create(10),
+		NULL
+		), LEFT_TOP, 0, "helloworld1.png");
+	testFilterFromFrame(CCGaussianHBlurFilter::create(10), RIGHT_TOP, 0, "helloworld1.png");
+	//testFilter(CCMotionBlurFilter::create(15.0f, 45));
+	//testFilter(CCHueFilter::create(80));
 
 	//testFilterFromFrame(CCArray::create(CCGaussianHBlurFilter::create(1), CCGaussianHBlurFilter::create(10), NULL), CENTER, 0, "grass.png");
 
