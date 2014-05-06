@@ -30,6 +30,7 @@ public:
     void restartCallback(CCObject* pSender);
     void nextCallback(CCObject* pSender);
     void backCallback(CCObject* pSender);
+    void clearSpriteBack(CCObject* pSender);
 
    CCSprite* getFilteredSprite(int index);
     

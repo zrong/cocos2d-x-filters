@@ -13,7 +13,6 @@ FilterSample::FilterSample()
 FilterSample::~FilterSample()
 {
     CC_SAFE_RELEASE(_pFilters);
-    CC_SAFE_RELEASE(_pSprite);
 }
 
 CCScene* FilterSample::scene()
@@ -34,6 +33,8 @@ bool FilterSample::init()
     CCMenuItemImage *item1 = CCMenuItemImage::create("b1.png", "b2.png", this, menu_selector(FilterSample::backCallback));
     CCMenuItemImage *item2 = CCMenuItemImage::create("r1.png", "r2.png", this, menu_selector(FilterSample::restartCallback));
     CCMenuItemImage *item3 = CCMenuItemImage::create("f1.png", "f2.png", this, menu_selector(FilterSample::nextCallback));
+    CCMenuItemFont *pClearItem = CCMenuItemFont::create("ClearFilter", this, menu_selector(FilterSample::clearSpriteBack));
+
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
                                         "CloseNormal.png",
                                         "CloseSelected.png",
@@ -42,12 +43,13 @@ bool FilterSample::init()
     
 	pCloseItem->setPosition(VisibleRect::rightBottom(-20,20));
 
-    CCMenu* pMenu = CCMenu::create(item1, item2, item3, pCloseItem, NULL);
+    CCMenu* pMenu = CCMenu::create(item1, item2, item3, pClearItem, pCloseItem, NULL);
     pMenu->setPosition(CCPointZero);
     CCSize item2Size = item2->getContentSize();
     item1->setPosition(VisibleRect::bottom(-item2Size.width * 2, item2Size.height / 2));
     item2->setPosition(VisibleRect::bottom(0, item2Size.height / 2));
     item3->setPosition(VisibleRect::bottom(item2Size.width * 2, item2Size.height / 2));
+    pClearItem->setPosition(VisibleRect::bottom(0, 100));
     pCloseItem->setPosition(VisibleRect::rightBottom(-item2Size.width / 2, item2Size.height / 2));
 
     this->addChild(pMenu, 1);
@@ -108,6 +110,12 @@ void FilterSample::backCallback(CCObject* pSender)
     if (filterIndex < 0)
         filterIndex += _pFilters->count();
     showSprite(filterIndex);
+}
+
+void FilterSample::clearSpriteBack(CCObject* pSender)
+{
+    CCFilteredSprite* sprite = dynamic_cast<CCFilteredSprite*>(_pSprite);
+    if (sprite) sprite->clearFilter();
 }
 
 void FilterSample::menuCloseCallback(CCObject* pSender)

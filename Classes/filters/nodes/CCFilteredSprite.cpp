@@ -222,6 +222,12 @@ void CCFilteredSpriteWithOne::setFilters(CCArray* $pFilters)
 	CCAssert(false, "setFilters on CCFilteredSpriteWithOne is forbidden!");
 }
 
+void CCFilteredSpriteWithOne::clearFilter()
+{
+    CC_SAFE_RELEASE_NULL(_pFilters);
+    CCLOG("CCFilteredSpriteWithOne::clearFilter");
+}
+
 void CCFilteredSpriteWithOne::drawFilter()
 {
 	// show custom filter
@@ -364,6 +370,11 @@ void CCFilteredSpriteWithMulti::setTSRect(const CCRect& $rect)
 void CCFilteredSpriteWithMulti::setFilter(CCFilter* $pFilter)
 {
 	CCAssert(false, "setFilter on CCFilteredSpriteWithMulti is forbidden!");
+}
+
+void CCFilteredSpriteWithMulti::clearFilter()
+{
+    CCLOG("CCFilteredSpriteWithMulti::clearFilter");
 }
 
 bool CCFilteredSpriteWithMulti::updateFilters()
