@@ -51,7 +51,11 @@ public:
 	virtual CCArray* getFilters();
 	virtual void setFilters(CCArray* $pFilters);
 
+	virtual void draw(void);
+
 protected:
+	virtual bool updateFilter();
+	virtual bool updateFilters();
 	CCArray* _pFilters;
 };
 

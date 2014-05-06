@@ -48,6 +48,6 @@ THE SOFTWARE.
 
 // nodes
 #include "nodes/CCFilteredSprite.h"
-#include "nodes/CCFilteredNode.h"
+//#include "nodes/CCFilteredNode.h"
 
 #endif //__COCOS2D_FILTERS_H__

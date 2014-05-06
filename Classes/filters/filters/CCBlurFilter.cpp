@@ -39,7 +39,7 @@ CCBlurBaseFilter::CCBlurBaseFilter()
 
 void CCBlurBaseFilter::setAttributes(CCGLProgram* $cgp)
 {
-	CCLOG("CCBlurBaseFilter::setAttributes");
+	//CCLOG("CCBlurBaseFilter::setAttributes");
 	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
 	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
 	$cgp->addAttribute(kCCAttributeNameColor, kCCVertexAttrib_Color);
@@ -56,7 +56,7 @@ void CCBlurBaseFilter::setUniforms(CCGLProgram* $cgp)
 void CCBlurBaseFilter::setParameter(float $param)
 {
 	_param = $param;
-	CCLOG("CCBlurBaseFilter::setParameter %f", _param);
+	//CCLOG("CCBlurBaseFilter::setParameter %f", _param);
 	initProgram();
 }
 
@@ -85,7 +85,7 @@ CCGLProgram* CCHBlurFilter::loadShader()
 {
 	CCGLProgram* __p = new CCGLProgram();
 	__p->initWithVertexShaderByteArray(ccFilterShader_hblur_vert, ccFilterShader_blur_frag);
-	CCLOG("CCHBlurFilter::loadShader %f", _param);
+	//CCLOG("CCHBlurFilter::loadShader %f", _param);
 	return __p;
 }
 
@@ -114,7 +114,7 @@ CCGLProgram* CCVBlurFilter::loadShader()
 {
 	CCGLProgram* __p = new CCGLProgram();
 	__p->initWithVertexShaderByteArray(ccFilterShader_vblur_vert, ccFilterShader_blur_frag);
-	CCLOG("CCVBlurFilter::loadShader %f", _param);
+	//CCLOG("CCVBlurFilter::loadShader %f", _param);
 	return __p;
 }
 
@@ -143,7 +143,7 @@ CCGaussianHBlurFilter::CCGaussianHBlurFilter()
 CCGLProgram* CCGaussianHBlurFilter::loadShader()
 {
 	CCGLProgram* __p = new CCGLProgram();
-	CCLOG("CCGaussianHBlurFilter::loadShader %f, program:%d", _param, __p);
+	//CCLOG("CCGaussianHBlurFilter::loadShader %f, program:%d", _param, __p);
 	__p->initWithVertexShaderByteArray(ccPositionTextureColor_vert,
 		ccFilterShader_gaussian_hblur_frag);
 	return __p;
@@ -162,7 +162,7 @@ void CCGaussianHBlurFilter::initSprite(CCFilteredSprite* $sprite)
 {
 	//_resolation = $sprite->getContentSize().width;
 	_resolation = 1024;
-	CCLOG("CCGaussianHBlurFilter.initSprite resulation:%f", _resolation);
+	//CCLOG("CCGaussianHBlurFilter.initSprite resulation:%f", _resolation);
 }
 
 //================== CCGaussianVBlurFilter
@@ -190,7 +190,7 @@ CCGaussianVBlurFilter::CCGaussianVBlurFilter()
 CCGLProgram* CCGaussianVBlurFilter::loadShader()
 {
 	CCGLProgram* __p = new CCGLProgram();
-	CCLOG("CCGaussianVBlurFilter::loadShader %f, program:%d", _param, __p);
+	//CCLOG("CCGaussianVBlurFilter::loadShader %f, program:%d", _param, __p);
 	__p->initWithVertexShaderByteArray(ccPositionTextureColor_vert,
 		ccFilterShader_gaussian_vblur_frag);
 	return __p;
@@ -209,7 +209,7 @@ void CCGaussianVBlurFilter::initSprite(CCFilteredSprite* $sprite)
 {
 	//_resolation = $sprite->getContentSize().height;
 	_resolation = 1024;
-	CCLOG("CCGaussianVBlurFilter.initSprite resulation:%f", _resolation);
+	//CCLOG("CCGaussianVBlurFilter.initSprite resulation:%f", _resolation);
 }
 
 //================== CCZoomBlurFilter
@@ -239,7 +239,7 @@ CCZoomBlurFilter::CCZoomBlurFilter()
 CCGLProgram* CCZoomBlurFilter::loadShader()
 {
 	CCGLProgram* __p = new CCGLProgram();
-	CCLOG("CCZoomBlurFilter::loadShader, program:%d", __p);
+	//CCLOG("CCZoomBlurFilter::loadShader, program:%d", __p);
 	__p->initWithVertexShaderByteArray(ccPositionTexture_vert, ccFilterShader_zoom_blur_frag);
 	return __p;
 }
@@ -258,7 +258,7 @@ void CCZoomBlurFilter::setParameter(float $blurSize, float $centerX, float $cent
 
 void CCZoomBlurFilter::setAttributes(CCGLProgram* $cgp)
 {
-	CCLOG("CCZoomBlurFilter::setAttributes");
+	//CCLOG("CCZoomBlurFilter::setAttributes");
 	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
 	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
 }
@@ -301,7 +301,7 @@ CCMotionBlurFilter::CCMotionBlurFilter()
 CCGLProgram* CCMotionBlurFilter::loadShader()
 {
 	CCGLProgram* __p = new CCGLProgram();
-	CCLOG("CCMotionBlurFilter::loadShader, program:%d", __p);
+	//CCLOG("CCMotionBlurFilter::loadShader, program:%d", __p);
 	__p->initWithVertexShaderByteArray(ccFilterShader_motion_blur_vert, ccFilterShader_motion_blur_frag);
 	return __p;
 }
@@ -325,7 +325,7 @@ void CCMotionBlurFilter::initSprite(CCFilteredSprite* $sprite)
 
 void CCMotionBlurFilter::setAttributes(CCGLProgram* $cgp)
 {
-	CCLOG("CCMotionBlurFilter::setAttributes");
+	//CCLOG("CCMotionBlurFilter::setAttributes");
 	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
 	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
 }

@@ -26,6 +26,7 @@ THE SOFTWARE.
 ****************************************************************************/
 
 #include "CCFilteredNode.h"
+#include "CCFilteredSprite.h"
 
 NS_CC_EXT_BEGIN
 
@@ -82,6 +83,7 @@ void CCFilteredNode::setFilter(CCFilter* $pFilter)
 {
 	CCArray* __pFilters = CCArray::create($pFilter, NULL);
 	CCFilteredNode::setFilters(__pFilters);
+	updateFilter();
 }
 
 CCArray* CCFilteredNode::getFilters()
@@ -94,7 +96,31 @@ void CCFilteredNode::setFilters(CCArray* $pFilters)
 	CC_SAFE_RETAIN($pFilters);
 	CC_SAFE_RELEASE(_pFilters);
 	_pFilters = $pFilters;
-	//updateFilters();
+	updateFilters();
+}
+
+void CCFilteredNode::draw()
+{
+
+}
+
+bool CCFilteredNode::updateFilter()
+{
+	return false;
+}
+
+bool CCFilteredNode::updateFilters()
+{
+	CCObject* pObj;
+	CCARRAY_FOREACH(m_pChildren, pObj)
+	{
+		CCFilteredSpriteWithOne* item = dynamic_cast<CCFilteredSpriteWithOne*>(pObj);
+		if (item)
+		{
+
+		}
+	}
+	return false;
 }
 
 NS_CC_EXT_END
