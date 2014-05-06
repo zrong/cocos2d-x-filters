@@ -95,7 +95,7 @@ void CCFilteredSprite::setFilters(CCArray* $pFilters)
 	CC_SAFE_RETAIN($pFilters);
 	CC_SAFE_RELEASE(_pFilters);
 	_pFilters = $pFilters;
-	CCLOG("CCFilteredSprite setFilters:%d", _pFilters->count());
+	//CCLOG("CCFilteredSprite setFilters:%d", _pFilters->count());
 	updateFilters();
 }
 
@@ -180,7 +180,7 @@ CCFilteredSpriteWithOne* CCFilteredSpriteWithOne::createWithSpriteFrame(CCSprite
 			__newTex->initWithImage(__rTex->newCCImage(true));
 			__newTex->autorelease();
 			pobSprite->initWithTexture(__newTex);
-			CCLOG("==== CCFilteredSprite::initWithTexture, rotated true texture wh(%f,%f)", __newTex->getContentSize().width, __newTex->getContentSize().height);
+			//CCLOG("==== CCFilteredSprite::initWithTexture, rotated true texture wh(%f,%f)", __newTex->getContentSize().width, __newTex->getContentSize().height);
 		}
 		else
 		{
@@ -389,10 +389,10 @@ bool CCFilteredSpriteWithMulti::updateFilters()
 		unsigned int __count = _pFilters->count();
 		CCTexture2D* __newTex = NULL;
 		CCRenderTexture* __canva = CCRenderTexture::create(__size.width, __size.height);
-		CCLOG("CCFilteredSpriteWithMulti::updateFilters %f, %f", __size.width, __size.height);
+		//CCLOG("CCFilteredSpriteWithMulti::updateFilters %f, %f", __size.width, __size.height);
 		for (size_t i = 0; i < __count; i++)
 		{
-			CCLOG("CCFilteredSpriteWithMulti render %d", i);
+			//CCLOG("CCFilteredSpriteWithMulti render %d", i);
 			
 			__canva->begin();
 			CCFilter* __filter = static_cast<CCFilter*>(_pFilters->objectAtIndex(i));
@@ -416,12 +416,12 @@ bool CCFilteredSpriteWithMulti::updateFilters()
 			__newTex->initWithImage(__canva->newCCImage(true));
 			__newTex->autorelease();
 
-			CCLOG("__sp (%u, %u)", __newTex->getPixelsWide(), __newTex->getPixelsHigh());
+			//CCLOG("__sp (%u, %u)", __newTex->getPixelsWide(), __newTex->getPixelsHigh());
 		}
 		static_cast<CCSprite*>(this)->initWithTexture(__newTex);
 		CHECK_GL_ERROR_DEBUG();
-		CCLOG("CCFilteredSpriteWithMulti updateFilters:%d", __count);
-		CCLOG("==== CCFilteredSpriteWithMulti updateFilters texture %f, %f", __newTex->getContentSize().width, __newTex->getContentSize().height);
+		//CCLOG("CCFilteredSpriteWithMulti updateFilters:%d", __count);
+		//CCLOG("==== CCFilteredSpriteWithMulti updateFilters texture %f, %f", __newTex->getContentSize().width, __newTex->getContentSize().height);
 		return true;
 	} while (0);
 

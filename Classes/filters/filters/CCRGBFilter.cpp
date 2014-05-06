@@ -57,7 +57,7 @@ CCRGBFilter::CCRGBFilter()
 CCGLProgram* CCRGBFilter::loadShader()
 {
 	CCGLProgram* __p = new CCGLProgram();
-	CCLOG("CCRGBFilter::loadShader, program:%d", __p);
+	//CCLOG("CCRGBFilter::loadShader, program:%d", __p);
 	__p->initWithVertexShaderByteArray(ccPositionTexture_vert, ccFilterShader_rgb_frag);
 	return __p;
 }
@@ -72,7 +72,7 @@ void CCRGBFilter::setParameter(float $redAdj, float $greenAdj, float $blueAdj)
 
 void CCRGBFilter::setAttributes(CCGLProgram* $cgp)
 {
-	CCLOG("CCRGBFilter::setAttributes");
+	//CCLOG("CCRGBFilter::setAttributes");
 	$cgp->addAttribute(kCCAttributeNamePosition, kCCVertexAttrib_Position);
 	$cgp->addAttribute(kCCAttributeNameTexCoord, kCCVertexAttrib_TexCoords);
 }

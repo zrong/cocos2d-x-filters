@@ -16,37 +16,48 @@ typedef enum {
 class FilterSample : public cocos2d::CCLayer
 {
 public:
+    static cocos2d::CCScene* scene();
+
+    FilterSample();
+    ~FilterSample();
+
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();  
 
-    // there's no 'id' in cpp, so we recommend returning the class instance pointer
-    static cocos2d::CCScene* scene();
-    
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
+
+    void restartCallback(CCObject* pSender);
+    void nextCallback(CCObject* pSender);
+    void backCallback(CCObject* pSender);
+
+   CCSprite* getFilteredSprite(int index);
     
-    // implement the "static node()" method manually
     CREATE_FUNC(FilterSample);
 
 	virtual void update(float delta);
+
 private:
-	void showSprite();
+    CCArray* _pFilters;
+    CCSprite* _pSprite;
+    
+    void initFilters();
+    void showSprite(int index);
+
+    CCSprite* testFilter(cocos2d::extension::CCFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld.png");
+    CCSprite* testFilter(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld.png");
+    CCSprite* testFilterFromFrame(cocos2d::extension::CCFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld1.png");
+    CCSprite* testFilterFromFrame(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld1.png");
+    CCPoint getLocation(ccLocation $location);
+
+private:
 	CCGLProgram* getEmboss();
 	cocos2d::CCGLProgram* getEmbossMov();
 	cocos2d::CCGLProgram* getColorRamp();
 	cocos2d::CCGLProgram* getGrass();
+
 	int _timeUniformLocation;
-	float _totalTime = 0.0f;
-	cocos2d::CCSprite* _pSprite;
-	CCSprite* testFilter(cocos2d::extension::CCFilter* $filter, ccLocation $location = CENTER, int $order = 0, 
-		const char* $path="helloworld.png");
-	CCSprite* testFilter(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, 
-		const char* $path = "helloworld.png");
-	CCSprite* testFilterFromFrame(cocos2d::extension::CCFilter* $filter, 
-		ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld1.png");
-	CCSprite* testFilterFromFrame(CCArray* $filters, 
-		ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld1.png");
-	CCPoint getLocation(ccLocation $location);
+    float _totalTime = 0.0f;
 };
 
 #endif // __FILTER_SAMPLE_H__

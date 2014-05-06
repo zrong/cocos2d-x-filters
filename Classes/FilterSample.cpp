@@ -2,22 +2,28 @@
 
 USING_NS_CC_EXT;
 
+static int filterIndex = 0;
+
+FilterSample::FilterSample()
+: _pFilters(NULL)
+, _pSprite(NULL)
+{
+}
+
+FilterSample::~FilterSample()
+{
+    CC_SAFE_RELEASE(_pFilters);
+    CC_SAFE_RELEASE(_pSprite);
+}
+
 CCScene* FilterSample::scene()
 {
-    // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
-    
-    // 'layer' is an autorelease object
     FilterSample *layer = FilterSample::create();
-
-    // add layer as a child to scene
     scene->addChild(layer);
-
-    // return the scene
     return scene;
 }
 
-// on "init" you need to initialize your instance
 bool FilterSample::init()
 {
     if ( !CCLayer::init() )
@@ -25,6 +31,9 @@ bool FilterSample::init()
         return false;
     }
 
+    CCMenuItemImage *item1 = CCMenuItemImage::create("b1.png", "b2.png", this, menu_selector(FilterSample::backCallback));
+    CCMenuItemImage *item2 = CCMenuItemImage::create("r1.png", "r2.png", this, menu_selector(FilterSample::restartCallback));
+    CCMenuItemImage *item3 = CCMenuItemImage::create("f1.png", "f2.png", this, menu_selector(FilterSample::nextCallback));
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
                                         "CloseNormal.png",
                                         "CloseSelected.png",
@@ -33,87 +42,105 @@ bool FilterSample::init()
     
 	pCloseItem->setPosition(VisibleRect::rightBottom(-20,20));
 
-    // create menu, it's an autorelease object
-    CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
+    CCMenu* pMenu = CCMenu::create(item1, item2, item3, pCloseItem, NULL);
     pMenu->setPosition(CCPointZero);
+    CCSize item2Size = item2->getContentSize();
+    item1->setPosition(VisibleRect::bottom(-item2Size.width * 2, item2Size.height / 2));
+    item2->setPosition(VisibleRect::bottom(0, item2Size.height / 2));
+    item3->setPosition(VisibleRect::bottom(item2Size.width * 2, item2Size.height / 2));
+    pCloseItem->setPosition(VisibleRect::rightBottom(-item2Size.width / 2, item2Size.height / 2));
+
     this->addChild(pMenu, 1);
+
+    this->initFilters();
 
 	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("test2.plist", "test2.png");
 	CCSprite* __bg = CCSprite::create("bg.jpg");
 	__bg->setPosition(VisibleRect::center());
 	this->addChild(__bg, -10);
-	this->showSprite();
+
+	this->showSprite(filterIndex);
     
     return true;
 }
 
-void FilterSample::showSprite()
+void FilterSample::initFilters()
 {
+    _pFilters = CCArray::create(
+        //colors
+        CCGrayFilter::create(0.2f, 0.3f, 0.5f, 0.1f),
+        CCRGBFilter::create(1, 0.5, 0.3),
+        CCHueFilter::create(90),
+        CCBrightnessFilter::create(0.3),
+        CCSaturationFilter::create(0),
+        CCExposureFilter::create(2),
+        CCGammaFilter::create(2),
+        //blurs
+        CCGaussianVBlurFilter::create(7),
+        CCGaussianHBlurFilter::create(7),
+        CCZoomBlurFilter::create(4, 0.7, 0.7),
+        CCMotionBlurFilter::create(5, 135),
+        //others
+        CCSharpenFilter::create(1,1),
+        CCArray::create(CCGrayFilter::create(), CCGaussianVBlurFilter::create(10), CCGaussianHBlurFilter::create(10), NULL),
+        CCArray::create(CCBrightnessFilter::create(0.1), CCContrastFilter::create(4), NULL),
+        CCArray::create(CCHueFilter::create(240), CCSaturationFilter::create(1.5), CCBrightnessFilter::create(-0.4), NULL),
+        NULL
+     );
+    _pFilters->retain();
+}
 
-	//ccnode* __pnode = ccnode::create();
-	//CCSprite* __sp1 = CCSprite::create("HelloWorld.png");
-	//addChild(__sp1);
-	//__sp1->setShaderProgram(getEmboss());
-	//__sp1->setPosition(VisibleRect::center());
-	//ccsprite* __sp2 = ccsprite::create("grass.png");
-	//__pnode->addchild(__sp1);
-	//__pnode->addchild(__sp2);
-	//__pnode->setposition(VisibleRect::center()));
-	//__pnode->setshaderprogram(this->getcolorramp());
-	//this->addchild(__pnode, 0);
+void FilterSample::restartCallback(CCObject* pSender)
+{
+    showSprite(filterIndex);
+}
 
-	//_pSprite = CCSprite::create("grass.png");
+void FilterSample::nextCallback(CCObject* pSender)
+{
+    filterIndex++;
+    filterIndex = filterIndex%_pFilters->count();
+    showSprite(filterIndex);
+}
 
-	//_pSprite = CCFilteredSprite::create("grass5.png", __grayFilter);
-	////_pSprite->setShaderProgram(this->getGrass());
-	//_pSprite->setPosition(ccp($size->width / 2 + $origin->x, $size->height / 2 + $origin->y));
-	//this->addChild(_pSprite, 0);
+void FilterSample::backCallback(CCObject* pSender)
+{
+    filterIndex--;
+    if (filterIndex < 0)
+        filterIndex += _pFilters->count();
+    showSprite(filterIndex);
+}
 
-	//CCGrayFilter* __grayFilter = CCGrayFilter::create(ccc4f(0.2f, 0.3f, 0.4f, 0.0f));
-	//CCSprite* __graySprite = CCFilteredSprite::create("FilterSample.png", __grayFilter);
-	//__graySprite->setPosition(VisibleRect::leftTop(240, -160));
-	//this->addChild(__graySprite, 10);
+void FilterSample::menuCloseCallback(CCObject* pSender)
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
+    CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.", "Alert");
+#else
+    CCDirector::sharedDirector()->end();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    exit(0);
+#endif
+#endif
+}
 
-	//CCHBlurFilter* __hblurFilter = CCHBlurFilter::create(0.02f);
-	//CCBlurBaseFilter* __vblurFilter = CCVBlurFilter::create(0.02f);
-	//testFilter(CCArray::create(__hblurFilter, __vblurFilter, NULL), LEFT_TOP);
+CCSprite* FilterSample::getFilteredSprite(int index)
+{
+    CCObject* item = _pFilters->objectAtIndex(index);
+    CCFilter* filter = dynamic_cast<CCFilter*>(item);
+    if (filter)
+    {
+        return testFilter(filter);
+    }
+    else if (CCArray* filters = dynamic_cast<CCArray*>(item))
+    {
+        return testFilter(filters);
+    }
+    return NULL;
+}
 
-	//testFilter(CCMaskFilter::create(CCString::create("mask.png")), RIGHT_TOP);
-	//testFilter(CCSharpenFilter::create(9.0f, 2), LEFT_BOTTOM);
-
-	//__sp->setPosition(ccp(200, 200));
-
-	//testFilter(CCBrightnessFilter::create(0.5f), RIGHT_BOTTOM);
-	//testFilter(CCRGBFilter::create(0.5f, 0.7f, 0.3f), RIGHT_BOTTOM);
-	//testFilter(CCExposureFilter::create(1.5f));
-	//testFilter(CCContrastFilter::create(5.5f));
-	//testFilter(CCSaturationFilter::create(0.f));
-	//testFilter(CCGammaFilter::create(0.2f));
-	//testFilter(CCHueFilter::create(90.5f));
-	//testFilter(CCHazeFilter::create(0.3, 0));
-	//testFilter(CCHBlurFilter::create(0.3));
-	//CCSprite* __sprite = testFilter(CCZoomBlurFilter::create(-1.f, 9, 9));
-	//__sprite->setTextureRect(CCRectMake(-20,0, 420	, 236));
-
-	//testFilter(CCZoomBlurFilter::create(7.0f, 0.7, 0.7));
-
-	//testFilter(CCArray::create(
-	//	CCGaussianHBlurFilter::create(10),
-	//	CCGaussianVBlurFilter::create(10),
-	//	NULL
-	//	), LEFT_TOP);
-
-	testFilterFromFrame(CCArray::create(
-		CCGaussianVBlurFilter::create(10),
-		CCGaussianHBlurFilter::create(10),
-		NULL
-		), LEFT_TOP, 0, "helloworld1.png");
-	testFilterFromFrame(CCGaussianHBlurFilter::create(10), RIGHT_TOP, 0, "helloworld1.png");
-	//testFilter(CCMotionBlurFilter::create(15.0f, 45));
-	//testFilter(CCHueFilter::create(80));
-
-	//testFilterFromFrame(CCArray::create(CCGaussianHBlurFilter::create(1), CCGaussianHBlurFilter::create(10), NULL), CENTER, 0, "grass.png");
-
+void FilterSample::showSprite(int index)
+{
+    if (_pSprite) _pSprite->removeFromParentAndCleanup(true);
+    _pSprite = getFilteredSprite(index);
 }
 
 CCPoint FilterSample::getLocation(ccLocation $location)
@@ -251,17 +278,4 @@ cocos2d::CCGLProgram* FilterSample::getColorRamp()
 	glActiveTexture(GL_TEXTURE0);
 
 	return __pProg;
-}
-
-
-void FilterSample::menuCloseCallback(CCObject* pSender)
-{
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
-	CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-#else
-    CCDirector::sharedDirector()->end();
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
-#endif
 }
