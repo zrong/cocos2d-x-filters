@@ -225,7 +225,8 @@ void CCFilteredSpriteWithOne::setFilters(CCArray* $pFilters)
 void CCFilteredSpriteWithOne::clearFilter()
 {
     CC_SAFE_RELEASE_NULL(_pFilters);
-    CCLOG("CCFilteredSpriteWithOne::clearFilter");
+    //CCLOG("CCFilteredSpriteWithOne::clearFilter");
+    setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
 }
 
 void CCFilteredSpriteWithOne::drawFilter()
@@ -374,7 +375,17 @@ void CCFilteredSpriteWithMulti::setFilter(CCFilter* $pFilter)
 
 void CCFilteredSpriteWithMulti::clearFilter()
 {
-    CCLOG("CCFilteredSpriteWithMulti::clearFilter");
+    //CCLOG("CCFilteredSpriteWithMulti::clearFilter");
+    CC_SAFE_RELEASE_NULL(_pFilters);
+    CCSprite* sprite = static_cast<CCSprite*>(this);
+    if (_pTexture)
+    {
+        sprite->initWithTexture(_pTexture, _rect);
+    }
+    else if (_pFrame)
+    {
+        sprite->initWithSpriteFrame(_pFrame);
+    }
 }
 
 bool CCFilteredSpriteWithMulti::updateFilters()
