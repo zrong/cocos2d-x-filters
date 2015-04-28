@@ -3,7 +3,7 @@
 
 #include "platform/CCPlatformDefine.h"
 #include "platform/CCGL.h"
-#include "ExtensionMacros.h"
+#include "extensions/ExtensionMacros.h"
 
 
 NS_CC_EXT_BEGIN

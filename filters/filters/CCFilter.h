@@ -2,7 +2,7 @@
 #define __CCSHADER_FILTER_H__
 
 #include "cocos2d.h"
-#include "ExtensionMacros.h"
+#include "extensions/ExtensionMacros.h"
 #include "platform/CCGL.h"
 #include "filters/shaders/ccFilterShaders.h"
 
