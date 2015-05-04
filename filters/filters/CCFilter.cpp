@@ -59,25 +59,25 @@ void Filter::initProgram()
         return;
     }
     
-    GLProgram* __pProgram = nullptr;
+    GLProgram* pProgram = nullptr;
     if (nullptr != shaderName) {
-        __pProgram = GLProgramCache::getInstance()->getGLProgram(shaderName);
+        pProgram = GLProgramCache::getInstance()->getGLProgram(shaderName);
     }
 	//CCLOG("CCFilter::initProgram %s, program:%d", shaderName, __pProgram);
-	if (nullptr == __pProgram)
+	if (nullptr == pProgram)
 	{
-		__pProgram = loadShader();
+		pProgram = loadShader();
 
         if (nullptr != shaderName) {
-            GLProgramCache::getInstance()->addGLProgram(__pProgram, this->shaderName);
+            GLProgramCache::getInstance()->addGLProgram(pProgram, this->shaderName);
         }
 	}
 
-    _pProgramState = GLProgramState::getOrCreateWithGLProgram(__pProgram);
+    _pProgramState = GLProgramState::getOrCreateWithGLProgram(pProgram);
     _pProgramState->retain();
 }
 
-void Filter::initSprite(FilteredSprite* $sprite)
+void Filter::initSprite(FilteredSprite* sprite)
 {
     setUniforms(nullptr);
 }
@@ -90,14 +90,14 @@ void Filter::draw()
 GLProgram* Filter::loadShader()
 {
 	//CCLOG("Filter::loadShader");
-	return NULL;
+	return nullptr;
 }
 
-void Filter::setAttributes(GLProgram* $glp)
+void Filter::setAttributes(GLProgram* glp)
 {
 }
 
-void Filter::setUniforms(GLProgram* $glp)
+void Filter::setUniforms(GLProgram* glp)
 {
 }
 
@@ -109,9 +109,9 @@ SingleFloatParamFilter::SingleFloatParamFilter()
 }
 
 
-void SingleFloatParamFilter::setParameter(float $param)
+void SingleFloatParamFilter::setParameter(float param)
 {
-	_param = $param;
+	_param = param;
 	initProgram();
 }
 

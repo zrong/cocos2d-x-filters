@@ -35,8 +35,8 @@ Point VisibleRect::left()
 
 Point VisibleRect::left(const float &ox, const float &oy)
 {
-    Point __ccp = left();
-    return Point(__ccp.x + ox, __ccp.y + oy);
+    Point ccp = left();
+    return Point(ccp.x + ox, ccp.y + oy);
 }
 
 Point VisibleRect::right()
@@ -47,8 +47,8 @@ Point VisibleRect::right()
 
 Point VisibleRect::right(const float &ox, const float &oy)
 {
-    Point __ccp = right();
-    return Point(__ccp.x + ox, __ccp.y + oy);
+    Point ccp = right();
+    return Point(ccp.x + ox, ccp.y + oy);
 }
 
 Point VisibleRect::top()
@@ -59,8 +59,8 @@ Point VisibleRect::top()
 
 Point VisibleRect::top(const float &ox, const float &oy)
 {
-    Point __ccp = top();
-    return Point(__ccp.x + ox, __ccp.y + oy);
+    Point ccp = top();
+    return Point(ccp.x + ox, ccp.y + oy);
 }
 
 Point VisibleRect::bottom()
@@ -71,8 +71,8 @@ Point VisibleRect::bottom()
 
 Point VisibleRect::bottom(const float &ox, const float &oy)
 {
-    Point __ccp = bottom();
-    return Point(__ccp.x + ox, __ccp.y + oy);
+    Point ccp = bottom();
+    return Point(ccp.x + ox, ccp.y + oy);
 }
 
 Point VisibleRect::center()
@@ -83,8 +83,8 @@ Point VisibleRect::center()
 
 Point VisibleRect::center(const float &ox, const float &oy)
 {
-    Point __ccp = center();
-    return Point(__ccp.x + ox, __ccp.y + oy);
+    Point ccp = center();
+    return Point(ccp.x + ox, ccp.y + oy);
 }
 
 Point VisibleRect::leftTop()
@@ -95,8 +95,8 @@ Point VisibleRect::leftTop()
 
 Point VisibleRect::leftTop(const float &ox, const float &oy)
 {
-    Point __ccp = leftTop();
-    return Point(__ccp.x + ox, __ccp.y + oy);
+    Point ccp = leftTop();
+    return Point(ccp.x + ox, ccp.y + oy);
 }
 
 Point VisibleRect::rightTop()
@@ -107,8 +107,8 @@ Point VisibleRect::rightTop()
 
 Point VisibleRect::rightTop(const float &ox, const float &oy)
 {
-    Point __ccp = rightTop();
-    return Point(__ccp.x + ox, __ccp.y + oy);
+    Point ccp = rightTop();
+    return Point(ccp.x + ox, ccp.y + oy);
 }
 
 Point VisibleRect::leftBottom()
@@ -119,8 +119,8 @@ Point VisibleRect::leftBottom()
 
 Point VisibleRect::leftBottom(const float &ox, const float &oy)
 {
-    Point __ccp = leftBottom();
-    return Point(__ccp.x + ox, __ccp.y + oy);
+    Point ccp = leftBottom();
+    return Point(ccp.x + ox, ccp.y + oy);
 }
 
 Point VisibleRect::rightBottom()
@@ -131,6 +131,6 @@ Point VisibleRect::rightBottom()
 
 Point VisibleRect::rightBottom(const float &ox, const float &oy)
 {
-    Point __ccp = rightBottom();
-    return Point(__ccp.x + ox, __ccp.y + oy);
+    Point ccp = rightBottom();
+    return Point(ccp.x + ox, ccp.y + oy);
 }

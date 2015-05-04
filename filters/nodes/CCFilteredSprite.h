@@ -44,11 +44,11 @@ public:
 
     virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override;
 
-	virtual Filter* getFilter(unsigned int $index = 0);
+	virtual Filter* getFilter(unsigned int index = 0);
 	virtual void setFilter(Filter* $pFilter)=0;
 
 	virtual Filters& getFilters();
-	virtual void setFilters(Filters& $pFilters);
+	virtual void setFilters(Filters& pFilters);
 
     virtual void clearFilter() = 0;
 
@@ -62,17 +62,17 @@ class FilteredSpriteWithOne : public FilteredSprite
 {
 public:
 	static FilteredSpriteWithOne* create();
-	static FilteredSpriteWithOne* create(const char* $pszFileName);
-	static FilteredSpriteWithOne* create(const char* $pszFileName, const Rect& $rect);
+	static FilteredSpriteWithOne* create(const char* pszFileName);
+	static FilteredSpriteWithOne* create(const char* pszFileName, const Rect& $rect);
 
-    static FilteredSpriteWithOne* createWithTexture(Texture2D* $pTexture);
-    static FilteredSpriteWithOne* createWithTexture(Texture2D* $pTexture, const Rect& $rect);
-	static FilteredSpriteWithOne* createWithSpriteFrame(SpriteFrame* $pSpriteFrame);
-	static FilteredSpriteWithOne* createWithSpriteFrameName(const char* $pszSpriteFrameName);
+    static FilteredSpriteWithOne* createWithTexture(Texture2D* pTexture);
+    static FilteredSpriteWithOne* createWithTexture(Texture2D* pTexture, const Rect& rect);
+	static FilteredSpriteWithOne* createWithSpriteFrame(SpriteFrame* pSpriteFrame);
+	static FilteredSpriteWithOne* createWithSpriteFrameName(const char* pszSpriteFrameName);
 
-	virtual Filter* getFilter(unsigned int $index = 0);
-	virtual void setFilters(Filters& $pFilters);
-	virtual void setFilter(Filter* $pFilter);
+	virtual Filter* getFilter(unsigned int index = 0);
+	virtual void setFilters(Filters& pFilters);
+	virtual void setFilter(Filter* pFilter);
     virtual void clearFilter();
 
 protected:
@@ -84,17 +84,17 @@ class FilteredSpriteWithMulti : public FilteredSprite
 {
 public:
 	static FilteredSpriteWithMulti* create();
-	static FilteredSpriteWithMulti* create(const char* $pszFileName);
-	static FilteredSpriteWithMulti* create(const char* $pszFileName, const Rect& $rect);
+	static FilteredSpriteWithMulti* create(const char* pszFileName);
+	static FilteredSpriteWithMulti* create(const char* pszFileName, const Rect& rect);
 
-	static FilteredSpriteWithMulti* createWithTexture(Texture2D* $pTexture);
-	static FilteredSpriteWithMulti* createWithTexture(Texture2D* $pTexture, const Rect& rect);
+	static FilteredSpriteWithMulti* createWithTexture(Texture2D* pTexture);
+	static FilteredSpriteWithMulti* createWithTexture(Texture2D* pTexture, const Rect& rect);
 
-	static FilteredSpriteWithMulti* createWithSpriteFrame(SpriteFrame* $pSpriteFrame);
+	static FilteredSpriteWithMulti* createWithSpriteFrame(SpriteFrame* pSpriteFrame);
 
-	static FilteredSpriteWithMulti* createWithSpriteFrameName(const char* $pszSpriteFrameName);
+	static FilteredSpriteWithMulti* createWithSpriteFrameName(const char* pszSpriteFrameName);
 
-	virtual void setFilter(Filter* $pFilter);
+	virtual void setFilter(Filter* pFilter);
     virtual void clearFilter();
 
 	FilteredSpriteWithMulti();
@@ -102,12 +102,12 @@ public:
 
 	// ts = Temporary Storage
 	Texture2D* getTSTexture();
-	void setTSTexture(Texture2D* $texture);
+	void setTSTexture(Texture2D* texture);
 	SpriteFrame* getTSFrame();
-	void setTSFrame(SpriteFrame* $frame);
+	void setTSFrame(SpriteFrame* frame);
 
 	Rect getTSRect();
-	void setTSRect(const Rect& $rect);
+	void setTSRect(const Rect& rect);
     
     virtual void update(float delta) override;
 

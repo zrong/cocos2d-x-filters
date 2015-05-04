@@ -22,7 +22,7 @@ Scene* FilterSample::scene()
 
 bool FilterSample::init()
 {
-    if ( !CCLayer::init() )
+    if ( !Layer::init() )
     {
         return false;
     }

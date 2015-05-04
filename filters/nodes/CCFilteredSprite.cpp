@@ -50,7 +50,7 @@ void FilteredSprite::draw(Renderer *renderer, const Mat4 &transform, uint32_t fl
     if(_insideBounds)
     {
         // normal effect: order == 0
-        _quadCommand.init(_globalZOrder, _texture->getName(), getGLProgramState(), _blendFunc, &_quad, 1, transform);
+        _quadCommand.init(_globalZOrder, _texture->getName(), getGLProgramState(), _blendFunc, &_quad, 1, transform, 0);
         renderer->addCommand(&_quadCommand);
 
 //        for(auto &command : _pCommand) {
@@ -61,13 +61,13 @@ void FilteredSprite::draw(Renderer *renderer, const Mat4 &transform, uint32_t fl
     }
 }
 
-Filter* FilteredSprite::getFilter(unsigned int $index)
+Filter* FilteredSprite::getFilter(unsigned int index)
 {
-	if (_pFilters.size() == 0 || $index >= (unsigned int)(_pFilters.size()))
+	if (_pFilters.size() == 0 || index >= (unsigned int)(_pFilters.size()))
 	{
 		return NULL;
 	}
-	return static_cast<Filter*>(_pFilters.at($index));
+	return static_cast<Filter*>(_pFilters.at(index));
 }
 
 Filters& FilteredSprite::getFilters()
@@ -96,10 +96,10 @@ FilteredSpriteWithOne* FilteredSpriteWithOne::create()
 	return NULL;
 }
 
-FilteredSpriteWithOne* FilteredSpriteWithOne::create(const char* $pszFileName)
+FilteredSpriteWithOne* FilteredSpriteWithOne::create(const char* pszFileName)
 {
 	FilteredSpriteWithOne *pobSprite = new FilteredSpriteWithOne();
-	if (pobSprite && pobSprite->initWithFile($pszFileName))
+	if (pobSprite && pobSprite->initWithFile(pszFileName))
 	{
 		pobSprite->autorelease();
 		return pobSprite;
@@ -108,10 +108,10 @@ FilteredSpriteWithOne* FilteredSpriteWithOne::create(const char* $pszFileName)
 	return NULL;
 }
 
-FilteredSpriteWithOne* FilteredSpriteWithOne::create(const char* $pszFileName, const Rect& $rect)
+FilteredSpriteWithOne* FilteredSpriteWithOne::create(const char* pszFileName, const Rect& rect)
 {
 	FilteredSpriteWithOne *pobSprite = new FilteredSpriteWithOne();
-	if (pobSprite && pobSprite->initWithFile($pszFileName, $rect))
+	if (pobSprite && pobSprite->initWithFile(pszFileName, rect))
 	{
 		pobSprite->autorelease();
 		return pobSprite;
@@ -121,10 +121,10 @@ FilteredSpriteWithOne* FilteredSpriteWithOne::create(const char* $pszFileName, c
 }
 
 
-FilteredSpriteWithOne* FilteredSpriteWithOne::createWithTexture(Texture2D* $pTexture)
+FilteredSpriteWithOne* FilteredSpriteWithOne::createWithTexture(Texture2D* pTexture)
 {
     FilteredSpriteWithOne *pobSprite = new FilteredSpriteWithOne();
-    if (pobSprite && pobSprite->initWithTexture($pTexture))
+    if (pobSprite && pobSprite->initWithTexture(pTexture))
     {
         pobSprite->autorelease();
         return static_cast<FilteredSpriteWithOne*>(pobSprite);
@@ -133,10 +133,10 @@ FilteredSpriteWithOne* FilteredSpriteWithOne::createWithTexture(Texture2D* $pTex
     return NULL;
 }
 
-FilteredSpriteWithOne* FilteredSpriteWithOne::createWithTexture(Texture2D* $pTexture, const Rect& $rect)
+FilteredSpriteWithOne* FilteredSpriteWithOne::createWithTexture(Texture2D* pTexture, const Rect& rect)
 {
     FilteredSpriteWithOne *pobSprite = new FilteredSpriteWithOne();
-    if (pobSprite && pobSprite->initWithTexture($pTexture, $rect))
+    if (pobSprite && pobSprite->initWithTexture(pTexture, rect))
     {
         pobSprite->autorelease();
         return static_cast<FilteredSpriteWithOne*>(pobSprite);
@@ -146,32 +146,32 @@ FilteredSpriteWithOne* FilteredSpriteWithOne::createWithTexture(Texture2D* $pTex
 }
 
 
-FilteredSpriteWithOne* FilteredSpriteWithOne::createWithSpriteFrame(SpriteFrame* $pSpriteFrame)
+FilteredSpriteWithOne* FilteredSpriteWithOne::createWithSpriteFrame(SpriteFrame* pSpriteFrame)
 {
 	FilteredSpriteWithOne *pobSprite = new FilteredSpriteWithOne();
-	if ($pSpriteFrame && pobSprite)
+	if (pSpriteFrame && pobSprite)
 	{
-		if ($pSpriteFrame->isRotated())
+		if (pSpriteFrame->isRotated())
 		{
-			Sprite* __sp = Sprite::createWithSpriteFrame($pSpriteFrame);
-			Size __size = __sp->getContentSize();
-			__sp->setAnchorPoint(Vec2(0,0));
-			__sp->setPosition(Vec2(0,0));
-			RenderTexture* __rTex = RenderTexture::create(__size.width, __size.height);
-			__rTex->begin();
-			__sp->visit();
-			__rTex->end();
-			Texture2D* __newTex = new Texture2D();
-            Image *pNewImage = __rTex->newImage(true);
-			__newTex->initWithImage(pNewImage);
+			Sprite* sp = Sprite::createWithSpriteFrame(pSpriteFrame);
+			Size size = sp->getContentSize();
+			sp->setAnchorPoint(Vec2(0,0));
+			sp->setPosition(Vec2(0,0));
+			RenderTexture* rTex = RenderTexture::create(size.width, size.height);
+			rTex->begin();
+			sp->visit();
+			rTex->end();
+			Texture2D* newTex = new Texture2D();
+            Image *pNewImage = rTex->newImage(true);
+			newTex->initWithImage(pNewImage);
             delete pNewImage;
-			__newTex->autorelease();
-			pobSprite->initWithTexture(__newTex);
-			//CCLOG("==== FilteredSprite::initWithTexture, rotated true texture wh(%f,%f)", __newTex->getContentSize().width, __newTex->getContentSize().height);
+			newTex->autorelease();
+			pobSprite->initWithTexture(newTex);
+			//CCLOG("==== FilteredSprite::initWithTexture, rotated true texture wh(%f,%f)", newTex->getContentSize().width, newTex->getContentSize().height);
 		}
 		else
 		{
-			pobSprite->initWithSpriteFrame($pSpriteFrame);
+			pobSprite->initWithSpriteFrame(pSpriteFrame);
 		}
 		pobSprite->autorelease();
 		return pobSprite;
@@ -180,28 +180,28 @@ FilteredSpriteWithOne* FilteredSpriteWithOne::createWithSpriteFrame(SpriteFrame*
 	return NULL;
 }
 
-FilteredSpriteWithOne* FilteredSpriteWithOne::createWithSpriteFrameName(const char* $pszSpriteFrameName)
+FilteredSpriteWithOne* FilteredSpriteWithOne::createWithSpriteFrameName(const char* pszSpriteFrameName)
 {
-	SpriteFrame *pFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName($pszSpriteFrameName);
+	SpriteFrame *pFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(pszSpriteFrameName);
 
 #if COCOS2D_DEBUG > 0
 	char msg[256] = { 0 };
-	sprintf(msg, "Invalid spriteFrameName: %s", $pszSpriteFrameName);
+	sprintf(msg, "Invalid spriteFrameName: %s", pszSpriteFrameName);
 	CCASSERT(pFrame != NULL, msg);
 #endif
 
 	return createWithSpriteFrame(pFrame);
 }
 
-Filter* FilteredSpriteWithOne::getFilter(unsigned int $index)
+Filter* FilteredSpriteWithOne::getFilter(unsigned int index)
 {
 	return FilteredSprite::getFilter(0);
 }
 
-void FilteredSpriteWithOne::setFilter(Filter* $pFilter)
+void FilteredSpriteWithOne::setFilter(Filter* pFilter)
 {
     Filters filters;
-    filters.pushBack($pFilter);
+    filters.pushBack(pFilter);
 	FilteredSprite::setFilters(filters);
 }
 
@@ -264,50 +264,50 @@ FilteredSpriteWithMulti* FilteredSpriteWithMulti::create()
 	return NULL;
 }
 
-FilteredSpriteWithMulti* FilteredSpriteWithMulti::create(const char* $pszFileName)
+FilteredSpriteWithMulti* FilteredSpriteWithMulti::create(const char* pszFileName)
 {
-	Texture2D* __pTexture = Director::getInstance()->getTextureCache()->addImage($pszFileName);
-	Rect __rect = Rect(0, 0, 0, 0);
-	__rect.size = __pTexture->getContentSize();
-	return createWithTexture(__pTexture, __rect);
+	Texture2D* pTexture = Director::getInstance()->getTextureCache()->addImage(pszFileName);
+	Rect rect = Rect(0, 0, 0, 0);
+	rect.size = pTexture->getContentSize();
+	return createWithTexture(pTexture, rect);
 }
 
-FilteredSpriteWithMulti* FilteredSpriteWithMulti::create(const char* $pszFileName, const Rect& $rect)
+FilteredSpriteWithMulti* FilteredSpriteWithMulti::create(const char* pszFileName, const Rect& rect)
 {
-	Texture2D* __pTexture = Director::getInstance()->getTextureCache()->addImage($pszFileName);
-	return FilteredSpriteWithMulti::createWithTexture(__pTexture, $rect);
+	Texture2D* pTexture = Director::getInstance()->getTextureCache()->addImage(pszFileName);
+	return FilteredSpriteWithMulti::createWithTexture(pTexture, rect);
 }
 
-FilteredSpriteWithMulti* FilteredSpriteWithMulti::createWithTexture(Texture2D* $pTexture)
+FilteredSpriteWithMulti* FilteredSpriteWithMulti::createWithTexture(Texture2D* pTexture)
 {
-	Rect __rect = Rect(0, 0, 0, 0);
-	__rect.size = $pTexture->getContentSize();
-	FilteredSpriteWithMulti *pobSprite = FilteredSpriteWithMulti::createWithTexture($pTexture, __rect);
+	Rect rect = Rect(0, 0, 0, 0);
+	rect.size = pTexture->getContentSize();
+	FilteredSpriteWithMulti *pobSprite = FilteredSpriteWithMulti::createWithTexture(pTexture, rect);
 	return pobSprite;
 }
 
-FilteredSpriteWithMulti* FilteredSpriteWithMulti::createWithTexture(Texture2D* $pTexture, const Rect& $rect)
+FilteredSpriteWithMulti* FilteredSpriteWithMulti::createWithTexture(Texture2D* pTexture, const Rect& rect)
 {
 	FilteredSpriteWithMulti *pobSprite = FilteredSpriteWithMulti::create();
-	pobSprite->setTSTexture($pTexture);
-	pobSprite->setTSRect($rect);
+	pobSprite->setTSTexture(pTexture);
+	pobSprite->setTSRect(rect);
 	return pobSprite;
 }
 
-FilteredSpriteWithMulti* FilteredSpriteWithMulti::createWithSpriteFrame(SpriteFrame* $pSpriteFrame)
+FilteredSpriteWithMulti* FilteredSpriteWithMulti::createWithSpriteFrame(SpriteFrame* pSpriteFrame)
 {
 	FilteredSpriteWithMulti *pobSprite = FilteredSpriteWithMulti::create();
-	pobSprite->setTSFrame($pSpriteFrame);
+	pobSprite->setTSFrame(pSpriteFrame);
 	return pobSprite;
 }
 
-FilteredSpriteWithMulti* FilteredSpriteWithMulti::createWithSpriteFrameName(const char* $pszSpriteFrameName)
+FilteredSpriteWithMulti* FilteredSpriteWithMulti::createWithSpriteFrameName(const char* pszSpriteFrameName)
 {
-	SpriteFrame *pFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName($pszSpriteFrameName);
+	SpriteFrame *pFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(pszSpriteFrameName);
 
 #if COCOS2D_DEBUG > 0
 	char msg[256] = { 0 };
-	sprintf(msg, "Invalid spriteFrameName: %s", $pszSpriteFrameName);
+	sprintf(msg, "Invalid spriteFrameName: %s", pszSpriteFrameName);
 	CCASSERT(pFrame != NULL, msg);
 #endif
 
@@ -332,11 +332,11 @@ Texture2D* FilteredSpriteWithMulti::getTSTexture()
 	return _pTexture;
 }
 
-void FilteredSpriteWithMulti::setTSTexture(Texture2D* $texture)
+void FilteredSpriteWithMulti::setTSTexture(Texture2D* texture)
 {
-	CC_SAFE_RETAIN($texture);
+	CC_SAFE_RETAIN(texture);
 	CC_SAFE_RELEASE(_pTexture);
-	_pTexture = $texture;
+	_pTexture = texture;
 }
 
 SpriteFrame* FilteredSpriteWithMulti::getTSFrame()
@@ -344,11 +344,11 @@ SpriteFrame* FilteredSpriteWithMulti::getTSFrame()
 	return _pFrame;
 }
 
-void FilteredSpriteWithMulti::setTSFrame(SpriteFrame* $pFrame)
+void FilteredSpriteWithMulti::setTSFrame(SpriteFrame* pFrame)
 {
-	CC_SAFE_RETAIN($pFrame);
+	CC_SAFE_RETAIN(pFrame);
 	CC_SAFE_RELEASE(_pFrame);
-	_pFrame = $pFrame;
+	_pFrame = pFrame;
 }
 
 Rect FilteredSpriteWithMulti::getTSRect()
@@ -361,7 +361,7 @@ void FilteredSpriteWithMulti::setTSRect(const Rect& $rect)
 	_rect = $rect;
 }
 
-void FilteredSpriteWithMulti::setFilter(Filter* $pFilter)
+void FilteredSpriteWithMulti::setFilter(Filter* pFilter)
 {
 	CCASSERT(false, "setFilter on FilteredSpriteWithMulti is forbidden!");
 }
@@ -385,14 +385,14 @@ bool FilteredSpriteWithMulti::updateFilters()
 	CCASSERT(_pFilters.size()>1, "Invalid Filter!");
 	do
 	{
-		Size __size;
+		Size size;
 		if (_pTexture)
 		{
-			__size = _pTexture->getContentSize();
+			size = _pTexture->getContentSize();
 		}
 		else if (_pFrame)
 		{
-			__size = _pFrame->getRect().size;
+			size = _pFrame->getRect().size;
 		}
 		else
 		{
@@ -403,7 +403,7 @@ bool FilteredSpriteWithMulti::updateFilters()
             _pRenderTextureCompound->release();
             _pRenderTextureCompound = nullptr;
         }
-		_pRenderTextureCompound = RenderTexture::create(__size.width, __size.height);
+		_pRenderTextureCompound = RenderTexture::create(size.width, size.height);
         _pRenderTextureCompound->retain();
         _filterIdxCompound = 0;
 
@@ -438,7 +438,7 @@ void FilteredSpriteWithMulti::update(float delta) {
     }
 
     _pRenderTextureCompound->begin();
-    Filter* __filter = static_cast<Filter*>(_pFilters.at(_filterIdxCompound));
+    Filter* filter = static_cast<Filter*>(_pFilters.at(_filterIdxCompound));
     if (nullptr != _pFilterSpiteCompound) {
         _pFilterSpiteCompound->release();
         _pFilterSpiteCompound = nullptr;
@@ -446,8 +446,8 @@ void FilteredSpriteWithMulti::update(float delta) {
     if (_filterIdxCompound == 0)
     {
         _pFilterSpiteCompound = _pTexture ?
-        FilteredSpriteWithOne::createWithTexture(_pTexture) :
-        FilteredSpriteWithOne::createWithSpriteFrame(_pFrame);
+            FilteredSpriteWithOne::createWithTexture(_pTexture) :
+            FilteredSpriteWithOne::createWithSpriteFrame(_pFrame);
     }
     else
     {
@@ -461,7 +461,7 @@ void FilteredSpriteWithMulti::update(float delta) {
         _pFilterSpiteCompound = FilteredSpriteWithOne::createWithTexture(texture);
     }
     _pFilterSpiteCompound->retain();
-    _pFilterSpiteCompound->setFilter(__filter);
+    _pFilterSpiteCompound->setFilter(filter);
     _pFilterSpiteCompound->setAnchorPoint(Vec2(0, 0));
     _pFilterSpiteCompound->visit();
     _pRenderTextureCompound->end();

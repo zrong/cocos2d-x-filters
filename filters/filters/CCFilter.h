@@ -20,7 +20,7 @@ public:
 	Filter();
 	~Filter();
 
-	virtual void initSprite(FilteredSprite* $sprite);
+	virtual void initSprite(FilteredSprite* sprite);
 	virtual void draw();
 	GLProgram* getProgram();
     GLProgramState* getGLProgramState();
@@ -30,8 +30,8 @@ protected:
     GLProgramState* _pProgramState;
 	void initProgram();
 	virtual GLProgram* loadShader();
-	virtual void setAttributes(GLProgram* $glp);
-	virtual void setUniforms(GLProgram* $glp);
+	virtual void setAttributes(GLProgram* glp);
+	virtual void setUniforms(GLProgram* glp);
 };
 
 class SingleFloatParamFilter : public Filter
@@ -39,7 +39,7 @@ class SingleFloatParamFilter : public Filter
 public:
 	SingleFloatParamFilter();
 
-	virtual void setParameter(float $param);
+	virtual void setParameter(float param);
 protected:
 	float _param;
 };
