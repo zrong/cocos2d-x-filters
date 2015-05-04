@@ -2,8 +2,11 @@
 #define __FILTER_SAMPLE_H__
 
 #include "cocos2d.h"
-#include "filters/cocos2dFilters.h"
+#include "extensions/ExtensionMacros.h"
 #include "VisibleRect.h"
+#include "filters/cocos2dFilters.h"
+
+USING_NS_CC_EXT;
 
 typedef enum {
     LEFT_TOP,
@@ -13,49 +16,56 @@ typedef enum {
     CENTER,
 } ccLocation;
 
-class FilterSample : public cocos2d::CCLayer
+class FilterSample : public cocos2d::Layer
 {
 public:
-    static cocos2d::CCScene* scene();
+    static cocos2d::Scene* scene();
     
     FilterSample();
     ~FilterSample();
     
-    // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
+    // Here's a difference. Method 'init' in cocos2d-x returns bool,
+    // instead of returning 'id' in cocos2d-iphone
     virtual bool init();
     
     // a selector callback
-    void menuCloseCallback(CCObject* pSender);
+    void menuCloseCallback(Ref* pSender);
     
-    void restartCallback(CCObject* pSender);
-    void nextCallback(CCObject* pSender);
-    void backCallback(CCObject* pSender);
-    void clearSpriteBack(CCObject* pSender);
+    void restartCallback(Ref* pSender);
+    void nextCallback(Ref* pSender);
+    void backCallback(Ref* pSender);
+    void clearSpriteBack(Ref* pSender);
     
-    CCSprite* getFilteredSprite(int index);
+    Sprite* getFilteredSprite(int index);
     
     CREATE_FUNC(FilterSample);
     
     virtual void update(float delta);
     
 private:
-    CCArray* _pFilters;
-    CCSprite* _pSprite;
+    Filters _filters;
+    std::vector<Filters> _multiFilters;
+    int _filtersNum = 0;
+    Sprite* _pSprite;
     
     void initFilters();
     void showSprite(int index);
     
-    CCSprite* testFilter(cocos2d::extension::CCFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld.png");
-    CCSprite* testFilter(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld.png");
-    CCSprite* testFilterFromFrame(cocos2d::extension::CCFilter* $filter, ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld1.png");
-    CCSprite* testFilterFromFrame(CCArray* $filters, ccLocation $location = CENTER, int $order = 0, const char* $path = "helloworld1.png");
-    CCPoint getLocation(ccLocation $location);
+    Sprite* testFilter(Filter* filter, ccLocation location = CENTER,
+                       int order = 0, const char* path = "res/helloworld.png");
+    Sprite* testFilter(Filters filters, ccLocation location = CENTER,
+                       int order = 0, const char* path = "res/helloworld.png");
+    Sprite* testFilterFromFrame(Filter* filter, ccLocation location = CENTER,
+                                int order = 0, const char* path = "res/helloworld1.png");
+    Sprite* testFilterFromFrame(Filters filters, ccLocation location = CENTER,
+                                int order = 0, const char* path = "res/helloworld1.png");
+    Point getLocation(ccLocation location);
     
 private:
-    CCGLProgram* getEmboss();
-    cocos2d::CCGLProgram* getEmbossMov();
-    cocos2d::CCGLProgram* getColorRamp();
-    cocos2d::CCGLProgram* getGrass();
+    GLProgram* getEmboss();
+    cocos2d::GLProgram* getEmbossMov();
+    cocos2d::GLProgram* getColorRamp();
+    cocos2d::GLProgram* getGrass();
     
     int _timeUniformLocation;
     float _totalTime = 0.0f;

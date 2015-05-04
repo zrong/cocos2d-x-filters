@@ -44,7 +44,7 @@ protected:
 	float _param;
 };
 
-
+typedef Vector<Filter*> Filters;
 
 NS_CC_EXT_END
 

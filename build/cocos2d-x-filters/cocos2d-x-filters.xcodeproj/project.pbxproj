@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E53C167A1AF0811B00DBBE61 /* CCBlurFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C721F51AEF397F00F176E6 /* CCBlurFilter.h */; };
+		E53C167B1AF0811B00DBBE61 /* CCBrightnessFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C721F71AEF398000F176E6 /* CCBrightnessFilter.h */; };
+		E53C167C1AF0811B00DBBE61 /* CCContrastFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C721F91AEF398000F176E6 /* CCContrastFilter.h */; };
+		E53C167D1AF0811B00DBBE61 /* CCCustomFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C721FB1AEF398000F176E6 /* CCCustomFilter.h */; };
+		E53C167E1AF0811B00DBBE61 /* CCDropShadowFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C721FD1AEF398000F176E6 /* CCDropShadowFilter.h */; };
+		E53C167F1AF0811B00DBBE61 /* CCExposureFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C721FF1AEF398000F176E6 /* CCExposureFilter.h */; };
+		E53C16801AF0811B00DBBE61 /* CCFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C722011AEF398000F176E6 /* CCFilter.h */; };
+		E53C16811AF0811B00DBBE61 /* CCGammaFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C722031AEF398000F176E6 /* CCGammaFilter.h */; };
+		E53C16821AF0811B00DBBE61 /* CCGrayFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C722051AEF398000F176E6 /* CCGrayFilter.h */; };
+		E53C16831AF0811B00DBBE61 /* CCHazeFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C722071AEF398000F176E6 /* CCHazeFilter.h */; };
+		E53C16841AF0811B00DBBE61 /* CCHueFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C722091AEF398000F176E6 /* CCHueFilter.h */; };
+		E53C16851AF0811B00DBBE61 /* CCMaskFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C7220B1AEF398000F176E6 /* CCMaskFilter.h */; };
+		E53C16861AF0811B00DBBE61 /* CCRGBFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C7220D1AEF398000F176E6 /* CCRGBFilter.h */; };
+		E53C16871AF0811B00DBBE61 /* CCSaturationFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C7220F1AEF398000F176E6 /* CCSaturationFilter.h */; };
+		E53C16881AF0811B00DBBE61 /* CCSepiaFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C722111AEF398000F176E6 /* CCSepiaFilter.h */; };
+		E53C16891AF0811B00DBBE61 /* CCSharpenFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C722131AEF398000F176E6 /* CCSharpenFilter.h */; };
+		E53C168A1AF0811B00DBBE61 /* CCTestFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C722151AEF398000F176E6 /* CCTestFilter.h */; };
+		E53C168B1AF0811B00DBBE61 /* CCFilteredSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C722181AEF398000F176E6 /* CCFilteredSprite.h */; };
 		E5C7230F1AEF645600F176E6 /* CCBlurFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5C721F41AEF397F00F176E6 /* CCBlurFilter.cpp */; };
 		E5C723101AEF645600F176E6 /* CCBrightnessFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5C721F61AEF398000F176E6 /* CCBrightnessFilter.cpp */; };
 		E5C723111AEF645600F176E6 /* CCContrastFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5C721F81AEF398000F176E6 /* CCContrastFilter.cpp */; };
@@ -302,6 +320,24 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E53C167A1AF0811B00DBBE61 /* CCBlurFilter.h in Headers */,
+				E53C167B1AF0811B00DBBE61 /* CCBrightnessFilter.h in Headers */,
+				E53C167C1AF0811B00DBBE61 /* CCContrastFilter.h in Headers */,
+				E53C167D1AF0811B00DBBE61 /* CCCustomFilter.h in Headers */,
+				E53C167E1AF0811B00DBBE61 /* CCDropShadowFilter.h in Headers */,
+				E53C167F1AF0811B00DBBE61 /* CCExposureFilter.h in Headers */,
+				E53C16801AF0811B00DBBE61 /* CCFilter.h in Headers */,
+				E53C16811AF0811B00DBBE61 /* CCGammaFilter.h in Headers */,
+				E53C16821AF0811B00DBBE61 /* CCGrayFilter.h in Headers */,
+				E53C16831AF0811B00DBBE61 /* CCHazeFilter.h in Headers */,
+				E53C16841AF0811B00DBBE61 /* CCHueFilter.h in Headers */,
+				E53C16851AF0811B00DBBE61 /* CCMaskFilter.h in Headers */,
+				E53C16861AF0811B00DBBE61 /* CCRGBFilter.h in Headers */,
+				E53C16871AF0811B00DBBE61 /* CCSaturationFilter.h in Headers */,
+				E53C16881AF0811B00DBBE61 /* CCSepiaFilter.h in Headers */,
+				E53C16891AF0811B00DBBE61 /* CCSharpenFilter.h in Headers */,
+				E53C168A1AF0811B00DBBE61 /* CCTestFilter.h in Headers */,
+				E53C168B1AF0811B00DBBE61 /* CCFilteredSprite.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

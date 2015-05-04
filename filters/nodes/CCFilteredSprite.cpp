@@ -70,14 +70,14 @@ Filter* FilteredSprite::getFilter(unsigned int $index)
 	return static_cast<Filter*>(_pFilters.at($index));
 }
 
-Vector<Filter*>& FilteredSprite::getFilters()
+Filters& FilteredSprite::getFilters()
 {
 	return _pFilters;
 }
 
-void FilteredSprite::setFilters(Vector<Filter*>& $pFilters)
+void FilteredSprite::setFilters(Filters& pFilters)
 {
-	_pFilters = $pFilters;
+	_pFilters = pFilters;
 	//CCLOG("FilteredSprite setFilters:%d", _pFilters->count());
 	updateFilters();
 }
@@ -200,12 +200,12 @@ Filter* FilteredSpriteWithOne::getFilter(unsigned int $index)
 
 void FilteredSpriteWithOne::setFilter(Filter* $pFilter)
 {
-    Vector<Filter*> __pFilters;
-    __pFilters.pushBack($pFilter);
-	FilteredSprite::setFilters(__pFilters);
+    Filters filters;
+    filters.pushBack($pFilter);
+	FilteredSprite::setFilters(filters);
 }
 
-void FilteredSpriteWithOne::setFilters(Vector<Filter*>& $pFilters)
+void FilteredSpriteWithOne::setFilters(Filters& pFilters)
 {
 	CCASSERT(false, "setFilters on FilteredSpriteWithOne is forbidden!");
 }

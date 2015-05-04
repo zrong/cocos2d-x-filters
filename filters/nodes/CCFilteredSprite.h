@@ -47,15 +47,15 @@ public:
 	virtual Filter* getFilter(unsigned int $index = 0);
 	virtual void setFilter(Filter* $pFilter)=0;
 
-	virtual Vector<Filter*>& getFilters();
-	virtual void setFilters(Vector<Filter*>& $pFilters);
+	virtual Filters& getFilters();
+	virtual void setFilters(Filters& $pFilters);
 
     virtual void clearFilter() = 0;
 
 protected:
 	virtual void drawFilter()=0;
 	virtual bool updateFilters()=0;
-	Vector<Filter*> _pFilters;
+	Filters _pFilters;
 };
 
 class FilteredSpriteWithOne : public FilteredSprite
@@ -71,7 +71,7 @@ public:
 	static FilteredSpriteWithOne* createWithSpriteFrameName(const char* $pszSpriteFrameName);
 
 	virtual Filter* getFilter(unsigned int $index = 0);
-	virtual void setFilters(Vector<Filter*>& $pFilters);
+	virtual void setFilters(Filters& $pFilters);
 	virtual void setFilter(Filter* $pFilter);
     virtual void clearFilter();
 
