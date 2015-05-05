@@ -356,9 +356,9 @@ Rect FilteredSpriteWithMulti::getTSRect()
 	return _rect;
 }
 
-void FilteredSpriteWithMulti::setTSRect(const Rect& $rect)
+void FilteredSpriteWithMulti::setTSRect(const Rect& rect)
 {
-	_rect = $rect;
+	_rect = rect;
 }
 
 void FilteredSpriteWithMulti::setFilter(Filter* pFilter)

@@ -30,14 +30,14 @@ public:
     virtual bool init();
     
     // a selector callback
-    void menuCloseCallback(Ref* pSender);
+    void onClose(Ref* pSender);
     
-    void restartCallback(Ref* pSender);
-    void nextCallback(Ref* pSender);
-    void backCallback(Ref* pSender);
-    void clearSpriteBack(Ref* pSender);
     void onSpriteFilter(Ref* pSender);
     void onArmatureFilter(Ref* pSender);
+    void onRestart(Ref* pSender);
+    void onNext(Ref* pSender);
+    void onBack(Ref* pSender);
+    void onClearFilter(Ref* pSender);
     
     Sprite* getFilteredSprite(int index);
     

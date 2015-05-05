@@ -45,7 +45,7 @@ public:
     virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override;
 
 	virtual Filter* getFilter(unsigned int index = 0);
-	virtual void setFilter(Filter* $pFilter)=0;
+	virtual void setFilter(Filter* pFilter)=0;
 
 	virtual Filters& getFilters();
 	virtual void setFilters(Filters& pFilters);
@@ -63,7 +63,7 @@ class FilteredSpriteWithOne : public FilteredSprite
 public:
 	static FilteredSpriteWithOne* create();
 	static FilteredSpriteWithOne* create(const char* pszFileName);
-	static FilteredSpriteWithOne* create(const char* pszFileName, const Rect& $rect);
+	static FilteredSpriteWithOne* create(const char* pszFileName, const Rect& rect);
 
     static FilteredSpriteWithOne* createWithTexture(Texture2D* pTexture);
     static FilteredSpriteWithOne* createWithTexture(Texture2D* pTexture, const Rect& rect);
