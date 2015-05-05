@@ -32,6 +32,8 @@
 #include "DragonBonesHeaders.h"
 #include "renderer/DBCCRenderHeaders.h"
 
+NS_CC_EXT_BEGIN
+
 class DBCCFilterArmature : public :: dragonBones::DBCCArmature
 {
 public:
@@ -40,10 +42,12 @@ public:
                        dragonBones::IEventDispatcher *eventDispatcher,
                        cocos2d::Node *display);
     ~DBCCFilterArmature() override;
-    cocos2d::extension::Filter* getFilter();
-    void setFilter(cocos2d::extension::Filter* filter);
+    Filter* getFilter();
+    void setFilter(Filter* filter);
 private:
-    cocos2d::extension::Filter* _filter;
+    Filter* _filter;
 };
+
+NS_CC_EXT_END
 
 #endif /* defined(DBCCFILTERARMATURE_H) */

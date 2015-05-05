@@ -6,6 +6,7 @@
 #include "VisibleRect.h"
 #include "filters/cocos2dFilters.h"
 #include "filters/nodes/DBCCFilterArmature.h"
+#include "filters/nodes/DBCCFilterFactory.h"
 
 USING_NS_CC_EXT;
 
@@ -39,8 +40,6 @@ public:
     void onBack(Ref* pSender);
     void onClearFilter(Ref* pSender);
     
-    Sprite* getFilteredSprite(int index);
-    
     CREATE_FUNC(FilterSample);
     
     virtual void update(float delta);
@@ -55,6 +54,9 @@ private:
     
     void initFilters();
     void showFilteredDisplay(int index);
+    
+    Sprite* getFilteredSprite(int index);
+    Node* getFilteredArmatureDisplay(int index);
     
     Sprite* testFilter(Filter* filter, ccLocation location = CENTER,
                        int order = 0, const char* path = "res/helloworld.png");

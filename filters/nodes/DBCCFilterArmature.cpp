@@ -1,5 +1,7 @@
 #include "DBCCFilterArmature.h"
 
+NS_CC_EXT_BEGIN
+
 DBCCFilterArmature::DBCCFilterArmature(dragonBones::ArmatureData *armatureData,
                                        dragonBones::Animation *animation,
                                        dragonBones::IEventDispatcher *eventDispatcher,
@@ -14,12 +16,14 @@ DBCCFilterArmature::~DBCCFilterArmature()
     dispose();
 }
 
-cocos2d::extension::Filter* DBCCFilterArmature::getFilter()
+Filter* DBCCFilterArmature::getFilter()
 {
     return _filter;
 }
 
-void DBCCFilterArmature::setFilter(cocos2d::extension::Filter *filter)
+void DBCCFilterArmature::setFilter(Filter *filter)
 {
     _filter = filter;
 }
+
+NS_CC_EXT_END

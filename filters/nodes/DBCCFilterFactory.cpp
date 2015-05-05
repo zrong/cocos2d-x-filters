@@ -1,5 +1,7 @@
 #include "DBCCFilterFactory.h"
 
+NS_CC_EXT_BEGIN
+
 DBCCFilterFactory* DBCCFilterFactory::_instance = nullptr;
 
 DBCCFilterFactory* DBCCFilterFactory::getInstance()
@@ -22,7 +24,7 @@ void DBCCFilterFactory::destroyInstance()
 DBCCFilterFactory::DBCCFilterFactory() : _filter(nullptr){}
 DBCCFilterFactory::~DBCCFilterFactory() {}
 
-DBCCFilterArmature* DBCCFilterFactory::buildArmature(const std::string &armatureName, const std::string &skinName, const std::string &animationName, const std::string &dragonBonesName, const std::string &textureAtlasName, cocos2d::extension::Filter* filter)
+DBCCFilterArmature* DBCCFilterFactory::buildArmature(const std::string &armatureName, const std::string &skinName, const std::string &animationName, const std::string &dragonBonesName, const std::string &textureAtlasName, Filter* filter)
 {
     _filter = filter;
     return (DBCCFilterArmature*) DBCCFactory::buildArmature(armatureName, skinName, animationName, dragonBonesName, textureAtlasName);
@@ -81,13 +83,13 @@ void* DBCCFilterFactory::generateDisplay(const dragonBones::ITextureAtlas *textu
         
         auto spriteFrame = cocos2d::SpriteFrame::createWithTexture(texture, rect, textureData->rotated, offset, originSize);
         //display = cocos2d::Sprite::createWithSpriteFrame(spriteFrame);
-        display = cocos2d::extension::FilteredSpriteWithOne::createWithSpriteFrame(spriteFrame);
+        display = FilteredSpriteWithOne::createWithSpriteFrame(spriteFrame);
         
     }
     else
     {
         //display = cocos2d::Sprite::createWithTexture(texture, rect, rotated);
-        display = cocos2d::extension::FilteredSpriteWithOne::createWithTexture(texture, rect);
+        display = FilteredSpriteWithOne::createWithTexture(texture, rect);
     }
     // sprite
     
@@ -106,3 +108,5 @@ void* DBCCFilterFactory::generateDisplay(const dragonBones::ITextureAtlas *textu
     display->setContentSize(originSize);
     return display;
 }
+
+NS_CC_EXT_END

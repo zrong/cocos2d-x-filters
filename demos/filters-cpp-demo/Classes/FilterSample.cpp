@@ -50,7 +50,7 @@ bool FilterSample::init()
     pCloseItem->setPosition(VisibleRect::rightBottom(-20,20));
     
     Menu* pMenu = Menu::create(item1, item2, item3, pClearItem, pArmatureItem, pSpriteItem, pCloseItem, NULL);
-    pMenu->setPosition(Point());
+    pMenu->setPosition(cocos2d::Point());
     Size item2Size = item2->getContentSize();
     item1->setPosition(VisibleRect::bottom(-item2Size.width * 2, item2Size.height / 2));
     item2->setPosition(VisibleRect::bottom(0, item2Size.height / 2));
@@ -68,6 +68,9 @@ bool FilterSample::init()
     Sprite* bg = Sprite::create("res/bg.jpg");
     bg->setPosition(VisibleRect::center());
     this->addChild(bg, -10);
+    
+    DBCCFilterFactory::getInstance()->loadDragonBonesData("res/dragon/skeleton.xml", "Dragon");
+    DBCCFilterFactory::getInstance()->loadDragonBonesData("res/dragon/skeleton.xml", "Dragon");
     
     this->showFilteredDisplay(filterIndex);
     
@@ -143,10 +146,16 @@ void FilterSample::onClearFilter(Ref* pSender)
 
 void FilterSample::onArmatureFilter(Ref* pSender)
 {
+    _showArmature = true;
+    this->showFilteredDisplay(filterIndex);
+    this->scheduleUpdate();
 }
 
 void FilterSample::onSpriteFilter(Ref* pSender)
 {
+    _showArmature = false;
+    this->showFilteredDisplay(filterIndex);
+    this->unscheduleUpdate();
 }
 
 void FilterSample::onClose(Ref* pSender)
@@ -173,10 +182,34 @@ Sprite* FilterSample::getFilteredSprite(int index)
     return testFilter(filter);
 }
 
+Node* FilterSample::getFilteredArmatureDisplay(int index)
+{
+    if(index >= _filters.size())
+    {
+        index = 0;
+    }
+    Filter* filter = _filters.at(index);
+    if(_pArmature)
+    {
+        _pArmature->dispose();
+        CC_SAFE_DELETE(_pArmature);
+    }
+    _pArmature = DBCCFilterFactory::getInstance()->buildArmature("Dragon", "", "Dragon", "Dragon", "Dragon", filter);
+    return _pArmature->getCCDisplay();
+}
+
 void FilterSample::showFilteredDisplay(int index)
 {
     if (_pNode) _pNode->removeFromParentAndCleanup(true);
-    _pNode = getFilteredSprite(index);
+    if(_showArmature)
+    {
+        _pNode = getFilteredArmatureDisplay(index);
+        addChild(_pNode);
+    }
+    else
+    {
+        _pNode = getFilteredSprite(index);
+    }
 }
 
 Point FilterSample::getLocation(ccLocation $location)
@@ -275,10 +308,17 @@ cocos2d::GLProgram* FilterSample::getEmbossMov()
 
 void FilterSample::update(float dt)
 {
-    _totalTime += dt;
-    //CCLOG("show %f, dt %f", _totalTime, $dt);
-    _pNode->getGLProgram()->use();
-    glUniform1f(_timeUniformLocation, _totalTime);
+    if(_showArmature)
+    {
+        _pArmature->advanceTime(dt);
+    }
+    else
+    {
+        _totalTime += dt;
+        //CCLOG("show %f, dt %f", _totalTime, $dt);
+        _pNode->getGLProgram()->use();
+        glUniform1f(_timeUniformLocation, _totalTime);
+    }
 }
 
 cocos2d::GLProgram* FilterSample::getEmboss()

@@ -34,6 +34,8 @@
 #include "renderer/DBCCRenderHeaders.h"
 #include "DBCCFilterArmature.h"
 
+NS_CC_EXT_BEGIN
+
 class DBCCFilterFactory : public dragonBones::DBCCFactory
 {
     
@@ -43,7 +45,7 @@ public:
     
     DBCCFilterFactory();
     virtual ~DBCCFilterFactory();
-    DBCCFilterArmature* buildArmature(const std::string &armatureName, const std::string &skinName, const std::string &animationName, const std::string &dragonBonesName, const std::string &textureAtlasName, cocos2d::extension::Filter* filter);
+    DBCCFilterArmature* buildArmature(const std::string &armatureName, const std::string &skinName, const std::string &animationName, const std::string &dragonBonesName, const std::string &textureAtlasName, Filter* filter);
     
 protected:
     virtual void* generateDisplay(const dragonBones::ITextureAtlas *textureAtlas,
@@ -53,8 +55,10 @@ protected:
     
 private:
     static DBCCFilterFactory *_instance;
-    cocos2d::extension::Filter* _filter;
+    Filter* _filter;
     DRAGON_BONES_DISALLOW_COPY_AND_ASSIGN(DBCCFilterFactory);
 };
+
+NS_CC_EXT_END
 
 #endif /* defined(DBCCFILTERFACTORY_H) */
