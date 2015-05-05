@@ -29,12 +29,12 @@ public:
     virtual bool init();
     
     // a selector callback
-    void menuCloseCallback(Ref* pSender);
+    void onClose(Ref* pSender);
     
-    void restartCallback(Ref* pSender);
-    void nextCallback(Ref* pSender);
-    void backCallback(Ref* pSender);
-    void clearSpriteBack(Ref* pSender);
+    void onRestart(Ref* pSender);
+    void onNext(Ref* pSender);
+    void onBack(Ref* pSender);
+    void onClearFilter(Ref* pSender);
     
     Sprite* getFilteredSprite(int index);
     
@@ -46,10 +46,10 @@ private:
     Filters _filters;
     std::vector<Filters> _multiFilters;
     int _filtersNum = 0;
-    Sprite* _pSprite;
+    Node* _pNode;
     
     void initFilters();
-    void showSprite(int index);
+    void showFilteredDisplay(int index);
     
     Sprite* testFilter(Filter* filter, ccLocation location = CENTER,
                        int order = 0, const char* path = "res/helloworld.png");
