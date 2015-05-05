@@ -5,6 +5,7 @@
 #include "extensions/ExtensionMacros.h"
 #include "VisibleRect.h"
 #include "filters/cocos2dFilters.h"
+#include "filters/nodes/DBCCFilterArmature.h"
 
 USING_NS_CC_EXT;
 
@@ -35,6 +36,8 @@ public:
     void nextCallback(Ref* pSender);
     void backCallback(Ref* pSender);
     void clearSpriteBack(Ref* pSender);
+    void onSpriteFilter(Ref* pSender);
+    void onArmatureFilter(Ref* pSender);
     
     Sprite* getFilteredSprite(int index);
     
@@ -46,10 +49,12 @@ private:
     Filters _filters;
     std::vector<Filters> _multiFilters;
     int _filtersNum = 0;
-    Sprite* _pSprite;
+    bool _showArmature = false;
+    Node* _pNode;
+    DBCCFilterArmature* _pArmature;
     
     void initFilters();
-    void showSprite(int index);
+    void showFilteredDisplay(int index);
     
     Sprite* testFilter(Filter* filter, ccLocation location = CENTER,
                        int order = 0, const char* path = "res/helloworld.png");

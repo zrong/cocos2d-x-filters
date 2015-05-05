@@ -3,7 +3,8 @@
 static int filterIndex = 0;
 
 FilterSample::FilterSample()
-: _pSprite(nullptr)
+: _pNode(nullptr)
+, _pArmature(nullptr)
 {
 }
 
@@ -39,18 +40,24 @@ bool FilterSample::init()
     MenuItemImage *pCloseItem = MenuItemImage::create("res/CloseNormal.png",
                                                       "res/CloseSelected.png",
                                                       CC_CALLBACK_1(FilterSample::menuCloseCallback, this));
-    MenuItemFont *pClearItem = MenuItemFont::create("ClearFilter",
+    MenuItemFont *pClearItem = MenuItemFont::create("Clear Filter",
                                                     CC_CALLBACK_1(FilterSample::clearSpriteBack, this));
+    MenuItemFont *pArmatureItem = MenuItemFont::create("For Armature",
+                                                       CC_CALLBACK_1(FilterSample::onArmatureFilter, this));
+    MenuItemFont *pSpriteItem = MenuItemFont::create("For Sprite",
+                                                    CC_CALLBACK_1(FilterSample::onSpriteFilter, this));
     
     pCloseItem->setPosition(VisibleRect::rightBottom(-20,20));
     
-    Menu* pMenu = Menu::create(item1, item2, item3, pClearItem, pCloseItem, NULL);
+    Menu* pMenu = Menu::create(item1, item2, item3, pClearItem, pArmatureItem, pSpriteItem, pCloseItem, NULL);
     pMenu->setPosition(Point());
     Size item2Size = item2->getContentSize();
     item1->setPosition(VisibleRect::bottom(-item2Size.width * 2, item2Size.height / 2));
     item2->setPosition(VisibleRect::bottom(0, item2Size.height / 2));
     item3->setPosition(VisibleRect::bottom(item2Size.width * 2, item2Size.height / 2));
     pClearItem->setPosition(VisibleRect::bottom(0, 100));
+    pArmatureItem->setPosition(VisibleRect::top(-100, -50));
+    pSpriteItem->setPosition(VisibleRect::top(100, -50));
     pCloseItem->setPosition(VisibleRect::rightBottom(-item2Size.width / 2, item2Size.height / 2));
     
     this->addChild(pMenu, 1);
@@ -62,7 +69,7 @@ bool FilterSample::init()
     bg->setPosition(VisibleRect::center());
     this->addChild(bg, -10);
     
-    this->showSprite(filterIndex);
+    this->showFilteredDisplay(filterIndex);
     
     return true;
 }
@@ -110,14 +117,14 @@ void FilterSample::initFilters()
 
 void FilterSample::restartCallback(Ref* pSender)
 {
-    showSprite(filterIndex);
+    showFilteredDisplay(filterIndex);
 }
 
 void FilterSample::nextCallback(Ref* pSender)
 {
     filterIndex++;
     filterIndex = filterIndex%_filtersNum;
-    showSprite(filterIndex);
+    showFilteredDisplay(filterIndex);
 }
 
 void FilterSample::backCallback(Ref* pSender)
@@ -125,13 +132,21 @@ void FilterSample::backCallback(Ref* pSender)
     filterIndex--;
     if (filterIndex < 0)
         filterIndex += _filtersNum;
-    showSprite(filterIndex);
+    showFilteredDisplay(filterIndex);
 }
 
 void FilterSample::clearSpriteBack(Ref* pSender)
 {
-    FilteredSprite* sprite = dynamic_cast<FilteredSprite*>(_pSprite);
+    FilteredSprite* sprite = dynamic_cast<FilteredSprite*>(_pNode);
     if (sprite) sprite->clearFilter();
+}
+
+void FilterSample::onArmatureFilter(Ref* pSender)
+{
+}
+
+void FilterSample::onSpriteFilter(Ref* pSender)
+{
 }
 
 void FilterSample::menuCloseCallback(Ref* pSender)
@@ -158,10 +173,10 @@ Sprite* FilterSample::getFilteredSprite(int index)
     return testFilter(filter);
 }
 
-void FilterSample::showSprite(int index)
+void FilterSample::showFilteredDisplay(int index)
 {
-    if (_pSprite) _pSprite->removeFromParentAndCleanup(true);
-    _pSprite = getFilteredSprite(index);
+    if (_pNode) _pNode->removeFromParentAndCleanup(true);
+    _pNode = getFilteredSprite(index);
 }
 
 Point FilterSample::getLocation(ccLocation $location)
@@ -262,7 +277,7 @@ void FilterSample::update(float dt)
 {
     _totalTime += dt;
     //CCLOG("show %f, dt %f", _totalTime, $dt);
-    _pSprite->getGLProgram()->use();
+    _pNode->getGLProgram()->use();
     glUniform1f(_timeUniformLocation, _totalTime);
 }
 
