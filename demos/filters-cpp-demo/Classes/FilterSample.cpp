@@ -3,7 +3,7 @@
 static int filterIndex = 0;
 
 FilterSample::FilterSample()
-: _pSprite(nullptr)
+: _pNode(nullptr)
 {
 }
 
@@ -29,18 +29,18 @@ bool FilterSample::init()
     
     MenuItemImage *item1 = MenuItemImage::create("res/b1.png",
                                                  "res/b2.png",
-                                                 CC_CALLBACK_1(FilterSample::backCallback, this));
+                                                 CC_CALLBACK_1(FilterSample::onBack, this));
     MenuItemImage *item2 = MenuItemImage::create("res/r1.png",
                                                  "res/r2.png",
-                                                 CC_CALLBACK_1(FilterSample::restartCallback, this));
+                                                 CC_CALLBACK_1(FilterSample::onRestart, this));
     MenuItemImage *item3 = MenuItemImage::create("res/f1.png",
                                                  "res/f2.png",
-                                                 CC_CALLBACK_1(FilterSample::nextCallback, this));
+                                                 CC_CALLBACK_1(FilterSample::onNext, this));
     MenuItemImage *pCloseItem = MenuItemImage::create("res/CloseNormal.png",
                                                       "res/CloseSelected.png",
-                                                      CC_CALLBACK_1(FilterSample::menuCloseCallback, this));
-    MenuItemFont *pClearItem = MenuItemFont::create("ClearFilter",
-                                                    CC_CALLBACK_1(FilterSample::clearSpriteBack, this));
+                                                      CC_CALLBACK_1(FilterSample::onClose, this));
+    MenuItemFont *pClearItem = MenuItemFont::create("Clear Filter",
+                                                    CC_CALLBACK_1(FilterSample::onClearFilter, this));
     
     pCloseItem->setPosition(VisibleRect::rightBottom(-20,20));
     
@@ -62,7 +62,7 @@ bool FilterSample::init()
     bg->setPosition(VisibleRect::center());
     this->addChild(bg, -10);
     
-    this->showSprite(filterIndex);
+    this->showFilteredDisplay(filterIndex);
     
     return true;
 }
@@ -108,33 +108,33 @@ void FilterSample::initFilters()
     _filtersNum = _filters.size()+_multiFilters.size();
 }
 
-void FilterSample::restartCallback(Ref* pSender)
+void FilterSample::onRestart(Ref* pSender)
 {
-    showSprite(filterIndex);
+    showFilteredDisplay(filterIndex);
 }
 
-void FilterSample::nextCallback(Ref* pSender)
+void FilterSample::onNext(Ref* pSender)
 {
     filterIndex++;
     filterIndex = filterIndex%_filtersNum;
-    showSprite(filterIndex);
+    showFilteredDisplay(filterIndex);
 }
 
-void FilterSample::backCallback(Ref* pSender)
+void FilterSample::onBack(Ref* pSender)
 {
     filterIndex--;
     if (filterIndex < 0)
         filterIndex += _filtersNum;
-    showSprite(filterIndex);
+    showFilteredDisplay(filterIndex);
 }
 
-void FilterSample::clearSpriteBack(Ref* pSender)
+void FilterSample::onClearFilter(Ref* pSender)
 {
-    FilteredSprite* sprite = dynamic_cast<FilteredSprite*>(_pSprite);
+    FilteredSprite* sprite = dynamic_cast<FilteredSprite*>(_pNode);
     if (sprite) sprite->clearFilter();
 }
 
-void FilterSample::menuCloseCallback(Ref* pSender)
+void FilterSample::onClose(Ref* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
     MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.", "Alert");
@@ -158,10 +158,10 @@ Sprite* FilterSample::getFilteredSprite(int index)
     return testFilter(filter);
 }
 
-void FilterSample::showSprite(int index)
+void FilterSample::showFilteredDisplay(int index)
 {
-    if (_pSprite) _pSprite->removeFromParentAndCleanup(true);
-    _pSprite = getFilteredSprite(index);
+    if (_pNode) _pNode->removeFromParentAndCleanup(true);
+    _pNode = getFilteredSprite(index);
 }
 
 Point FilterSample::getLocation(ccLocation $location)
@@ -262,7 +262,7 @@ void FilterSample::update(float dt)
 {
     _totalTime += dt;
     //CCLOG("show %f, dt %f", _totalTime, $dt);
-    _pSprite->getGLProgram()->use();
+    _pNode->getGLProgram()->use();
     glUniform1f(_timeUniformLocation, _totalTime);
 }
 
