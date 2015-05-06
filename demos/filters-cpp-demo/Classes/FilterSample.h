@@ -7,6 +7,8 @@
 #include "filters/cocos2dFilters.h"
 #include "filters/nodes/DBCCFilterArmature.h"
 #include "filters/nodes/DBCCFilterFactory.h"
+#include "renderer/DBCCArmatureNode.h"
+#include "renderer/DBCCFactory.h"
 
 USING_NS_CC_EXT;
 

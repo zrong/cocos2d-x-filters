@@ -68,7 +68,7 @@ void* DBCCFilterFactory::generateDisplay(const dragonBones::ITextureAtlas *textu
     cocos2d::Vec2 offset;
     cocos2d::Size originSize(width, height);
     
-    cocos2d::Node *display = nullptr;
+    FilteredSprite *display = nullptr;
     
     if (textureData->frame)
     {
@@ -96,6 +96,7 @@ void* DBCCFilterFactory::generateDisplay(const dragonBones::ITextureAtlas *textu
     display->setCascadeColorEnabled(true);
     display->setCascadeOpacityEnabled(true);
     display->retain();
+    display->setFilter(_filter);
     float pivotX = 0.f;
     float pivotY = 0.f;
     
@@ -106,6 +107,7 @@ void* DBCCFilterFactory::generateDisplay(const dragonBones::ITextureAtlas *textu
     }
     display->setAnchorPoint(cocos2d::Vec2(pivotX / originSize.width, 1.f - pivotY / originSize.height));
     display->setContentSize(originSize);
+    CCLOG("generateDisplay:%s", typeid(display).name());
     return display;
 }
 

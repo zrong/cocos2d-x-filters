@@ -69,8 +69,9 @@ bool FilterSample::init()
     bg->setPosition(VisibleRect::center());
     this->addChild(bg, -10);
     
-    DBCCFilterFactory::getInstance()->loadDragonBonesData("res/dragon/skeleton.xml", "Dragon");
-    DBCCFilterFactory::getInstance()->loadDragonBonesData("res/dragon/skeleton.xml", "Dragon");
+    DBCCFilterFactory* factory = DBCCFilterFactory::getInstance();
+    factory->loadDragonBonesData("res/dragon/skeleton.xml", "Dragon");
+    factory->loadTextureAtlas("res/dragon/texture.xml", "Dragon");
     
     this->showFilteredDisplay(filterIndex);
     
@@ -140,8 +141,15 @@ void FilterSample::onBack(Ref* pSender)
 
 void FilterSample::onClearFilter(Ref* pSender)
 {
-    FilteredSprite* sprite = dynamic_cast<FilteredSprite*>(_pNode);
-    if (sprite) sprite->clearFilter();
+    if(_showArmature)
+    {
+        // for armature
+    }
+    else
+    {
+        FilteredSprite* sprite = dynamic_cast<FilteredSprite*>(_pNode);
+        if (sprite) sprite->clearFilter();
+    }
 }
 
 void FilterSample::onArmatureFilter(Ref* pSender)
@@ -195,6 +203,8 @@ Node* FilterSample::getFilteredArmatureDisplay(int index)
         CC_SAFE_DELETE(_pArmature);
     }
     _pArmature = DBCCFilterFactory::getInstance()->buildArmature("Dragon", "", "Dragon", "Dragon", "Dragon", filter);
+    //_pArmature = DBCCFilterFactory::getInstance()->buildArmature("1010", "", "1010", "1010", "1010", filter);
+    //return dragonBones::DBCCFactory::getInstance()->buildArmatureNode("Dragon");
     return _pArmature->getCCDisplay();
 }
 
@@ -204,7 +214,9 @@ void FilterSample::showFilteredDisplay(int index)
     if(_showArmature)
     {
         _pNode = getFilteredArmatureDisplay(index);
+        _pNode->setPosition(VisibleRect::center(0, -170));
         addChild(_pNode);
+        _pArmature->getAnimation()->gotoAndPlay("stand");
     }
     else
     {
