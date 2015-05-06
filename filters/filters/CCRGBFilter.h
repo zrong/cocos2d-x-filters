@@ -1,6 +1,6 @@
 
-#ifndef __CCRGB_FILTER__
-#define __CCRGB_FILTER__
+#ifndef CCRGB_FILTER
+#define CCRGB_FILTER
 
 #include "CCFilter.h"
 
@@ -13,15 +13,15 @@ class RGBFilter : public Filter
 
 public:
 	static RGBFilter* create();
-	static RGBFilter* create(float $redAdj, float $greenAdj, float $blueAdj);
+	static RGBFilter* create(float redAdj, float greenAdj, float blueAdj);
 
 	RGBFilter();
 
-	void setParameter(float $redAdj, float $greenAdj, float $blueAdj);
+	void setParameter(float redAdj, float greenAdj, float blueAdj);
 protected:
 	virtual GLProgram* loadShader();
-	virtual void setAttributes(GLProgram* $glp);
-	virtual void setUniforms(GLProgram* $glp);
+	virtual void setAttributes(GLProgram* glp);
+	virtual void setUniforms(GLProgram* glp);
 	float _redAdj;
 	float _greenAdj;
 	float _blueAdj;
@@ -30,4 +30,4 @@ protected:
 
 NS_CC_EXT_END
 
-#endif //__CCRGB_FILTER__
+#endif //CCRGB_FILTER

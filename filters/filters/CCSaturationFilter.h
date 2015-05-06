@@ -1,5 +1,5 @@
-#ifndef __CCSATURATION_FILTER__
-#define __CCSATURATION_FILTER__
+#ifndef CCSATURATION_FILTER
+#define CCSATURATION_FILTER
 
 #include "CCFilter.h"
 
@@ -13,18 +13,18 @@ class SaturationFilter : public SingleFloatParamFilter
 
 public:
 	static SaturationFilter* create();
-	static SaturationFilter* create(float $param);
+	static SaturationFilter* create(float param);
 
 	SaturationFilter();
 
-	virtual void setParameter(float $param);
+	virtual void setParameter(float param);
 protected:
 	virtual GLProgram* loadShader();
-	virtual void setAttributes(GLProgram* $glp);
-	virtual void setUniforms(GLProgram* $glp);
+	virtual void setAttributes(GLProgram* glp);
+	virtual void setUniforms(GLProgram* glp);
 };
 
 
 NS_CC_EXT_END
 
-#endif //__CCSATURATION_FILTER__
+#endif //CCSATURATION_FILTER

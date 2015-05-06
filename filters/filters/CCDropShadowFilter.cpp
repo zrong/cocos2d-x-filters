@@ -34,16 +34,16 @@ NS_CC_EXT_BEGIN
 
 DropShadowFilter* DropShadowFilter::create()
 {
-	DropShadowFilter* __filter = new DropShadowFilter();
-	__filter->autorelease();
-	return __filter;
+	DropShadowFilter* filter = new DropShadowFilter();
+	filter->autorelease();
+	return filter;
 }
 
-DropShadowFilter* DropShadowFilter::create(float $resolation)
+DropShadowFilter* DropShadowFilter::create(float resolation)
 {
-	DropShadowFilter* __filter = DropShadowFilter::create();
-	__filter->setParameter($resolation);
-	return __filter;
+	DropShadowFilter* filter = DropShadowFilter::create();
+	filter->setParameter(resolation);
+	return filter;
 }
 
 DropShadowFilter::DropShadowFilter()
@@ -53,42 +53,42 @@ DropShadowFilter::DropShadowFilter()
 
 GLProgram* DropShadowFilter::loadShader()
 {
-    GLProgram* __p = GLProgram::createWithByteArrays(ccFilterShader_drop_shadow_vert, ccFilterShader_drop_shadow_frag);
+    GLProgram* p = GLProgram::createWithByteArrays(ccFilterShader_drop_shadow_vert, ccFilterShader_drop_shadow_frag);
     
-//	GLProgram* __p = new GLProgram();
-//	__p->initWithByteArrays(ccFilterShader_drop_shadow_vert, 
+//	GLProgram* p = new GLProgram();
+//	p->initWithByteArrays(ccFilterShader_drop_shadow_vert, 
 //		ccFilterShader_drop_shadow_frag);
-	return __p;
+	return p;
 }
 
-void DropShadowFilter::setParameter(float $resolation)
+void DropShadowFilter::setParameter(float resolation)
 {
 	//The initProgram() will perform in initSprite()
 }
 
-void DropShadowFilter::initSprite(FilteredSprite* $sprite)
+void DropShadowFilter::initSprite(FilteredSprite* sprite)
 {
-	float __aspectRatio = 1.0f;
-	Size __size = $sprite->getContentSize();
-	/*_textureWidth = __size.width;
-	_textureHeight = __size.height;*/
+	float aspectRatio = 1.0f;
+	Size size = sprite->getContentSize();
+	/*_textureWidth = size.width;
+	_textureHeight = size.height;*/
 	_textureWidth = 480;
 	_textureHeight = 320;
 	initProgram();
 }
 
-void DropShadowFilter::setAttributes(GLProgram* $cgp)
+void DropShadowFilter::setAttributes(GLProgram* cgp)
 {
 	//CCLOG("DropShadowFilter::setAttributes");
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_COLOR, GLProgram::VERTEX_ATTRIB_COLOR);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_COLOR, GLProgram::VERTEX_ATTRIB_COLOR);
 }
 
-void DropShadowFilter::setUniforms(GLProgram* $cgp)
+void DropShadowFilter::setUniforms(GLProgram* cgp)
 {
-//	int u_resolution = $cgp->getUniformLocationForName("u_resolution");
-//	$cgp->setUniformLocationWith2f(u_resolution, _textureWidth, _textureHeight);
+//	int u_resolution = cgp->getUniformLocationForName("u_resolution");
+//	cgp->setUniformLocationWith2f(u_resolution, _textureWidth, _textureHeight);
     
     _pProgramState->setUniformVec2("u_resolution", Vec2(_textureWidth, _textureHeight));
 }

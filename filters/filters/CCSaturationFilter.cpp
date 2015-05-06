@@ -33,16 +33,16 @@ NS_CC_EXT_BEGIN
 
 SaturationFilter* SaturationFilter::create()
 {
-	SaturationFilter* __filter = new SaturationFilter();
-	__filter->autorelease();
-	return __filter;
+	SaturationFilter* filter = new SaturationFilter();
+	filter->autorelease();
+	return filter;
 }
 
-SaturationFilter* SaturationFilter::create(float $brightness)
+SaturationFilter* SaturationFilter::create(float brightness)
 {
-	SaturationFilter* __filter = SaturationFilter::create();
-	__filter->setParameter($brightness);
-	return __filter;
+	SaturationFilter* filter = SaturationFilter::create();
+	filter->setParameter(brightness);
+	return filter;
 }
 
 SaturationFilter::SaturationFilter()
@@ -53,30 +53,30 @@ SaturationFilter::SaturationFilter()
 
 GLProgram* SaturationFilter::loadShader()
 {
-    GLProgram* __p = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, ccFilterShader_saturation_frag);
+    GLProgram* p = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, ccFilterShader_saturation_frag);
     
-//	GLProgram* __p = new GLProgram();
-//	__p->initWithByteArrays(ccPositionTexture_vert, ccFilterShader_saturation_frag);
-	return __p;
+//	GLProgram* p = new GLProgram();
+//	p->initWithByteArrays(ccPositionTexture_vert, ccFilterShader_saturation_frag);
+	return p;
 }
 
-void SaturationFilter::setParameter(float $param)
+void SaturationFilter::setParameter(float param)
 {
-	_param = MIN(2.f, MAX($param, 0.f));
+	_param = MIN(2.f, MAX(param, 0.f));
 	initProgram();
 }
 
-void SaturationFilter::setAttributes(GLProgram* $cgp)
+void SaturationFilter::setAttributes(GLProgram* cgp)
 {
 	//CCLOG("SaturationFilter::setAttributes");
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
 }
 
-void SaturationFilter::setUniforms(GLProgram* $cgp)
+void SaturationFilter::setUniforms(GLProgram* cgp)
 {
-//	int __param = $cgp->getUniformLocationForName("u_saturation");
-//	$cgp->setUniformLocationWith1f(__param, _param);
+//	int param = cgp->getUniformLocationForName("u_saturation");
+//	cgp->setUniformLocationWith1f(param, _param);
     
     _pProgramState->setUniformFloat("u_saturation", _param);
 }

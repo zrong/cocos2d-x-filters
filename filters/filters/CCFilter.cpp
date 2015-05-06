@@ -63,7 +63,7 @@ void Filter::initProgram()
     if (nullptr != shaderName) {
         pProgram = GLProgramCache::getInstance()->getGLProgram(shaderName);
     }
-	//CCLOG("CCFilter::initProgram %s, program:%d", shaderName, __pProgram);
+	//CCLOG("CCFilter::initProgram %s, program:%d", shaderName, pProgram);
 	if (nullptr == pProgram)
 	{
 		pProgram = loadShader();

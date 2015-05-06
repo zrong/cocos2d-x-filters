@@ -1,6 +1,6 @@
 
-#ifndef __CCCUSTOM_FILTER__
-#define __CCCUSTOM_FILTER__
+#ifndef CCCUSTOM_FILTER
+#define CCCUSTOM_FILTER
 
 #include "json/rapidjson.h"
 #include "json/document.h"
@@ -23,7 +23,7 @@ public:
     void setParameter(const char* paramsStr);
 protected:
     virtual GLProgram* loadShader();
-    virtual void setUniforms(GLProgram* $glp);
+    virtual void setUniforms(GLProgram* glp);
     
     std::string m_vertFile;
     std::string m_fragFile;
@@ -32,4 +32,4 @@ protected:
 
 NS_CC_EXT_END
 
-#endif //__CCCUSTOM_FILTER__
+#endif //CCCUSTOM_FILTER

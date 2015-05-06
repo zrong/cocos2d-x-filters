@@ -34,25 +34,25 @@ NS_CC_EXT_BEGIN
 
 MaskFilter* MaskFilter::create()
 {
-	MaskFilter* __filter = new MaskFilter();
-	__filter->autorelease();
-	return __filter;
+	MaskFilter* filter = new MaskFilter();
+	filter->autorelease();
+	return filter;
 }
 
-MaskFilter* MaskFilter::create(std::string* $maskImage)
+MaskFilter* MaskFilter::create(std::string* maskImage)
 {
-	MaskFilter* __filter = MaskFilter::create();
-	__filter->setParameter($maskImage);
-	__filter->setIsSpriteFrame(false);
-	return __filter;
+	MaskFilter* filter = MaskFilter::create();
+	filter->setParameter(maskImage);
+	filter->setIsSpriteFrame(false);
+	return filter;
 }
 
-MaskFilter* MaskFilter::createWithSpriteFrameName(std::string* $maskImage)
+MaskFilter* MaskFilter::createWithSpriteFrameName(std::string* maskImage)
 {
-	MaskFilter* __filter = MaskFilter::create();
-	__filter->setParameter($maskImage);
-	__filter->setIsSpriteFrame(true);
-	return __filter;
+	MaskFilter* filter = MaskFilter::create();
+	filter->setParameter(maskImage);
+	filter->setIsSpriteFrame(true);
+	return filter;
 }
 
 MaskFilter::MaskFilter()
@@ -68,41 +68,41 @@ void MaskFilter::initProgram()
 	//CCLOG("MaskFilter initProgram");
 }
 
-void MaskFilter::initSprite(FilteredSprite* $sprite)
+void MaskFilter::initSprite(FilteredSprite* sprite)
 {
 	//CCLOG("MaskFilter initSprite maskImage:%s", _param->c_str());
-	BlendFunc __maskBF = { GL_ONE, GL_ZERO };
-	BlendFunc __imgBF = { GL_DST_ALPHA, GL_ZERO };
+	BlendFunc maskBF = { GL_ONE, GL_ZERO };
+	BlendFunc imgBF = { GL_DST_ALPHA, GL_ZERO };
 
-	Sprite* __pMask = _isSpriteFrame ?
+	Sprite* pMask = _isSpriteFrame ?
 		Sprite::create(_param->c_str()):
 		Sprite::createWithSpriteFrameName(_param->c_str());
-	__pMask->setAnchorPoint(Vec2(0, 0));
-	__pMask->setPosition(Vec2(0, 0));
+	pMask->setAnchorPoint(Vec2(0, 0));
+	pMask->setPosition(Vec2(0, 0));
 
-	Sprite* __pImg = Sprite::createWithSpriteFrameName("helloworld.png");
-	__pImg->setAnchorPoint(Vec2(0, 0));
-	__pImg->setPosition(Vec2(0, 0));
+	Sprite* pImg = Sprite::createWithSpriteFrameName("helloworld.png");
+	pImg->setAnchorPoint(Vec2(0, 0));
+	pImg->setPosition(Vec2(0, 0));
 
-	__pMask->setBlendFunc(__maskBF);
-	__pImg->setBlendFunc(__imgBF);
+	pMask->setBlendFunc(maskBF);
+	pImg->setBlendFunc(imgBF);
 
-	Size __size = __pImg->getContentSize();
-	RenderTexture* __pRender = RenderTexture::create(__size.width, __size.height);
-	__pRender->begin();
-	__pMask->visit();
-	__pImg->visit();
-	__pRender->end();
+	Size size = pImg->getContentSize();
+	RenderTexture* pRender = RenderTexture::create(size.width, size.height);
+	pRender->begin();
+	pMask->visit();
+	pImg->visit();
+	pRender->end();
 
-	Texture2D* __pTex = new Texture2D();
-	__pTex->initWithImage(__pRender->newImage(true));
-	__pTex->autorelease();
-	$sprite->setTexture(__pTex);
+	Texture2D* pTex = new Texture2D();
+	pTex->initWithImage(pRender->newImage(true));
+	pTex->autorelease();
+	sprite->setTexture(pTex);
 }
 
-void MaskFilter::setParameter(std::string* $maskImage)
+void MaskFilter::setParameter(std::string* maskImage)
 {
-	_param = $maskImage;
+	_param = maskImage;
 }
 
 NS_CC_EXT_END

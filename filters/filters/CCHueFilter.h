@@ -1,6 +1,6 @@
 
-#ifndef __CCHUE_FILTER__
-#define __CCHUE_FILTER__
+#ifndef CCHUE_FILTER
+#define CCHUE_FILTER
 
 #include "CCFilter.h"
 
@@ -14,17 +14,17 @@ class HueFilter : public SingleFloatParamFilter
 
 public:
 	static HueFilter* create();
-	static HueFilter* create(float $param);
+	static HueFilter* create(float param);
 
 	HueFilter();
 
-	void setParameter(float $param);
+	void setParameter(float param);
 protected:
 	virtual GLProgram* loadShader();
-	virtual void setAttributes(GLProgram* $glp);
-	virtual void setUniforms(GLProgram* $glp);
+	virtual void setAttributes(GLProgram* glp);
+	virtual void setUniforms(GLProgram* glp);
 };
 
 NS_CC_EXT_END
 
-#endif //__CCHUE_FILTER__
+#endif //CCHUE_FILTER

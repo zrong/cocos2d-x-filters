@@ -1,5 +1,5 @@
-#ifndef __CCSHADER_FILTER_H__
-#define __CCSHADER_FILTER_H__
+#ifndef CCSHADER_FILTER_H
+#define CCSHADER_FILTER_H
 
 #include "cocos2d.h"
 #include "extensions/ExtensionMacros.h"
@@ -48,4 +48,4 @@ typedef Vector<Filter*> Filters;
 
 NS_CC_EXT_END
 
-#endif /* __CCSHADER_FILTER_H__ */
+#endif /* CCSHADER_FILTER_H */

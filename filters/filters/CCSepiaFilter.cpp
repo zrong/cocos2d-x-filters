@@ -33,16 +33,16 @@ NS_CC_EXT_BEGIN
 
 SepiaFilter* SepiaFilter::create()
 {
-	SepiaFilter* __filter = new SepiaFilter();
-	__filter->autorelease();
-	return __filter;
+	SepiaFilter* filter = new SepiaFilter();
+	filter->autorelease();
+	return filter;
 }
 
-SepiaFilter* SepiaFilter::create(float $resolation)
+SepiaFilter* SepiaFilter::create(float resolation)
 {
-	SepiaFilter* __filter = SepiaFilter::create();
-	__filter->setParameter();
-	return __filter;
+	SepiaFilter* filter = SepiaFilter::create();
+	filter->setParameter();
+	return filter;
 }
 
 SepiaFilter::SepiaFilter()
@@ -52,12 +52,12 @@ SepiaFilter::SepiaFilter()
 
 GLProgram* SepiaFilter::loadShader()
 {
-    GLProgram* __p = GLProgram::createWithByteArrays(ccPositionTextureColor_vert, ccFilterShader_sepia_frag);
+    GLProgram* p = GLProgram::createWithByteArrays(ccPositionTextureColor_vert, ccFilterShader_sepia_frag);
     
-//	GLProgram* __p = new GLProgram();
-//	__p->initWithByteArrays(ccPositionTextureColor_vert,
+//	GLProgram* p = new GLProgram();
+//	p->initWithByteArrays(ccPositionTextureColor_vert,
 //		ccFilterShader_sepia_frag);
-	return __p;
+	return p;
 }
 
 void SepiaFilter::setParameter()
@@ -65,15 +65,15 @@ void SepiaFilter::setParameter()
 	initProgram();
 }
 
-void SepiaFilter::setAttributes(GLProgram* $cgp)
+void SepiaFilter::setAttributes(GLProgram* cgp)
 {
 	//CCLOG("SepiaFilter::setAttributes");
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_COLOR, GLProgram::VERTEX_ATTRIB_COLOR);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_COLOR, GLProgram::VERTEX_ATTRIB_COLOR);
 }
 
-void SepiaFilter::setUniforms(GLProgram* $cgp)
+void SepiaFilter::setUniforms(GLProgram* cgp)
 {
 
 }
