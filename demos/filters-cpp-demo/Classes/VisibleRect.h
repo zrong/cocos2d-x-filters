@@ -1,6 +1,11 @@
-
-#ifndef __VISIBLERECT_H__
-#define __VISIBLERECT_H__
+/**********************************************
+ * author: zrong(zengrong.net)
+ * Creation: 2014-03-24
+ * Last Modification: 2015-05-06
+ **********************************************/
+ 
+#ifndef VISIBLERECT_H
+#define VISIBLERECT_H
 
 #include "cocos2d.h"
 
@@ -36,4 +41,4 @@ private:
     static Size _sSize;
 };
 
-#endif /* __VISIBLERECT_H__ */
+#endif /* VISIBLERECT_H */

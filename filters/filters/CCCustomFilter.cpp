@@ -8,16 +8,16 @@ NS_CC_EXT_BEGIN
 
 CustomFilter* CustomFilter::create()
 {
-	CustomFilter* __filter = new CustomFilter();
-	__filter->autorelease();
-	return __filter;
+	CustomFilter* filter = new CustomFilter();
+	filter->autorelease();
+	return filter;
 }
 
 CustomFilter* CustomFilter::create(std::string paramsStr)
 {
-	CustomFilter* __filter = CustomFilter::create();
-	__filter->setParameter(paramsStr.c_str());
-	return __filter;
+	CustomFilter* filter = CustomFilter::create();
+	filter->setParameter(paramsStr.c_str());
+	return filter;
 }
 
 CustomFilter::CustomFilter()
@@ -43,9 +43,9 @@ GLProgram* CustomFilter::loadShader()
     auto fragSource = fileUtiles->getStringFromFile(fragmentFullPath);
     fragShader = fragSource.c_str();
     
-    GLProgram* __p = GLProgram::createWithByteArrays(vertShader, fragShader);
+    GLProgram* p = GLProgram::createWithByteArrays(vertShader, fragShader);
 
-	return __p;
+	return p;
 }
 
 void CustomFilter::setParameter(const char* paramsStr)
@@ -79,7 +79,7 @@ void CustomFilter::setParameter(const char* paramsStr)
     initProgram();
 }
 
-void CustomFilter::setUniforms(GLProgram* $cgp)
+void CustomFilter::setUniforms(GLProgram* cgp)
 {
     for (rapidjson::Value::ConstMemberIterator it = m_json.MemberonBegin();
          it != m_json.MemberonEnd(); ++it) {
