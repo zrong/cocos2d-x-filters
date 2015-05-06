@@ -1,6 +1,8 @@
 cocos2d-x-filters
 =================
 
+[Official site(Chinese)][6]
+
 A filter implement for cocos2d-x 2.x/3.x and quick-cocos2d-x 2.x.
 
 - [for quick-cocos2d-x 2.x][1]
@@ -14,3 +16,4 @@ A filter implement for cocos2d-x 2.x/3.x and quick-cocos2d-x 2.x.
 [3]: https://github.com/zrong/cocos2d-x-filters/tree/v3.x
 [4]: https://github.com/chukong/quick-cocos2d-x/blob/master/framework/filter.lua
 [5]: https://github.com/chukong/quick-cocos2d-x/tree/master/samples/filters
+[6]: http://zengrong.net/cocos2d-x-filters
