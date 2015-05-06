@@ -1,9 +1,16 @@
+/**********************************************
+ * Author: zrong(zengrong.net)
+ * Creation: 2014-03-24
+ * Last Modification: 2015-05-06
+ **********************************************/
+
 #include "FilterSample.h"
 
 static int filterIndex = 0;
 
 FilterSample::FilterSample()
 : _pNode(nullptr)
+, _nameLabel(nullptr)
 {
 }
 
@@ -45,7 +52,7 @@ bool FilterSample::init()
     pCloseItem->setPosition(VisibleRect::rightBottom(-20,20));
     
     Menu* pMenu = Menu::create(item1, item2, item3, pClearItem, pCloseItem, NULL);
-    pMenu->setPosition(Point());
+    pMenu->setPosition(Point(0,0));
     Size item2Size = item2->getContentSize();
     item1->setPosition(VisibleRect::bottom(-item2Size.width * 2, item2Size.height / 2));
     item2->setPosition(VisibleRect::bottom(0, item2Size.height / 2));
@@ -54,6 +61,10 @@ bool FilterSample::init()
     pCloseItem->setPosition(VisibleRect::rightBottom(-item2Size.width / 2, item2Size.height / 2));
     
     this->addChild(pMenu, 1);
+    
+    _nameLabel = Label::createWithSystemFont("Filter Name", "Arial", 28);
+    _nameLabel->setPosition(VisibleRect::top(0, -50));
+    this->addChild(_nameLabel, 10);
     
     this->initFilters();
     
@@ -78,14 +89,29 @@ void FilterSample::initFilters()
     _filters.pushBack(ExposureFilter::create(2));
     _filters.pushBack(GammaFilter::create(2));
     
+    
+    _filterNames.push_back("GrayFilter(0.2, 0.3, 0.5, 0.1)");
+    _filterNames.push_back("RGBFilter(1, 0.5, 0.3)");
+    _filterNames.push_back("HueFilter(90)");
+    _filterNames.push_back("BrightnessFilter(0.3)");
+    _filterNames.push_back("SaturationFilter(0)");
+    _filterNames.push_back("ExposureFilter(2)");
+    _filterNames.push_back("GammaFilter(2)");
+    
     //blurs
     _filters.pushBack(GaussianVBlurFilter::create(7));
     _filters.pushBack(GaussianHBlurFilter::create(7));
     _filters.pushBack(ZoomBlurFilter::create(4, 0.7, 0.7));
     _filters.pushBack(MotionBlurFilter::create(5, 135));
     
+    _filterNames.push_back("GaussianVBlurFilter(7)");
+    _filterNames.push_back("GaussianHBlurFilter(7)");
+    _filterNames.push_back("ZoomBlurFilter(4, 0.7, 0.7)");
+    _filterNames.push_back("MotionBlurFilter(5, 135)");
+    
     //others
     _filters.pushBack(SharpenFilter::create(1,1));
+    _filterNames.push_back("SharpenFilter(1,1)");
     
     //multi
     Filters one;
@@ -93,17 +119,20 @@ void FilterSample::initFilters()
     one.pushBack(GaussianVBlurFilter::create(10));
     one.pushBack(GaussianHBlurFilter::create(10));
     _multiFilters.push_back(one);
+    _multiFilterNames.push_back("GrayFilter()\nGaussianVBlurFilter(10)\nGaussianHBlurFilter(10)");
     
     Filters two;
     two.pushBack(BrightnessFilter::create(0.1));
     two.pushBack(ContrastFilter::create(4));
     _multiFilters.push_back(two);
+    _multiFilterNames.push_back("BrightnessFilter(0.1)\nContrastFilter(4)");
     
     Filters three;
     three.pushBack(HueFilter::create(240));
     three.pushBack(SaturationFilter::create(1.5));
     three.pushBack(BrightnessFilter::create(-0.4));
     _multiFilters.push_back(three);
+    _multiFilterNames.push_back("HueFilter(240)\nSaturationFilter(1.5)\nBrightnessFilter(-0.4)");
     
     _filtersNum = _filters.size()+_multiFilters.size();
 }
@@ -152,9 +181,11 @@ Sprite* FilterSample::getFilteredSprite(int index)
     {
         index = index - _filters.size();
         Filters filters = _multiFilters.at(index);
+        _nameLabel->setString(_multiFilterNames.at(index));
         return testFilter(filters);
     }
     Filter* filter = _filters.at(index);
+    _nameLabel->setString(_filterNames.at(index));
     return testFilter(filter);
 }
 

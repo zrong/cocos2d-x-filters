@@ -1,5 +1,11 @@
-#ifndef __FILTER_SAMPLE_H__
-#define __FILTER_SAMPLE_H__
+/**********************************************
+ * Author: zrong(zengrong.net)
+ * Creation: 2014-03-24
+ * Last Modification: 2015-05-06
+ **********************************************/
+
+#ifndef FILTER_SAMPLE_H
+#define FILTER_SAMPLE_H
 
 #include "cocos2d.h"
 #include "extensions/ExtensionMacros.h"
@@ -43,8 +49,11 @@ public:
     virtual void update(float delta);
     
 private:
+    Label* _nameLabel;
     Filters _filters;
+    std::vector<std::string> _filterNames;
     std::vector<Filters> _multiFilters;
+    std::vector<std::string> _multiFilterNames;
     int _filtersNum = 0;
     Node* _pNode;
     
@@ -71,4 +80,4 @@ private:
     float _totalTime = 0.0f;
 };
 
-#endif // __FILTER_SAMPLE_H__
+#endif // FILTER_SAMPLE_H
