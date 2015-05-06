@@ -33,16 +33,16 @@ NS_CC_EXT_BEGIN
 
 BrightnessFilter* BrightnessFilter::create()
 {
-	BrightnessFilter* __filter = new BrightnessFilter();
-	__filter->autorelease();
-	return __filter;
+	BrightnessFilter* filter = new BrightnessFilter();
+	filter->autorelease();
+	return filter;
 }
 
-BrightnessFilter* BrightnessFilter::create(float $brightness)
+BrightnessFilter* BrightnessFilter::create(float brightness)
 {
-	BrightnessFilter* __filter = BrightnessFilter::create();
-	__filter->setParameter($brightness);
-	return __filter;
+	BrightnessFilter* filter = BrightnessFilter::create();
+	filter->setParameter(brightness);
+	return filter;
 }
 
 BrightnessFilter::BrightnessFilter()
@@ -53,30 +53,30 @@ BrightnessFilter::BrightnessFilter()
 
 GLProgram* BrightnessFilter::loadShader()
 {
-    GLProgram* __p = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, ccFilterShader_brightness_frag);
+    GLProgram* p = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, ccFilterShader_brightness_frag);
     
-//	GLProgram* __p = new GLProgram();
-//	__p->initWithByteArrays(ccPositionTexture_vert, ccFilterShader_brightness_frag);
-	return __p;
+//	GLProgram* p = new GLProgram();
+//	p->initWithByteArrays(ccPositionTexture_vert, ccFilterShader_brightness_frag);
+	return p;
 }
 
-void BrightnessFilter::setParameter(float $brightness)
+void BrightnessFilter::setParameter(float brightness)
 {
-	_param = MIN(1.f, MAX($brightness, -1.f));
+	_param = MIN(1.f, MAX(brightness, -1.f));
 	initProgram();
 }
 
-void BrightnessFilter::setAttributes(GLProgram* $cgp)
+void BrightnessFilter::setAttributes(GLProgram* cgp)
 {
 	//CCLOG("CCRGBFilter::setAttributes");
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
 }
 
-void BrightnessFilter::setUniforms(GLProgram* $cgp)
+void BrightnessFilter::setUniforms(GLProgram* cgp)
 {
-//	int u_brightness = $cgp->getUniformLocationForName("u_brightness");
-//	$cgp->setUniformLocationWith1f(u_brightness, _param);
+//	int u_brightness = cgp->getUniformLocationForName("u_brightness");
+//	cgp->setUniformLocationWith1f(u_brightness, _param);
     
     _pProgramState->setUniformFloat("u_brightness", _param);
 }

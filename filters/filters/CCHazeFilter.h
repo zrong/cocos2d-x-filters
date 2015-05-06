@@ -1,6 +1,6 @@
 
-#ifndef __CCHAZE_FILTER__
-#define __CCHAZE_FILTER__
+#ifndef CCHAZE_FILTER
+#define CCHAZE_FILTER
 
 #include "CCFilter.h"
 
@@ -13,19 +13,19 @@ class HazeFilter : public Filter
 
 public:
 	static HazeFilter* create();
-	static HazeFilter* create(float $hazeDistance, float $slope);
+	static HazeFilter* create(float hazeDistance, float slope);
 
 	HazeFilter();
 
-	void setParameter(float $hazeDistance, float $slope);
+	void setParameter(float hazeDistance, float slope);
 protected:
 	virtual GLProgram* loadShader();
-	virtual void setAttributes(GLProgram* $glp);
-	virtual void setUniforms(GLProgram* $glp);
+	virtual void setAttributes(GLProgram* glp);
+	virtual void setUniforms(GLProgram* glp);
 	float _hazeDistance;
 	float _slope;
 };
 
 NS_CC_EXT_END
 
-#endif //__CCHAZE_FILTER__
+#endif //CCHAZE_FILTER

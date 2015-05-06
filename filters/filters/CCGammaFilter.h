@@ -1,5 +1,5 @@
-#ifndef __CCGAMMA_FILTER__
-#define __CCGAMMA_FILTER__
+#ifndef CCGAMMA_FILTER
+#define CCGAMMA_FILTER
 
 #include "CCFilter.h"
 
@@ -12,18 +12,18 @@ class GammaFilter : public SingleFloatParamFilter
 
 public:
 	static GammaFilter* create();
-	static GammaFilter* create(float $param);
+	static GammaFilter* create(float param);
 
 	GammaFilter();
 
-	virtual void setParameter(float $param);
+	virtual void setParameter(float param);
 protected:
 	virtual GLProgram* loadShader();
-	virtual void setAttributes(GLProgram* $glp);
-	virtual void setUniforms(GLProgram* $glp);
+	virtual void setAttributes(GLProgram* glp);
+	virtual void setUniforms(GLProgram* glp);
 
 };
 
 NS_CC_EXT_END
 
-#endif //__CCGAMMA_FILTER__
+#endif //CCGAMMA_FILTER

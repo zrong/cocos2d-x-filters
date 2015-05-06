@@ -33,16 +33,16 @@ NS_CC_EXT_BEGIN
 
 GammaFilter* GammaFilter::create()
 {
-	GammaFilter* __filter = new GammaFilter();
-	__filter->autorelease();
-	return __filter;
+	GammaFilter* filter = new GammaFilter();
+	filter->autorelease();
+	return filter;
 }
 
-GammaFilter* GammaFilter::create(float $brightness)
+GammaFilter* GammaFilter::create(float brightness)
 {
-	GammaFilter* __filter = GammaFilter::create();
-	__filter->setParameter($brightness);
-	return __filter;
+	GammaFilter* filter = GammaFilter::create();
+	filter->setParameter(brightness);
+	return filter;
 }
 
 GammaFilter::GammaFilter()
@@ -53,30 +53,30 @@ GammaFilter::GammaFilter()
 
 GLProgram* GammaFilter::loadShader()
 {
-    GLProgram* __p = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, ccFilterShader_gamma_frag);
+    GLProgram* p = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, ccFilterShader_gamma_frag);
     
-//	GLProgram* __p = new GLProgram();
-//	__p->initWithByteArrays(ccPositionTexture_vert, ccFilterShader_gamma_frag);
-	return __p;
+//	GLProgram* p = new GLProgram();
+//	p->initWithByteArrays(ccPositionTexture_vert, ccFilterShader_gamma_frag);
+	return p;
 }
 
-void GammaFilter::setParameter(float $param)
+void GammaFilter::setParameter(float param)
 {
-	_param = MIN(3.f, MAX($param, 0.f));
+	_param = MIN(3.f, MAX(param, 0.f));
 	initProgram();
 }
 
-void GammaFilter::setAttributes(GLProgram* $cgp)
+void GammaFilter::setAttributes(GLProgram* cgp)
 {
 	//CCLOG("GammaFilter::setAttributes");
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
 }
 
-void GammaFilter::setUniforms(GLProgram* $cgp)
+void GammaFilter::setUniforms(GLProgram* cgp)
 {
-//	int __param = $cgp->getUniformLocationForName("u_gamma");
-//	$cgp->setUniformLocationWith1f(__param, _param);
+//	int param = cgp->getUniformLocationForName("u_gamma");
+//	cgp->setUniformLocationWith1f(param, _param);
     
     _pProgramState->setUniformFloat("u_gamma", _param);
 }

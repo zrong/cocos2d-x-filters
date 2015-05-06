@@ -1,5 +1,5 @@
-#ifndef __CCFILTER_GRAY_H__
-#define __CCFILTER_GRAY_H__
+#ifndef CCFILTER_GRAY_H
+#define CCFILTER_GRAY_H
 
 #include "CCFilter.h"
 
@@ -11,17 +11,17 @@ class GrayFilter : public Filter
 {
 public:
 	static GrayFilter* create();
-	static GrayFilter* create(Color4F $param);
-	static GrayFilter* create(float $r, float $g, float $b, float $a=0.f);
+	static GrayFilter* create(Color4F param);
+	static GrayFilter* create(float r, float g, float b, float a=0.f);
 
 	GrayFilter();
-	void setParameter(Color4F $param);
-	void setParameter(float $r, float $g, float $b, float $a=0.f);
+	void setParameter(Color4F param);
+	void setParameter(float r, float g, float b, float a=0.f);
 
 protected:
 	virtual GLProgram* loadShader();
-	virtual void setAttributes(GLProgram* $glp);
-	virtual void setUniforms(GLProgram* $glp);
+	virtual void setAttributes(GLProgram* glp);
+	virtual void setUniforms(GLProgram* glp);
 
 private:
 	Color4F _param;
@@ -29,4 +29,4 @@ private:
 
 NS_CC_EXT_END
 
-#endif //__CCFILTER_GRAY_H__
+#endif //CCFILTER_GRAY_H

@@ -1,5 +1,5 @@
-#ifndef __CCSHARPEN_FILTER__
-#define __CCSHARPEN_FILTER__
+#ifndef CCSHARPEN_FILTER
+#define CCSHARPEN_FILTER
 
 #include "CCFilter.h"
 
@@ -12,18 +12,18 @@ class SharpenFilter : public Filter
 
 public:
 	static SharpenFilter* create();
-	static SharpenFilter* create(float $sharpness, float $widthFactor, float $heightFactor);
-	static SharpenFilter* create(float $sharpness, int $amount);
+	static SharpenFilter* create(float sharpness, float widthFactor, float heightFactor);
+	static SharpenFilter* create(float sharpness, int amount);
 
 	SharpenFilter();
 
-	void setParameter(float $sharpness, float $widthFactor, float $heightFactor);
-	void setParameter(float $sharpness, int $amount);
-	virtual void initSprite(FilteredSprite* $sprite);
+	void setParameter(float sharpness, float widthFactor, float heightFactor);
+	void setParameter(float sharpness, int amount);
+	virtual void initSprite(FilteredSprite* sprite);
 protected:
 	virtual GLProgram* loadShader();
-	virtual void setAttributes(GLProgram* $glp);
-	virtual void setUniforms(GLProgram* $glp);
+	virtual void setAttributes(GLProgram* glp);
+	virtual void setUniforms(GLProgram* glp);
 	float _sharpness;
 	float _widthFactor;
 	float _heightFactor;
@@ -33,4 +33,4 @@ protected:
 
 NS_CC_EXT_END
 
-#endif //__CCSHARPEN_FILTER__
+#endif //CCSHARPEN_FILTER

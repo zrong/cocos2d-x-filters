@@ -34,16 +34,16 @@ NS_CC_EXT_BEGIN
 
 HueFilter* HueFilter::create()
 {
-	HueFilter* __filter = new HueFilter();
-	__filter->autorelease();
-	return __filter;
+	HueFilter* filter = new HueFilter();
+	filter->autorelease();
+	return filter;
 }
 
-HueFilter* HueFilter::create(float $brightness)
+HueFilter* HueFilter::create(float brightness)
 {
-	HueFilter* __filter = HueFilter::create();
-	__filter->setParameter($brightness);
-	return __filter;
+	HueFilter* filter = HueFilter::create();
+	filter->setParameter(brightness);
+	return filter;
 }
 
 HueFilter::HueFilter()
@@ -54,30 +54,30 @@ HueFilter::HueFilter()
 
 GLProgram* HueFilter::loadShader()
 {
-    GLProgram* __p = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, ccFilterShader_hue_frag);
+    GLProgram* p = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, ccFilterShader_hue_frag);
     
-//	GLProgram* __p = new GLProgram();
-//	__p->initWithByteArrays(ccPositionTexture_vert, ccFilterShader_hue_frag);
-	return __p;
+//	GLProgram* p = new GLProgram();
+//	p->initWithByteArrays(ccPositionTexture_vert, ccFilterShader_hue_frag);
+	return p;
 }
 
-void HueFilter::setParameter(float $param)
+void HueFilter::setParameter(float param)
 {
-	_param = fmodf($param, 360.f)*M_PI / 180;
+	_param = fmodf(param, 360.f)*M_PI / 180;
 	initProgram();
 }
 
-void HueFilter::setAttributes(GLProgram* $cgp)
+void HueFilter::setAttributes(GLProgram* cgp)
 {
 	//CCLOG("HueFilter::setAttributes");
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
 }
 
-void HueFilter::setUniforms(GLProgram* $cgp)
+void HueFilter::setUniforms(GLProgram* cgp)
 {
-//	int u_hueAdjust = $cgp->getUniformLocationForName("u_hueAdjust");
-//	$cgp->setUniformLocationWith1f(u_hueAdjust, _param);
+//	int u_hueAdjust = cgp->getUniformLocationForName("u_hueAdjust");
+//	cgp->setUniformLocationWith1f(u_hueAdjust, _param);
     
     _pProgramState->setUniformFloat("u_hueAdjust", _param);
 }

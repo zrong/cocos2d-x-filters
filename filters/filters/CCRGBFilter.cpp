@@ -34,16 +34,16 @@ NS_CC_EXT_BEGIN
 
 RGBFilter* RGBFilter::create()
 {
-	RGBFilter* __filter = new RGBFilter();
-	__filter->autorelease();
-	return __filter;
+	RGBFilter* filter = new RGBFilter();
+	filter->autorelease();
+	return filter;
 }
 
-RGBFilter* RGBFilter::create(float $readAdj, float $greenAdj, float $blueAdj)
+RGBFilter* RGBFilter::create(float readAdj, float greenAdj, float blueAdj)
 {
-	RGBFilter* __filter = RGBFilter::create();
-	__filter->setParameter($readAdj, $greenAdj, $blueAdj);
-	return __filter;
+	RGBFilter* filter = RGBFilter::create();
+	filter->setParameter(readAdj, greenAdj, blueAdj);
+	return filter;
 }
 
 RGBFilter::RGBFilter()
@@ -56,36 +56,36 @@ RGBFilter::RGBFilter()
 
 GLProgram* RGBFilter::loadShader()
 {
-    GLProgram* __p = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, ccFilterShader_rgb_frag);
+    GLProgram* p = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, ccFilterShader_rgb_frag);
     
-//	GLProgram* __p = new GLProgram();
-//	__p->initWithByteArrays(ccPositionTexture_vert, ccFilterShader_rgb_frag);
-	return __p;
+//	GLProgram* p = new GLProgram();
+//	p->initWithByteArrays(ccPositionTexture_vert, ccFilterShader_rgb_frag);
+	return p;
 }
 
-void RGBFilter::setParameter(float $redAdj, float $greenAdj, float $blueAdj)
+void RGBFilter::setParameter(float redAdj, float greenAdj, float blueAdj)
 {
-	_redAdj = $redAdj;
-	_greenAdj = $greenAdj;
-	_blueAdj = $blueAdj;
+	_redAdj = redAdj;
+	_greenAdj = greenAdj;
+	_blueAdj = blueAdj;
 	initProgram();
 }
 
-void RGBFilter::setAttributes(GLProgram* $cgp)
+void RGBFilter::setAttributes(GLProgram* cgp)
 {
 	//CCLOG("RGBFilter::setAttributes");
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
-	$cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
+	cgp->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORD);
 }
 
-void RGBFilter::setUniforms(GLProgram* $cgp)
+void RGBFilter::setUniforms(GLProgram* cgp)
 {
-//	int __redAdj = $cgp->getUniformLocationForName("u_redAdj");
-//	int __greenAdj = $cgp->getUniformLocationForName("u_greenAdj");
-//	int __blueAdj = $cgp->getUniformLocationForName("u_blueAdj");
-//	$cgp->setUniformLocationWith1f(__redAdj, _redAdj);
-//	$cgp->setUniformLocationWith1f(__greenAdj, _greenAdj);
-//	$cgp->setUniformLocationWith1f(__blueAdj, _blueAdj);
+//	int redAdj = cgp->getUniformLocationForName("u_redAdj");
+//	int greenAdj = cgp->getUniformLocationForName("u_greenAdj");
+//	int blueAdj = cgp->getUniformLocationForName("u_blueAdj");
+//	cgp->setUniformLocationWith1f(redAdj, _redAdj);
+//	cgp->setUniformLocationWith1f(greenAdj, _greenAdj);
+//	cgp->setUniformLocationWith1f(blueAdj, _blueAdj);
     
     _pProgramState->setUniformFloat("u_redAdj", _redAdj);
     _pProgramState->setUniformFloat("u_greenAdj", _greenAdj);
