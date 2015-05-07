@@ -231,13 +231,13 @@ bool FilteredSpriteWithOne::updateFilters()
 	CCASSERT(_pFilters.size() == 1, "Invalid Filter!");
 	do
 	{
-		unsigned int __count = _pFilters.size();
-		CC_BREAK_IF(__count == 0);
-		Filter* __filter = static_cast<Filter*>(_pFilters.at(0));
-		__filter->initSprite(this);
-		if (__filter->getGLProgramState())
+		unsigned int count = _pFilters.size();
+		CC_BREAK_IF(count == 0);
+		Filter* filter = static_cast<Filter*>(_pFilters.at(0));
+		filter->initSprite(this);
+		if (filter->getGLProgramState())
 		{
-            setGLProgramState(__filter->getGLProgramState());
+            setGLProgramState(filter->getGLProgramState());
 		}
 		CHECK_GL_ERROR_DEBUG();
 		return true;
