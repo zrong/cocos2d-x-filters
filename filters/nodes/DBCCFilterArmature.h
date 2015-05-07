@@ -30,6 +30,7 @@
 
 #include "CCFilter.h"
 #include "DragonBonesHeaders.h"
+#include "filters/nodes/CCFilteredSprite.h"
 #include "renderer/DBCCRenderHeaders.h"
 
 NS_CC_EXT_BEGIN
@@ -44,6 +45,7 @@ public:
     ~DBCCFilterArmature() override;
     Filter* getFilter();
     void setFilter(Filter* filter);
+    void clearFilter();
 private:
     Filter* _filter;
 };

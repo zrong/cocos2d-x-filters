@@ -45,7 +45,9 @@ public:
     
     DBCCFilterFactory();
     virtual ~DBCCFilterFactory();
-    DBCCFilterArmature* buildArmature(const std::string &armatureName, const std::string &skinName, const std::string &animationName, const std::string &dragonBonesName, const std::string &textureAtlasName, Filter* filter);
+    virtual DBCCFilterArmature* buildArmature(const std::string &armatureName) const override;
+    virtual DBCCFilterArmature* buildArmature(const std::string &armatureName, const std::string &dragonBonesName) const override;
+    virtual DBCCFilterArmature* buildArmature(const std::string &armatureName, const std::string &skinName, const std::string &animationName, const std::string &dragonBonesName, const std::string &textureAtlasName) const override;
     
 protected:
     virtual void* generateDisplay(const dragonBones::ITextureAtlas *textureAtlas,

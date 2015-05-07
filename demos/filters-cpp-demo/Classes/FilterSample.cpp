@@ -57,7 +57,6 @@ bool FilterSample::init()
     pCloseItem->setPosition(VisibleRect::rightBottom(-20,20));
     
     Menu* pMenu = Menu::create(item1, item2, item3, pClearItem, pArmatureItem, pSpriteItem, pCloseItem, NULL);
-    pMenu->setPosition(cocos2d::Point());
     pMenu->setPosition(cocos2d::Point(0,0));
     Size item2Size = item2->getContentSize();
     item1->setPosition(VisibleRect::bottom(-item2Size.width * 2, item2Size.height / 2));
@@ -173,7 +172,7 @@ void FilterSample::onClearFilter(Ref* pSender)
 {
     if(_showArmature)
     {
-        // for armature
+        _pArmature->clearFilter();
     }
     else
     {
@@ -185,6 +184,11 @@ void FilterSample::onClearFilter(Ref* pSender)
 void FilterSample::onArmatureFilter(Ref* pSender)
 {
     _showArmature = true;
+    _filtersNum = _filters.size();
+    if(filterIndex >= _filtersNum)
+    {
+        filterIndex = 0;
+    }
     this->showFilteredDisplay(filterIndex);
     this->scheduleUpdate();
 }
@@ -192,6 +196,7 @@ void FilterSample::onArmatureFilter(Ref* pSender)
 void FilterSample::onSpriteFilter(Ref* pSender)
 {
     _showArmature = false;
+    _filtersNum = _filters.size()+_multiFilters.size();
     this->showFilteredDisplay(filterIndex);
     this->unscheduleUpdate();
 }
@@ -224,17 +229,15 @@ Sprite* FilterSample::getFilteredSprite(int index)
 
 Node* FilterSample::getFilteredArmatureDisplay(int index)
 {
-    if(index >= _filters.size())
-    {
-        index = 0;
-    }
     Filter* filter = _filters.at(index);
+    _nameLabel->setString(_filterNames.at(index));
     if(_pArmature)
     {
         _pArmature->dispose();
         CC_SAFE_DELETE(_pArmature);
     }
-    _pArmature = DBCCFilterFactory::getInstance()->buildArmature("Dragon", "", "Dragon", "Dragon", "Dragon", filter);
+    _pArmature = DBCCFilterFactory::getInstance()->buildArmature("Dragon", "", "Dragon", "Dragon", "Dragon");
+    _pArmature->setFilter(filter);
     //_pArmature = DBCCFilterFactory::getInstance()->buildArmature("1010", "", "1010", "1010", "1010", filter);
     //return dragonBones::DBCCFactory::getInstance()->buildArmatureNode("Dragon");
     return _pArmature->getCCDisplay();

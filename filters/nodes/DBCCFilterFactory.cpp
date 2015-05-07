@@ -21,12 +21,22 @@ void DBCCFilterFactory::destroyInstance()
     }
 }
 
-DBCCFilterFactory::DBCCFilterFactory() : _filter(nullptr){}
+DBCCFilterFactory::DBCCFilterFactory() {}
 DBCCFilterFactory::~DBCCFilterFactory() {}
 
-DBCCFilterArmature* DBCCFilterFactory::buildArmature(const std::string &armatureName, const std::string &skinName, const std::string &animationName, const std::string &dragonBonesName, const std::string &textureAtlasName, Filter* filter)
+DBCCFilterArmature* DBCCFilterFactory::buildArmature(const std::string &armatureName) const
 {
-    _filter = filter;
+    return (DBCCFilterArmature*) DBCCFactory::buildArmature(armatureName);
+}
+
+DBCCFilterArmature* DBCCFilterFactory::buildArmature(const std::string &armatureName, const std::string &dragonBonesName) const
+{
+    return (DBCCFilterArmature*) DBCCFactory::buildArmature(armatureName, dragonBonesName);
+}
+
+DBCCFilterArmature* DBCCFilterFactory::buildArmature(const std::string &armatureName, const std::string &skinName, const std::string &animationName,
+                                         const std::string &dragonBonesName, const std::string &textureAtlasName) const
+{
     return (DBCCFilterArmature*) DBCCFactory::buildArmature(armatureName, skinName, animationName, dragonBonesName, textureAtlasName);
 }
 
@@ -43,8 +53,7 @@ DBCCFilterArmature* DBCCFilterFactory::generateArmature(const dragonBones::Armat
     eventDispatcher->eventDispatcher = new cocos2d::EventDispatcher();
     eventDispatcher->eventDispatcher->setEnabled(true);
     // armature
-    DBCCFilterArmature* armature = new DBCCFilterArmature((dragonBones::ArmatureData*)(armatureData), animation, eventDispatcher, display);
-    armature->setFilter(_filter);
+    auto* armature = new DBCCFilterArmature((dragonBones::ArmatureData*)(armatureData), animation, eventDispatcher, display);
     return armature;
 }
 
@@ -96,7 +105,7 @@ void* DBCCFilterFactory::generateDisplay(const dragonBones::ITextureAtlas *textu
     display->setCascadeColorEnabled(true);
     display->setCascadeOpacityEnabled(true);
     display->retain();
-    display->setFilter(_filter);
+    //display->setFilter(_filter);
     float pivotX = 0.f;
     float pivotY = 0.f;
     
@@ -107,7 +116,6 @@ void* DBCCFilterFactory::generateDisplay(const dragonBones::ITextureAtlas *textu
     }
     display->setAnchorPoint(cocos2d::Vec2(pivotX / originSize.width, 1.f - pivotY / originSize.height));
     display->setContentSize(originSize);
-    CCLOG("generateDisplay:%s", typeid(display).name());
     return display;
 }
 
