@@ -28,10 +28,10 @@
 #ifndef DBCCFILTERFACTORY_H
 #define DBCCFILTERFACTORY_H
 
-#include "CCFilter.h"
-#include "CCFilteredSprite.h"
 #include "DragonBonesHeaders.h"
 #include "renderer/DBCCRenderHeaders.h"
+#include "CCFilteredSprite.h"
+#include "filters/filters/CCFilter.h"
 #include "DBCCFilterArmature.h"
 
 NS_CC_EXT_BEGIN
