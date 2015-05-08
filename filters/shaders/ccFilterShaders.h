@@ -1,5 +1,5 @@
-#ifndef __CC_FILTER_SHADER_H__
-#define __CC_FILTER_SHADER_H__
+#ifndef CC_FILTER_SHADER_H
+#define CC_FILTER_SHADER_H
 
 #include "platform/CCPlatformDefine.h"
 #include "platform/CCGL.h"
@@ -82,4 +82,4 @@ extern CC_DLL const GLchar * ccFilterShader_grass_frag;
 
 NS_CC_EXT_END
 
-#endif /* __CC_FILTER_SHADER_H__ */
+#endif /* CC_FILTER_SHADER_H */

@@ -25,8 +25,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 
-#ifndef __CCFILTERED_SPRITE_H__
-#define __CCFILTERED_SPRITE_H__
+#ifndef CCFILTERED_SPRITE_H
+#define CCFILTERED_SPRITE_H
 
 #include "cocos2d.h"
 #include "filters/filters/CCFilter.h"
@@ -127,4 +127,4 @@ private:
 
 NS_CC_EXT_END
 
-#endif /* __CCFILTERED_SPRITE_H__ */
+#endif /* CCFILTERED_SPRITE_H */

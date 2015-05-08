@@ -75,7 +75,7 @@ bool FilterSample::init()
     
     this->initFilters();
     
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/test2.plist", "res/test2.png");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/test3.plist", "res/test3.png");
     Sprite* bg = Sprite::create("res/bg.jpg");
     bg->setPosition(VisibleRect::center());
     this->addChild(bg, -10);
@@ -220,11 +220,13 @@ Sprite* FilterSample::getFilteredSprite(int index)
         index = index - _filters.size();
         Filters filters = _multiFilters.at(index);
         _nameLabel->setString(_multiFilterNames.at(index));
-        return testFilter(filters);
+        //return testFilter(filters);
+        return testFilterFromFrame(filters);
     }
     Filter* filter = _filters.at(index);
     _nameLabel->setString(_filterNames.at(index));
-    return testFilter(filter);
+    //return testFilter(filter);
+    return testFilterFromFrame(filter);
 }
 
 Node* FilterSample::getFilteredArmatureDisplay(int index)

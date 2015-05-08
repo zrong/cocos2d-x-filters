@@ -151,28 +151,7 @@ FilteredSpriteWithOne* FilteredSpriteWithOne::createWithSpriteFrame(SpriteFrame*
 	FilteredSpriteWithOne *pobSprite = new FilteredSpriteWithOne();
 	if (pSpriteFrame && pobSprite)
 	{
-		if (pSpriteFrame->isRotated())
-		{
-			Sprite* sp = Sprite::createWithSpriteFrame(pSpriteFrame);
-			Size size = sp->getContentSize();
-			sp->setAnchorPoint(Vec2(0,0));
-			sp->setPosition(Vec2(0,0));
-			RenderTexture* rTex = RenderTexture::create(size.width, size.height);
-			rTex->begin();
-			sp->visit();
-			rTex->end();
-			Texture2D* newTex = new Texture2D();
-            Image *pNewImage = rTex->newImage(true);
-			newTex->initWithImage(pNewImage);
-            delete pNewImage;
-			newTex->autorelease();
-			pobSprite->initWithTexture(newTex);
-			//CCLOG("==== FilteredSprite::initWithTexture, rotated true texture wh(%f,%f)", newTex->getContentSize().width, newTex->getContentSize().height);
-		}
-		else
-		{
-			pobSprite->initWithSpriteFrame(pSpriteFrame);
-		}
+		pobSprite->initWithSpriteFrame(pSpriteFrame);
 		pobSprite->autorelease();
 		return pobSprite;
 	}
@@ -231,13 +210,13 @@ bool FilteredSpriteWithOne::updateFilters()
 	CCASSERT(_pFilters.size() == 1, "Invalid Filter!");
 	do
 	{
-		unsigned int __count = _pFilters.size();
-		CC_BREAK_IF(__count == 0);
-		Filter* __filter = static_cast<Filter*>(_pFilters.at(0));
-		__filter->initSprite(this);
-		if (__filter->getGLProgramState())
+		unsigned int count = _pFilters.size();
+		CC_BREAK_IF(count == 0);
+		Filter* filter = static_cast<Filter*>(_pFilters.at(0));
+		filter->initSprite(this);
+		if (filter->getGLProgramState())
 		{
-            setGLProgramState(__filter->getGLProgramState());
+            setGLProgramState(filter->getGLProgramState());
 		}
 		CHECK_GL_ERROR_DEBUG();
 		return true;
