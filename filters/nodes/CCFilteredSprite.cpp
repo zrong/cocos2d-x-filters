@@ -151,28 +151,7 @@ FilteredSpriteWithOne* FilteredSpriteWithOne::createWithSpriteFrame(SpriteFrame*
 	FilteredSpriteWithOne *pobSprite = new FilteredSpriteWithOne();
 	if (pSpriteFrame && pobSprite)
 	{
-		if (pSpriteFrame->isRotated())
-		{
-			Sprite* sp = Sprite::createWithSpriteFrame(pSpriteFrame);
-			Size size = sp->getContentSize();
-			sp->setAnchorPoint(Vec2(0,0));
-			sp->setPosition(Vec2(0,0));
-			RenderTexture* rTex = RenderTexture::create(size.width, size.height);
-			rTex->begin();
-			sp->visit();
-			rTex->end();
-			Texture2D* newTex = new Texture2D();
-            Image *pNewImage = rTex->newImage(true);
-			newTex->initWithImage(pNewImage);
-            delete pNewImage;
-			newTex->autorelease();
-			pobSprite->initWithTexture(newTex);
-			//CCLOG("==== FilteredSprite::initWithTexture, rotated true texture wh(%f,%f)", newTex->getContentSize().width, newTex->getContentSize().height);
-		}
-		else
-		{
-			pobSprite->initWithSpriteFrame(pSpriteFrame);
-		}
+		pobSprite->initWithSpriteFrame(pSpriteFrame);
 		pobSprite->autorelease();
 		return pobSprite;
 	}

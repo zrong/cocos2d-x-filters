@@ -65,9 +65,9 @@ private:
     Sprite* testFilter(Filters filters, ccLocation location = CENTER,
                        int order = 0, const char* path = "res/helloworld.png");
     Sprite* testFilterFromFrame(Filter* filter, ccLocation location = CENTER,
-                                int order = 0, const char* path = "res/helloworld1.png");
+                                int order = 0, const char* path = "grass.png");
     Sprite* testFilterFromFrame(Filters filters, ccLocation location = CENTER,
-                                int order = 0, const char* path = "res/helloworld1.png");
+                                int order = 0, const char* path = "grass.png");
     Point getLocation(ccLocation location);
     
 private:
